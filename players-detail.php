@@ -36,7 +36,9 @@ $content['iserror'] = false;
 if ( isset($_GET['id']) )
 {
 	// get and check
-	$content['playerguid'] = DB_RemoveBadChars($_GET['id']);
+	//$content['playerguid'] = DB_RemoveBadChars($_GET['id']);
+	// Blind SQL Fix from https://www.exploit-db.com/exploits/6067 but untested!
+	$content['playerguid'] = intval(DB_RemoveBadChars($_GET['id']));
 	if (
 			!is_numeric($content['playerguid']) 
 				|| 

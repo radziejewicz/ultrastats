@@ -7,6 +7,8 @@ UltraStats is a stats parser and web front-end for Call of Duty (+UO), Call of D
 ![stats_beta1.sized.jpg](https://i.imgur.com/g6fIkoN.png)
 
 [![UltraStats_playerdetails.sized.jpg](https://i.imgur.com/h5AqFn9m.jpg)](https://i.imgur.com/h5AqFn9.jpg) [![UltraStats_index.sized.jpg](https://i.imgur.com/y4gifKym.jpg)](https://i.imgur.com/y4gifKy.jpg)
+
+---
 UltraStats Beta v0.2.144 made by 
 
 Changelog:
