@@ -1,0 +1,9 @@
+-- New Database Structure Updates
+ALTER TABLE `stats_servers` ADD `FTPPassiveMode` BOOL NOT NULL DEFAULT '0';
+ALTER TABLE `stats_aliases` ADD `AliasStrippedCodes` VARCHAR( 128 ) NOT NULL AFTER `AliasAsHtml` ;
+
+-- New Insert stuff
+INSERT INTO `stats_damagetypes` (`ID`, `DAMAGETYPE`, `DisplayName`) VALUES (8, 'MOD_UNKNOWN', 'Unknown Damage');
+
+-- Changed Stuff
+UPDATE `stats_weapons` SET `WeaponType` = '1' WHERE `INGAMENAME` = 'springfield_mp';

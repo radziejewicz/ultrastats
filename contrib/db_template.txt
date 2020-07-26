@@ -1,0 +1,721 @@
+-- phpMyAdmin SQL Dump
+-- version 2.7.0-pl2
+-- http://www.phpmyadmin.net
+-- 
+-- Host: localhost
+-- Generation Time: Apr 07, 2006 at 12:00 AM
+-- Server version: 4.0.18
+-- PHP Version: 4.4.2
+-- 
+-- Database: `ultrastatscod`
+-- 
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `stats_aliases`
+-- 
+
+DROP TABLE IF EXISTS `stats_aliases`;
+CREATE TABLE `stats_aliases` (
+  `ID` int(11) NOT NULL auto_increment,
+  `SERVERID` tinyint(4) NOT NULL default '0',
+  `PLAYERID` int(11) unsigned NOT NULL default '0',
+  `Alias` varchar(128) NOT NULL default '',
+  `AliasAsHtml` text NOT NULL,
+  `AliasStrippedCodes` varchar(128) NOT NULL default '',
+  `Count` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`ID`,`SERVERID`,`PLAYERID`,`Alias`)
+) TYPE=MyISAM COMMENT='Holds a List of names player used on servers' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `stats_chat`
+-- 
+
+DROP TABLE IF EXISTS `stats_chat`;
+CREATE TABLE `stats_chat` (
+  `ID` int(11) NOT NULL auto_increment,
+  `PLAYERID` int(11) unsigned NOT NULL default '0',
+  `SERVERID` tinyint(4) NOT NULL default '0',
+  `ROUNDID` int(11) NOT NULL default '0',
+  `TextSaid` varchar(255) NOT NULL default '',
+  PRIMARY KEY  (`ID`,`PLAYERID`,`SERVERID`,`ROUNDID`)
+) TYPE=MyISAM COMMENT='Optional Table to save what was said ;)' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `stats_config`
+-- 
+
+DROP TABLE IF EXISTS `stats_config`;
+CREATE TABLE `stats_config` (
+  `name` varchar(63) NOT NULL default '',
+  `value` varchar(255) NOT NULL default '',
+  PRIMARY KEY  (`name`)
+) TYPE=MyISAM COMMENT='Table to hold basic configuration values';
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `stats_consolidated`
+-- 
+
+DROP TABLE IF EXISTS `stats_consolidated`;
+CREATE TABLE `stats_consolidated` (
+  `ID` int(11) NOT NULL auto_increment,
+  `NAME` varchar(63) NOT NULL default '',
+  `SERVERID` tinyint(4) NOT NULL default '0',
+  `SortID` int(11) NOT NULL default '0',
+  `DisplayName` varchar(255) NOT NULL default '',
+  `DescriptionID` varchar(255) NOT NULL default '0',
+  `VALUE_INT` int(11) NOT NULL default '0',
+  `VALUE_TXT` varchar(255) NOT NULL default '',
+  `PLAYER_ID` int(11) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`ID`,`NAME`,`SERVERID`)
+) TYPE=MyISAM COMMENT='Table to hold total values and medals' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `stats_player_kills`
+-- 
+
+DROP TABLE IF EXISTS `stats_player_kills`;
+CREATE TABLE `stats_player_kills` (
+  `ID` int(11) NOT NULL auto_increment,
+  `SERVERID` tinyint(4) NOT NULL default '0',
+  `ROUNDID` int(11) NOT NULL default '0',
+  `PLAYERID` int(11) unsigned NOT NULL default '0',
+  `ENEMYID` int(11) unsigned NOT NULL default '0',
+  `WEAPONID` smallint(6) NOT NULL default '0',
+  `DAMAGETYPEID` tinyint(4) NOT NULL default '0',
+  `HITLOCATIONID` tinyint(4) NOT NULL default '0',
+  `Kills` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`ID`,`SERVERID`,`ROUNDID`,`PLAYERID`,`ENEMYID`,`WEAPONID`,`DAMAGETYPEID`,`HITLOCATIONID`)
+) TYPE=MyISAM COMMENT='Contains all kills made by the player' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `stats_players`
+-- 
+
+DROP TABLE IF EXISTS `stats_players`;
+CREATE TABLE `stats_players` (
+  `GUID` int(11) unsigned NOT NULL default '0',
+  `SERVERID` tinyint(4) NOT NULL default '0',
+  `Time_Year` mediumint(9) NOT NULL default '0',
+  `Time_Month` tinyint(4) NOT NULL default '0',
+  `Kills` int(11) NOT NULL default '0',
+  `Deaths` int(11) NOT NULL default '0',
+  `Teamkills` int(11) NOT NULL default '0',
+  `Suicides` int(11) NOT NULL default '0',
+  `KillRatio` float NOT NULL default '0',
+  PRIMARY KEY  (`GUID`,`SERVERID`,`Time_Year`,`Time_Month`)
+) TYPE=MyISAM COMMENT='Stores total values for the player used in the Player lists ';
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `stats_players_static`
+-- 
+
+DROP TABLE IF EXISTS `stats_players_static`;
+CREATE TABLE `stats_players_static` (
+  `GUID` int(11) unsigned NOT NULL default '0',
+  `ISCLANMEMBER` tinyint(1) NOT NULL default '0',
+  `ISBANNED` tinyint(1) NOT NULL default '0',
+  `BanReason` varchar(255) NOT NULL default '',
+  `PBGUID` varchar(32) NOT NULL default '',
+  `PlayerLogoImage` varchar(255) NOT NULL default '',
+  `PlayerDescription` varchar(255) NOT NULL default ''
+) TYPE=MyISAM COMMENT='Table to store static data per player!';
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `stats_players_topalias`
+-- 
+
+DROP TABLE IF EXISTS `stats_players_topalias`;
+CREATE TABLE `stats_players_topalias` (
+  `GUID` int(11) unsigned NOT NULL default '0',
+  `SERVERID` tinyint(4) NOT NULL default '0',
+  `ALIASID` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`GUID`,`SERVERID`)
+) TYPE=MyISAM COMMENT='Helper table to store the topaliases names';
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `stats_roundactions`
+-- 
+
+DROP TABLE IF EXISTS `stats_roundactions`;
+CREATE TABLE `stats_roundactions` (
+  `ID` int(11) NOT NULL default '0',
+  `SERVERID` tinyint(4) NOT NULL default '0',
+  `ROUNDID` int(11) NOT NULL default '0',
+  `PLAYERID` int(11) unsigned NOT NULL default '0',
+  `Team` varchar(7) NOT NULL default '',
+  `ACTIONID` smallint(6) NOT NULL default '0',
+  `Count` smallint(6) NOT NULL default '0',
+  PRIMARY KEY  (`ID`,`SERVERID`,`ROUNDID`,`PLAYERID`,`Team`,`ACTIONID`)
+) TYPE=MyISAM COMMENT='Actions which took place in a game round like flag capture';
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `stats_rounds`
+-- 
+
+DROP TABLE IF EXISTS `stats_rounds`;
+CREATE TABLE `stats_rounds` (
+  `ID` int(11) NOT NULL auto_increment,
+  `SERVERID` tinyint(4) NOT NULL default '0',
+  `TIMEADDED` int(11) NOT NULL default '0',
+  `ROUNDDURATION` mediumint(9) NOT NULL default '0',
+  `GAMETYPE` tinyint(4) NOT NULL default '0',
+  `MAPID` int(11) NOT NULL default '0',
+  `ServerCvars` text NOT NULL,
+  `AxisRoundWins` int(11) NOT NULL default '0',
+  `AxisGuids` varchar(255) NOT NULL default '',
+  `AlliesRoundWins` int(11) NOT NULL default '0',
+  `AlliesGuids` varchar(255) NOT NULL default '',
+  PRIMARY KEY  (`ID`),
+  KEY `SERVERID` (`SERVERID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COMMENT='Will contain all rounds which have been played' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `stats_servers`
+-- 
+
+DROP TABLE IF EXISTS `stats_servers`;
+CREATE TABLE `stats_servers` (
+  `ID` tinyint(4) NOT NULL auto_increment,
+  `Name` varchar(255) NOT NULL default '',
+  `IP` varchar(16) NOT NULL default '',
+  `Port` int(11) NOT NULL default '0',
+  `Description` text NOT NULL,
+  `ModName` varchar(32) NOT NULL default '',
+  `AdminName` varchar(255) NOT NULL default '',
+  `ClanName` varchar(255) NOT NULL default '',
+  `AdminEmail` varchar(255) NOT NULL default '',
+  `GameLogLocation` varchar(255) NOT NULL default '',
+  `LastLogLine` int(11) NOT NULL default '0',
+  `ServerEnabled` tinyint(1) NOT NULL default '0',
+  `ParsingEnabled` tinyint(1) NOT NULL default '0',
+  `ftppath` varchar(255) NOT NULL default '',
+  `LastUpdate` int(11) NOT NULL default '0',
+  `ServerLogo` varchar(255) NOT NULL default '',
+  `FTPPassiveMode` tinyint(1) NOT NULL default '0',
+  PRIMARY KEY  (`ID`)
+) TYPE=MyISAM COMMENT='Table to store the Server Informations' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `stats_time`
+-- 
+
+DROP TABLE IF EXISTS `stats_time`;
+CREATE TABLE `stats_time` (
+  `SERVERID` tinyint(4) NOT NULL default '0',
+  `Time_Year` mediumint(9) NOT NULL default '0',
+  `Time_Month` tinyint(4) NOT NULL default '0',
+  `ROUNDID` int(11) NOT NULL default '0',
+  `PLAYERID` int(11) unsigned NOT NULL default '0',
+  `TIMEPLAYED` smallint(6) NOT NULL default '0',
+  PRIMARY KEY  (`SERVERID`,`ROUNDID`,`PLAYERID`)
+) TYPE=MyISAM COMMENT='Contains Information on how long the player has played';
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `stats_users`
+-- 
+
+DROP TABLE IF EXISTS `stats_users`;
+CREATE TABLE `stats_users` (
+  `ID` int(11) NOT NULL auto_increment,
+  `username` varchar(32) NOT NULL default '',
+  `password` varchar(32) NOT NULL default '',
+  `session_time` int(11) NOT NULL default '0',
+  `access_level` tinyint(4) NOT NULL default '0',
+  PRIMARY KEY  (`ID`)
+) TYPE=MyISAM COMMENT='This table holds UltraStats users who can administrate them' AUTO_INCREMENT=1 ;
+
+-- phpMyAdmin SQL Dump
+-- version 2.7.0-pl2
+-- http://www.phpmyadmin.net
+-- 
+-- Host: localhost
+-- Generation Time: Apr 07, 2006 at 12:01 AM
+-- Server version: 4.0.18
+-- PHP Version: 4.4.2
+-- 
+-- Database: `ultrastatscod`
+-- 
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `stats_weapons_perserver`
+-- 
+
+DROP TABLE IF EXISTS `stats_weapons_perserver`;
+CREATE TABLE `stats_weapons_perserver` (
+  `WEAPONID` int(11) NOT NULL default '0',
+  `SERVERID` tinyint(4) NOT NULL default '0',
+  `ENABLED` tinyint(1) NOT NULL default '1',
+  PRIMARY KEY  (`WEAPONID`,`SERVERID`)
+) TYPE=MyISAM COMMENT='Helper Table to define which weapons will be shown per serve';
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `stats_damagetypes`
+-- 
+
+DROP TABLE IF EXISTS `stats_damagetypes`;
+CREATE TABLE `stats_damagetypes` (
+  `ID` tinyint(4) NOT NULL auto_increment,
+  `DAMAGETYPE` varchar(64) NOT NULL default '',
+  `DisplayName` varchar(255) NOT NULL default '',
+  PRIMARY KEY  (`ID`)
+) TYPE=MyISAM COMMENT='Helpertable to store the damage types' AUTO_INCREMENT=8 ;
+
+-- 
+-- Dumping data for table `stats_damagetypes`
+-- 
+
+INSERT INTO `stats_damagetypes` (`ID`, `DAMAGETYPE`, `DisplayName`) VALUES (1, 'MOD_RIFLE_BULLET', 'Rifle Bullet');
+INSERT INTO `stats_damagetypes` (`ID`, `DAMAGETYPE`, `DisplayName`) VALUES (2, 'MOD_HEAD_SHOT', 'Headshot');
+INSERT INTO `stats_damagetypes` (`ID`, `DAMAGETYPE`, `DisplayName`) VALUES (3, 'MOD_GRENADE_SPLASH', 'Grenade Splash');
+INSERT INTO `stats_damagetypes` (`ID`, `DAMAGETYPE`, `DisplayName`) VALUES (4, 'MOD_SUICIDE', 'Suicide');
+INSERT INTO `stats_damagetypes` (`ID`, `DAMAGETYPE`, `DisplayName`) VALUES (5, 'MOD_MELEE', 'Melee Slap');
+INSERT INTO `stats_damagetypes` (`ID`, `DAMAGETYPE`, `DisplayName`) VALUES (6, 'MOD_PISTOL_BULLET', 'Pistol Bullet');
+INSERT INTO `stats_damagetypes` (`ID`, `DAMAGETYPE`, `DisplayName`) VALUES (7, 'MOD_EXPLOSIVE', 'S&D Explosion');
+INSERT INTO `stats_damagetypes` (`ID`, `DAMAGETYPE`, `DisplayName`) VALUES (8, 'MOD_UNKNOWN', 'Unknown Damage');
+INSERT INTO `stats_damagetypes` (`ID`, `DAMAGETYPE`, `DisplayName`) VALUES (9, 'MOD_GRENADE', 'Grenade');
+INSERT INTO `stats_damagetypes` (`ID`, `DAMAGETYPE`, `DisplayName`) VALUES (10, 'MOD_PROJECTILE_SPLASH', 'Projectile Splash');
+INSERT INTO `stats_damagetypes` (`ID`, `DAMAGETYPE`, `DisplayName`) VALUES (11, 'MOD_IMPACT', 'Impact');
+INSERT INTO `stats_damagetypes` (`ID`, `DAMAGETYPE`, `DisplayName`) VALUES (12, 'MOD_PROJECTILE', 'Projectile');
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `stats_gameactions`
+-- 
+
+DROP TABLE IF EXISTS `stats_gameactions`;
+CREATE TABLE `stats_gameactions` (
+  `ID` smallint(6) NOT NULL auto_increment,
+  `NAME` varchar(64) NOT NULL default '',
+  `DisplayName` varchar(255) NOT NULL default '',
+  `SkillPoints` tinyint(4) NOT NULL default '0',
+  PRIMARY KEY  (`ID`)
+) TYPE=MyISAM COMMENT='Helper table to game actions' AUTO_INCREMENT=11 ;
+
+-- 
+-- Dumping data for table `stats_gameactions`
+-- 
+
+INSERT INTO `stats_gameactions` (`ID`, `NAME`, `DisplayName`, `SkillPoints`) VALUES (1, 'Exploit abuser was suicided by server', 'ExplotAbuser', -10);
+INSERT INTO `stats_gameactions` (`ID`, `NAME`, `DisplayName`, `SkillPoints`) VALUES (2, 'radio_capture', 'Radio Capture', 10);
+INSERT INTO `stats_gameactions` (`ID`, `NAME`, `DisplayName`, `SkillPoints`) VALUES (3, 'bomb_plant', 'Bomb Plant', 10);
+INSERT INTO `stats_gameactions` (`ID`, `NAME`, `DisplayName`, `SkillPoints`) VALUES (4, 'radio_destroy', 'Radio Destroy', 5);
+INSERT INTO `stats_gameactions` (`ID`, `NAME`, `DisplayName`, `SkillPoints`) VALUES (5, 'bomb_defuse', 'Bomb Defuse', 5);
+INSERT INTO `stats_gameactions` (`ID`, `NAME`, `DisplayName`, `SkillPoints`) VALUES (6, 'ctf_returned', 'Flag returned', 5);
+INSERT INTO `stats_gameactions` (`ID`, `NAME`, `DisplayName`, `SkillPoints`) VALUES (7, 'ctf_captured', 'Flag captured', 10);
+INSERT INTO `stats_gameactions` (`ID`, `NAME`, `DisplayName`, `SkillPoints`) VALUES (8, 'ctf_take', 'Flag taken', 2);
+INSERT INTO `stats_gameactions` (`ID`, `NAME`, `DisplayName`, `SkillPoints`) VALUES (9, 'ctf_pickup', 'Flag pickup', 2);
+INSERT INTO `stats_gameactions` (`ID`, `NAME`, `DisplayName`, `SkillPoints`) VALUES (10, 'ctf_defended', 'Flag defended', 5);
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `stats_gametypes`
+-- 
+
+DROP TABLE IF EXISTS `stats_gametypes`;
+CREATE TABLE `stats_gametypes` (
+  `ID` tinyint(4) NOT NULL auto_increment,
+  `NAME` varchar(16) NOT NULL default '',
+  `DisplayName` varchar(127) NOT NULL default '',
+  `Description_id` varchar(255) NOT NULL default '',
+  PRIMARY KEY  (`ID`),
+  KEY `NAME` (`NAME`)
+) TYPE=MyISAM COMMENT='Contains some detailed informations about the Gametypes' AUTO_INCREMENT=12 ;
+
+-- 
+-- Dumping data for table `stats_gametypes`
+-- 
+
+INSERT INTO `stats_gametypes` (`NAME`, `DisplayName`, `Description_id`) VALUES ('dm', 'Deathmatch', 'gametype_dm');
+INSERT INTO `stats_gametypes` (`NAME`, `DisplayName`, `Description_id`) VALUES ('tdm', 'Team Deathmatch', 'gametype_tdm');
+INSERT INTO `stats_gametypes` (`NAME`, `DisplayName`, `Description_id`) VALUES ('sd', 'Search and Destroy', 'gametype_sd');
+INSERT INTO `stats_gametypes` (`NAME`, `DisplayName`, `Description_id`) VALUES ('hq', 'Headquarters', 'gametype_hq');
+INSERT INTO `stats_gametypes` (`NAME`, `DisplayName`, `Description_id`) VALUES ('ctf', 'Capture the Flag', 'gametype_ctf');
+INSERT INTO `stats_gametypes` (`NAME`, `DisplayName`, `Description_id`) VALUES ('htf', 'Hold the Flag', 'gametype_htf');
+INSERT INTO `stats_gametypes` (`NAME`, `DisplayName`, `Description_id`) VALUES ('koth', 'Headquarters', 'gametype_koth');
+INSERT INTO `stats_gametypes` (`NAME`, `DisplayName`, `Description_id`) VALUES ('war', 'Team Deathmatch', 'gametype_war');
+INSERT INTO `stats_gametypes` (`NAME`, `DisplayName`, `Description_id`) VALUES ('sab', 'Sabotage', 'gametype_sab');
+INSERT INTO `stats_gametypes` (`NAME`, `DisplayName`, `Description_id`) VALUES ('dom', 'Domination', 'gametype_dom');
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `stats_hitlocations`
+-- 
+
+DROP TABLE IF EXISTS `stats_hitlocations`;
+CREATE TABLE `stats_hitlocations` (
+  `ID` tinyint(4) NOT NULL auto_increment,
+  `BODYPART` varchar(32) NOT NULL default '',
+  `DisplayName` varchar(64) NOT NULL default '',
+  PRIMARY KEY  (`ID`),
+  KEY `BODYPART` (`BODYPART`)
+) TYPE=MyISAM COMMENT='Hitlocation helper table for complex statements' AUTO_INCREMENT=20 ;
+
+-- 
+-- Dumping data for table `stats_hitlocations`
+-- 
+
+INSERT INTO `stats_hitlocations` (`ID`, `BODYPART`, `DisplayName`) VALUES (1, 'neck', 'neck');
+INSERT INTO `stats_hitlocations` (`ID`, `BODYPART`, `DisplayName`) VALUES (2, 'torso_upper', 'Upper Torso');
+INSERT INTO `stats_hitlocations` (`ID`, `BODYPART`, `DisplayName`) VALUES (3, 'right_leg_upper', 'Upper right leg');
+INSERT INTO `stats_hitlocations` (`ID`, `BODYPART`, `DisplayName`) VALUES (4, 'right_leg_lower', 'Lower right leg');
+INSERT INTO `stats_hitlocations` (`ID`, `BODYPART`, `DisplayName`) VALUES (5, 'torso_lower', 'Lower Torso');
+INSERT INTO `stats_hitlocations` (`ID`, `BODYPART`, `DisplayName`) VALUES (6, 'head', 'Head');
+INSERT INTO `stats_hitlocations` (`ID`, `BODYPART`, `DisplayName`) VALUES (7, 'none', 'None');
+INSERT INTO `stats_hitlocations` (`ID`, `BODYPART`, `DisplayName`) VALUES (8, 'left_arm_upper', 'Upper left arm');
+INSERT INTO `stats_hitlocations` (`ID`, `BODYPART`, `DisplayName`) VALUES (9, 'left_arm_lower', 'Lower left arm');
+INSERT INTO `stats_hitlocations` (`ID`, `BODYPART`, `DisplayName`) VALUES (10, 'right_arm_lower', 'Lower right arm');
+INSERT INTO `stats_hitlocations` (`ID`, `BODYPART`, `DisplayName`) VALUES (11, 'right_arm_upper', 'Upper right arm');
+INSERT INTO `stats_hitlocations` (`ID`, `BODYPART`, `DisplayName`) VALUES (12, 'right_foot', 'Right foot');
+INSERT INTO `stats_hitlocations` (`ID`, `BODYPART`, `DisplayName`) VALUES (13, 'left_foot', 'Left foot');
+INSERT INTO `stats_hitlocations` (`ID`, `BODYPART`, `DisplayName`) VALUES (14, 'right_arm_lower', 'Lower right arm');
+INSERT INTO `stats_hitlocations` (`ID`, `BODYPART`, `DisplayName`) VALUES (15, 'right_arm_upper', 'Upper right arm');
+INSERT INTO `stats_hitlocations` (`ID`, `BODYPART`, `DisplayName`) VALUES (16, 'left_leg_lower', 'Lower left leg');
+INSERT INTO `stats_hitlocations` (`ID`, `BODYPART`, `DisplayName`) VALUES (17, 'left_leg_upper', 'Upper left leg');
+INSERT INTO `stats_hitlocations` (`ID`, `BODYPART`, `DisplayName`) VALUES (18, 'right_hand', 'Right Hand');
+INSERT INTO `stats_hitlocations` (`ID`, `BODYPART`, `DisplayName`) VALUES (19, 'left_hand', 'Left Hand');
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `stats_language_strings`
+-- 
+
+DROP TABLE IF EXISTS `stats_language_strings`;
+CREATE TABLE `stats_language_strings` (
+  `LANG` char(2) NOT NULL default '',
+  `STRINGID` varchar(255) NOT NULL default '',
+  `TEXT` text NOT NULL,
+  PRIMARY KEY  (`LANG`,`STRINGID`)
+) TYPE=MyISAM COMMENT='This table holds strings which can be editied by the user (m';
+
+-- 
+-- Dumping data for table `stats_language_strings`
+-- 
+
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'mp_brocage_description', 'The terrain of Normandy provided a natural advantage to the defender. The terrain was dominated by bocage of over fifty miles mostly between the Orne and Vire Rivers. The bocage is a series of small fields ringed by earthen banks 3-4 feet high and overgrown with dense shrubbery. It is almost impossible to see further than one field at a time. Dirt tracks criss-cross the bocage around the edges of the small fields, allowing troops and equipment to move freely without being seen either from the air or the ground.\r\n\r\nThe Germans took full advantage of the fields, and turned each into a death trap. Soldiers who fought there remember the Battle for Normandy as an unending series of firefights for each small field. To make matters worse for the attacking Allies, the bocage also includes many streams, rivers, and steep hills, and valleys. In the middle of Normandy is mount Picon, the highest point in the area, 1200 feet above sea level on a large plateau. This region is denser, and more difficult to attack in than the rest of the bocage. There are few roads, lots of forest, and suffers dense fogs in summer and winter. Allied intelligence had totally failed to anticipate these problems.\r\n\r\n<br><br>Source: <a href="http://www.planetcallofduty.com/callofduty2/mp/maps.shtml" target="_blank">Planet CallOfDuty.com</A>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'mp_leningrad_description', 'The German assault on the city of Leningrad started in the spring of 1941. The Germans believed the taking of Leningrad was very important in their quest of taking over Russia. The Defense of Leningrad took an area of over 450 km and involved 517,000 men. The defense stopped the Germans in the suburbs of the city and lasted for 83 days. The Battle of Leningrad began on July 10, 1941 and lasted over three years. The Germans, along with the Finnish army, attacked with 38 divisions and were opposed by the Northern Front and the Northwestern Front. On July 10 the Russian State Committee for Defense combined the two Russian Fronts forming the Northwest Axis to coordinate efforts. Immediately the Northwest Axis fortified regions like Krasnogvardeisk and Slutsk- Kolpino to defense the enemy. Between November 1941 and October 1942 during the seige of Leningrad , 641,803 people died of starvation. Because of the shortages in food and supplies an offensive to break the blockade was impossible. Fortunately though, a successful Russian counteroffensive at Stalingrad drained the enemy of resources needed to carry out a new attack on Leningrad that was being planned. \r\n\r\n<br><br>Source: <a href="http://www.planetcallofduty.com/callofduty2/mp/maps.shtml" target="_blank">Planet CallOfDuty.com</A>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'mp_matmata_description', 'The Tunisia Campaign was a series of World War II battles that took place in Tunisia during the North African Campaign of the World War II, between forces of the German/Italian Axis, and allied forces consisting primarily of US, British and small numbers of Vichy French. The battle opened with general success of the German forces, but the massive supply and numerical superiority of the allies eventually led to their complete defeat. The result was the loss of over 275,000 German and Italian prisoners of war, including most of the Deutsches Afrika Korps (DAK). It is often referred to as the Battle of Tunisia.\r\n\r\n<br><br>Source: <a href="http://www.planetcallofduty.com/callofduty2/mp/maps.shtml" target="_blank">Planet CallOfDuty.com</A>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'medal_pro_killer', 'Player who killed the most peoples ');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'medal_pro_headshot', 'Player with the most Headshots ');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'medal_pro_explosivekiller', 'Player who has the most explosive kills ');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'medal_pro_slappyhappy', 'Player who has the most slap kills ');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'medal_pro_sniper', 'Player who has the most sniper kills ');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'medal_pro_pistol', 'Player who has the most pistol kills ');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'medal_anti_no1target', 'Player who was killed');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'medal_anti_teamkiller', 'Player who killed the most team m8s');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'medal_anti_suicide', 'Player who seems not to like his life');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'medal_anti_nademagnet', 'Player who seems to who seems to attract nades ');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'medal_anti_whiner', 'Player who is bitching around the most time (chat)');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'mp_breakout_description', '');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'mp_brecourt_description', '');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'mp_burgundy_description', '');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'mp_carentan_description', '');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'mp_dawnville_description', 'The Germans took St Mere Eglise on June 18th 1940 and the next four years passed relatively peacefully, soldiers were billeted in the town and a swastika flew over the town hall. During 1943 the number and quality of the occupying troops decreased. By the time of D-day the town was occupied by Austrian anti aircraft gunners, driving wood burning trucks. During 1944 there were frequent allied air raids on the town and the night of June 5th - 6th was no different. A house in the square caught fire, (now the site of the airborne museum) possibly caused by one of the marker flares dropped by the pathfinders. The inhabitants formed a chain with buckets from the pump in the square (now a listed monument). At this point parachutes were seen in the night sky and began landing in and around the town. It was the 82nd airborne division. The Germans opened fire and ordered the locals into their houses. The Austrians left and only a few Germans continued the fight. The town was taken by members of the 505th led by Lieutenant-Colonel Edward C. Krause.\r\n\r\n<br><br>Source: <a href="http://www.planetcallofduty.com/callofduty2/mp/maps.shtml" target="_blank">Planet CallOfDuty.com</A>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'mp_decoy_description', 'The Battle of Alamein, or more correctly the Second Battle of El Alamein, marked a significant turning point in the Western Desert Campaign of World War II. The battle lasted from October 23 to November 3, 1942. Following the First Battle of El Alamein, which had stalled the Axis advance, General Bernard Montgomery took command of the British Commonwealth''s Eighth Army from Claude Auchinleck in August 1942. Success in the battle turned the tide in the North African Campaign. By July 1942 the German Afrika Korps under General Erwin Rommel had struck deep into Egypt, threatening the British Commonwealth forces'' vital supply line across the Suez Canal. Faced with overextended supply lines and lack of reinforcements and yet well aware of massive Allied reinforcements arriving, Rommel decided to strike at the Allies while their build-up was still not complete. This attack on 30 August 1942 at Alam Halfa failed, and expecting a counterattack by Montgomery´s Eighth Army, the Afrika Korps dug in. After six more weeks of building up forces the Eighth Army was ready to strike. 200,000 men and 1,000 tanks under Montgomery made their move against the 100,000 men and 500 tanks of the Afrika Korps.\r\n\r\n<br><br>Source: <a href="http://www.planetcallofduty.com/callofduty2/mp/maps.shtml" target="_blank">Planet CallOfDuty.com</A>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'mp_downtown_description', 'On 22 June 1941 Germany and its Axis allies invaded the Soviet Union, taking the Soviet political leadership, and hence most of the Red Army, completely by surprise. Having crushed most of the Soviet air force on the ground, German forces quickly advanced deep into Soviet territory using Blitzkrieg tactics. Armoured units raced forward in pincer movements trapping and destroying entire Soviet armies. While the German Army Group North moved towards Leningrad, and Army Group South went on to conquer Ukraine, Army Group Centre was to advance towards Moscow. The Soviet defences were catastrophic, and the casualties were enormous. In early August 1941 the Germans captured the city of Smolensk, an important stronghold on the road to Moscow, but the engagement in the Smolensk area blocked the German advance until mid-September, effectively disrupting the blitzkrieg. On October 2, 1941, Army Group Centre under Fedor von Bock finally launched its attack against Moscow, code-named Operation Typhoon.\r\n\r\n<br><br>Source: <a href="http://www.planetcallofduty.com/callofduty2/mp/maps.shtml" target="_blank">Planet CallOfDuty.com</A>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'mp_farmhouse_description', '');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'mp_trainyard_description', '');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'mp_railyard_description', 'The Battle of Stalingrad was a major turning point in World War II and is considered one of the bloodiest and largest battles in human history. The battle was marked by unprecedented brutality and the disregard for civilian casualties on both sides, as well as a testiment to the world the scale of devastation the Eastern Front had reached as a result of clash of ideologies. Total casualties are estimated at up to two million. The lack of exact data is the result of the Soviet government''s refusal at the time to calculate the losses for fear the sacrifice might have proven too high. The Axis powers lost about a quarter of their total manpower on the Eastern Front, and never completely recovered from the defeat. For the Soviets, the victory at Stalingrad marked the start of the liberation of the Soviet Union, leading to eventual victory over Nazi Germany in May 1945. \r\n\r\n<br><br>Source: <a href="http://www.planetcallofduty.com/callofduty2/mp/maps.shtml" target="_blank">Planet CallOfDuty.com</A>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'mp_toujane_description', '');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'mp_trainstation_description', 'By the evening of June 6th, the tanks of the 21st Panzer Division, reinforced later that night by those of the 12th SS Hitlerjugend, had formed a barrier of fire and steel in front of Caen, which stopped the Allies in their tracks and banished all hopes of early deliverance for the thousands of civilians who had not fled the city after the initial bombings. The German commander brought his best divisions into play, notably most of his armoured units. The British and Canadians were pinned down in the cornfields around the city. Caen was to become the linchpin of the Battle of Normandy. The Battle of Caen was in danger of becoming bogged down &#8211; or so it appeared. The fighting turned into a war of position, with soldiers on both sides holed up in trenches. Attack followed counter-attack without any tangible results. The Great War cast its grim shadow across the Normandy front. \r\n\r\n<br><br>Source: <a href="http://www.planetcallofduty.com/callofduty2/mp/maps.shtml" target="_blank">Planet CallOfDuty.com</A>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'gametype_dm', 'This is basically every-man-for-himself deathmatch. No teams, no special goals, just a battlefield of chaos as everyone fights each other. It may not be realistic, but it sure is fun.\r\n\r\n<br><br>Source: <a href="http://www.planetcallofduty.com/callofduty2/mp/maps.shtml" target="_blank">Planet CallOfDuty.com</A>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'gametype_tdm', 'A somewhat more realistic play style, Team Match pits the Allies against the Axis in a large deathmatch contest. The team with the most frags wins.\r\n\r\n<br><br>Source: <a href="http://www.planetcallofduty.com/callofduty2/mp/maps.shtml" target="_blank">Planet CallOfDuty.com</A>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'gametype_sd', 'On all the default multiplayer maps except for "Pavlov," it''s the Allied forces attempting to search out and destroy a specific target, usually a gun emplacement. These maps typically have two potential targets for the Allied forces, so the Axis cannot simply camp out the one target and wait -- the Allied forces win if they destroy either target. The Axis win a round by killing the entire Allied team, by defusing a planted bomb, or by letting the timer run out.\r\n\r\n<br><br>Source: <a href="http://www.planetcallofduty.com/callofduty2/mp/maps.shtml" target="_blank">Planet CallOfDuty.com</A>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'gametype_hq', 'In this mode there are two different points on the map designated as capture points for each team. In order to score points a team must control and &#8220;setup&#8221; headquarters at one of these capture points. Once they have done that, they must defend that headquarters. The longer they can keep the headquarters from being taken, the more points they get. The interesting twist is that if you die while on the defending team, you are not allowed to respawn until your headquarters is taken over by the other team, while the attacking team still gets to respawn. This means that as you defend your headquarters, you have less team mates to help you as they slowly get killed. Always a pain being the last defender alive. Once taken over, the capture points are changed to new locations and it starts all over again. This is a very fun mode to play and is always changing.\r\n\r\n<br><br>Source: <a href="http://www.planetcallofduty.com/callofduty2/mp/maps.shtml" target="_blank">Planet CallOfDuty.com</A>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'gametype_ctf', 'Similar to the Day of Defeat style of play. Whichever team captures the most flags before the round is over, wins.\r\n\r\n<br><br>Source: <a href="http://www.planetcallofduty.com/callofduty2/mp/maps.shtml" target="_blank">Planet CallOfDuty.com</A>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'gametype_htf', 'The goal of HTF is to be the one who captures your team''s flag. Where they get the "hold" part of "hold the flag" is beyond me. Think of it as a figure of speech. When a flag is capped, a special HTF scoreboard notes the point and you can see it in the same area chat and server messages are displayed in.\r\n\r\n<br><br>Source: <a href="http://www.planetcallofduty.com/callofduty2/mp/maps.shtml" target="_blank">Planet CallOfDuty.com</A>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_bren_mp', 'The Brenis an excellent machine gun in the role of squad support. Its large size limits mobility, but allows it to deliver accurate round when fired while prone. \r\n<ul>\r\n	<li>Range: Long \r\n</li>\r\n	<li>Rate of Fire: Fast \r\n</li>\r\n	<li>Damage: High \r\n</li>\r\n	<li>Mobility: Slow </li>\r\n</ul>\r\n\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_colt_mp', 'A standard issue pistol for American paratroopers, favored by British airborne forces as well. The 7-round magazine is small, but the stopping power of the large .45 caliber round makes the Coltuseful in a pinch.\r\n<ul>\r\n	<li>Range: Short \r\n</li>\r\n	<li>Rate of Fire: Medium \r\n</li>\r\n	<li>Damage: Moderate \r\n</li>\r\n	<li>Mobility: Very Fast </li>\r\n</ul>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_enfield_mp', 'First introduced in 1907 at the outbreak of the First World War, the Lee Enfield rifle is the BritishArmy''s standard issue infantry weapon. A bolt-action rifle, it''s powerful and effective at long range. It carries up to ten rounds, loaded by two 5-round stripper clips.\r\n<ul>\r\n	<li>Range: Long \r\n</li>\r\n	<li>Rate of Fire: Slow </li>\r\n	<li>Damage: Very High \r\n</li>\r\n	<li>Mobility: Fast </li>\r\n</ul>\r\n\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('En', 'weapon_frag_grenade_british_mp', 'Fragmentation grenades are very effective anti-personnel devices. The highly explosive charges reduce their metal casing to flying fragments, causing considerable blast damage. Though they''re ineffective against armored vehicles, they are extremely useful for clearing out entrenched enemy positions.\r\n<ul>\r\n	<li>Range: Medium \r\n</li>\r\n	<li>Rate of Fire: Medium \r\n</li>\r\n	<li>Damage: Very High \r\n</li>\r\n	<li>Mobility: Very Fast </li>\r\n</ul>\r\n\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_frag_grenade_german_mp', 'Fragmentation grenadesare very effective anti-personnel devices. The highly explosive charges reduce their metal casing to flying fragments, causing considerable blast damage. Though they''re ineffective against armored vehicles, they are extremely useful for clearing out entrenched enemy positions.\r\n<ul>\r\n	<li>Range: Medium \r\n</li>\r\n	<li>Rate of Fire: Medium \r\n</li>\r\n	<li>Damage: Very High \r\n</li>\r\n	<li>Mobility: Very Fast </li>\r\n</ul>\r\n\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_frag_grenade_russian_mp', 'Fragmentation grenades are very effective anti-personnel devices. The highly explosive charges reduce their metal casing to flying fragments, causing considerable blast damage. Though they''re ineffective against armored vehicles, they are extremely useful for clearing out entrenched enemy positions.\r\n<ul>\r\n	<li>Range: Medium \r\n</li>\r\n	<li>Rate of Fire: Medium \r\n</li>\r\n	<li>Damage: Very High \r\n</li>\r\n	<li>Mobility: Very Fast </li>\r\n</ul>\r\n\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_kar98k_mp', 'The Kar98k is the standard issue German infantry rifle. It''s accurate and deadly at long range, but suffers from a slow rate of fire due to its bolt-action mechanism. Like the Mosin-Nagant, its also has a scoped version in the game.\r\n<ul>\r\n	<li>Range: Long/Very Long \r\n</li>\r\n	<li>Rate of Fire: Slow </li>\r\n	<li>Damage: Very High \r\n</li>\r\n	<li>Mobility: Medium </li>\r\n</ul>\r\n\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_kar98k_sniper_mp', 'he Kar98k is the standard issue German infantry rifle. It''s accurate and deadly at long range, but suffers from a slow rate of fire due to its bolt-action mechanism. Like the Mosin-Nagant, its also has a scoped version in the game.\r\n<ul>\r\n	<li>Range: Long/Very Long \r\n</li>\r\n	<li>Rate of Fire: Slow </li>\r\n	<li>Damage: Very High \r\n</li>\r\n	<li>Mobility: Medium </li>\r\n</ul>\r\n\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_luger_mp', 'The Luger Pistol carries 9mm ammunition and an 8-shot magazine. Its a highly prized trophy and can often be found as a sidearm in Russian or Americanhands.\r\n<ul>\r\n	<li>Range: Short</li>\r\n	<li>Rate of Fire: Medium \r\n</li>\r\n	<li>Damage: Moderate \r\n</li>\r\n	<li>Mobility: Very Fast </li>\r\n</ul>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_m1carbine_mp', 'The M1A1 carbine, a .30 caliber semi-automatic rifle with a folding stock, is commonly issued to paratroopers. Though it lacks the stopping power of larger rifles, it''s lightweight, accurate, and compact.\r\n<ul>\r\n	<li>Range: Medium \r\n</li>\r\n	<li>Rate of Fire: Moderate \r\n</li>\r\n	<li>Damage: Moderate \r\n</li>\r\n	<li>Mobility: Fast </li>\r\n</ul>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_m1garand_mp', 'The M1 Garandis a powerful and accurate semi-automatic rifle. It''s primary drawback is that it can''t be conveniently reloaded in the middle of a clip.\r\n<ul>\r\n	<li>Range: Long \r\n</li>\r\n	<li>Rate of Fire: Medium </li>\r\n	<li>Damage: High </li>\r\n	<li>Mobility: Fast </li>\r\n</ul>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_mosin_nagant_mp', 'The Mosin-Nagant is a bolt action rifle capable of very accurate and long range fire. However, its low rate of fire is a liability in close-range combat. It also has a scoped version capable of longer ranges\r\n<ul>\r\n	<li>Range: Long/Very Long (scoped version) \r\n</li>\r\n	<li>Rate of Fire: Slow </li>\r\n	<li>Damage: Very High \r\n</li>\r\n	<li>Mobility: Medium </li>\r\n</ul>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_mosin_nagant_sniper_mp', 'The Mosin-Nagant is a bolt action rifle capable of very accurate and long range fire. However, its low rate of fire is a liability in close-range combat. It also has a scoped version capable of longer ranges\r\n<ul>\r\n	<li>Range: Long/Very Long (scoped version) \r\n</li>\r\n	<li>Rate of Fire: Slow </li>\r\n	<li>Damage: Very High \r\n</li>\r\n	<li>Mobility: Medium </li>\r\n</ul>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_mp40_mp', 'The MP40submachine gun is an effective room-clearing weapon. It has a relatively minimal muzzle climb even when fired fully automatic in extended bursts.\r\n<ul>\r\n	<li>Range: Medium \r\n</li>\r\n	<li>Rate of Fire: Fast \r\n</li>\r\n	<li>Damage: Moderate \r\n</li>\r\n	<li>Mobility: Fast </li>\r\n</ul>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_mp44_mp', '<p>Fully automatic with good accuracy. Effective at medium range.</p>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_none', 'An unknown Weapon? Can this really happen o.O ?');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_ppsh_mp', 'The PPSh submachine gunholds 71 rounds of Soviet pistol ammo and has a very high rate of fire. It''s ineffective at long range and fires a relatively weak round, but its rate of fire makes for effective suppression and close-range combat.\r\n<ul>\r\n	<li>Range: Short \r\n</li>\r\n	<li>Rate of Fire: Very Fast \r\n</li>\r\n	<li>Damage: Moderate \r\n</li>\r\n	<li>Mobility: Fast </li>\r\n</ul>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_springfield_mp', 'The Springfield M1903, originally developed after the Spanish-American War, is a sniper rifle equipped with a 4x zoom scope. As a bolt-action weapon, it has a slow rate of fire and reloads one round at a time.\r\n<ul>\r\n	<li>Range: Very Long \r\n</li>\r\n	<li>Rate of Fire: Slow </li>\r\n	<li>Damage: Very High \r\n</li>\r\n	<li>Mobility Medium </li>\r\n</ul>\r\n\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_sten_mp', 'The Sten Mark IIis a 9mm submachine effective for clearing out rooms and trenches. Its compact frame and light weight provide excellent mobility.\r\n<ul>\r\n	<li>Range: Medium \r\n</li>\r\n	<li>Rate of Fire: Fast \r\n</li>\r\n	<li>Damage: Moderate \r\n</li>\r\n	<li>Mobility: Very Fast </li>\r\n</ul>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_thompson_mp', 'The Thompsonsub-machine gun is effective at close range and fires the powerful .45 ACP round. It''s notoriously ineffective at a distance, but compensates with a high rate of fire.\r\n<ul>\r\n	<li>Range: Short \r\n</li>\r\n	<li>Rate of Fire: Fast \r\n</li>\r\n	<li>Damage: High \r\n</li>\r\n	<li>Mobility: Fast </li>\r\n</ul>\r\n\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'gametype_koth', '<p>A laptop spawns somewhere on the map. The players'' goal is to capture the laptop for your team. If one team captures the laptop, they must defend it from being re-captured (and therefore destroyed) by the opposing team. The team that has captured the laptop does not respawn, whereas the team that is attempting to re-capture it respawns normally.&nbsp;</p>\r\n<p> For every 5 seconds a laptop remains under a team''s control, that team scores 5 points. To capture/destroy a laptop, the player must stand in a defined area near the laptop (usually one must stand in the same room it is in). If multiple players from the same team are within this area, the laptop is captured more quickly.&nbsp;</p>\r\n<p> A new laptop spawns after the old one has been re-captured or when the team holding the laptop does so for a preset amount of time, whichever comes first. The first team to capture the laptop has the advantage, for the new HQ always appears closer and easier to access to the dominating team. This can however be neutralized to an extent by spreading out to where the laptop may spawn next, preventing the enemy (who just caught it) from spawning right by it.</p>\r\n\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'gametype_war', 'Use teamwork to kill opposing players and reach a predefined score limit or until the time limit runs out.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'gametype_sab', '\r\n<p>Similar to Search and Destroy, a neutral suitcase bomb is placed in the center of the map, both teams rush to capture the bomb and plant it on the enemy''s objective.&nbsp;</p>\r\n<p> Each team''s goal is to take the bomb and blow up the objective in the enemy''s base. The bomb carrier can fire his weapons, but his position will be announced periodically throughout the game. Also, unlike Search and Destroy, players have unlimited respawns as opposed to just one per round, although it is not instantaneous like Team Deathmatch or Free-for-All.</p>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'gametype_dom', 'Flags are placed in strategic points around the map. All flags start neutral. Teams battle to hold the most flags. Game ends when the time limit is reached, or the score limit is reached.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'mp_backlot_description', '<p><b> US Forces vs OpFor&nbsp;</b></p>\r\n<p>This urban desert setting contains many two story buildings, including the hotly contested Construction Zone. A lot of fighting Takes place just in front of it, especially down the north/south streets on either side. There''s plenty of cover here, but you''ll need a buddy to watch your back.&nbsp;<br>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'mp_bloc_description', '<p><b>Spec Ops vs. Spetsnaz&nbsp;</b></p>\r\n<p>This is a snowy, low visibility compex of apartment buildings. A central court yard with low walls slows your advance from building to building. Definately a snipers map. There are some great stairwells that you can use, and of course a host of windows and other openeings to snipe through. Most of the action takes place in the two facing apartment buildings, which both have upper and lower levels.&nbsp;<br>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'mp_bog_description', '<p><b>US Forces vs. OpFor</b>&nbsp;</p>\r\n<p>This is a swampy, nasty dumping groiund at night, featuring a large trash pile in the center as well as broken vehicles, a bus,and several cargo containers. There are two buildings you can enter on the south side of the map, and they feature one level only.&nbsp;<br>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'mp_cargoship_description', '<p><b>US Forces vs Opfor&nbsp;</b></p>\r\n<p>This map takes place on a cargo ship out to sea. It''s night, but visibility is still good. Night vision helps quite a bit on this level, but it can be diorienting in close quarters. There are only two indoor areas, located at each end of the ship. There are two raised platforms for snipers as well.</p>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'mp_citystreets_description', '<p><b>US Forces vs. OpFor&nbsp;</b></p>\r\n<p>This is a large urban area centered around a marketplace in the late afternoon. Several streetsand allyways make it difficult to pin down enemies. There are only four accessible building interiors throughout this map, but plenty of ambush locations&nbsp;<br>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'mp_convoy_description', '<b> US Forces vs. OpFor&nbsp;</b><br>\r\nThis is an urban desert town divided horizontally by a main road, on which a convoy has been destroyed. The northern side is a shanty town, while the south side is constructed of sturdy materials and offers more stable cover. There are two drainage pipes running under the main road that run south to north.&nbsp;<br>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'mp_countdown_description', '<p><b>US Forces vs. OpFor&nbsp;</b></p>\r\n<p>A freshly used missle launch site, Countdown has six underground missile silos dead center on the map. There are three launch doors open (You can fall to you death) and one with a missile ready to launch. The smoke and steam coming off these silod is great cover. There are two large hangers on the north and south sides of the level that can provide good cover as well, and two trucks with ladders for sniping.&nbsp;<br>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'mp_crash_description', '<p><b> US Forces vs. OpFor</b>&nbsp;</p>\r\n<p>This map is centered around a downed helicopter, and most of the action takes place directly around it. The chopper has crashed in the center of a wartorn town, and the teams initially spawn at the southwest corner and the northest corner. Initial meeting areas include the Back Ally, the Resturant, and the Crash site&nbsp;<br>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'mp_crash_snow', '<p><b> US Forces vs. OpFor</b>&nbsp;</p>\r\n<p>this is the Winter Version von mp_crash</p> \r\n<p>\r\nThis map is centered around a downed helicopter, and most of the action takes place directly around it. The chopper has crashed in the center of a wartorn town, and the teams initially spawn at the southwest corner and the northest corner. Initial meeting areas include the Back Ally, the Resturant, and the Crash site&nbsp;<br>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'mp_crossfire_description', '<p><b>US Forces vs. OpFor</b>&nbsp;</p>\r\n<p>Split by an S-Shaped road, this urban desert town is filled with tons of accesible buildings. Two main Overwatch buildings bookend the street, which is lined with buildings that your team can use to advance from one end of the road to the other.&nbsp;<br>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'mp_farm_description', '<p><b> Spec Ops vs. Spetsnaz&nbsp;</b></p>\r\n<p>This map is a farm on an overcast, rainy day. Lots of vegitation allows for great stealth manuvering and use of the ghillie suit. The weather on this map makes for low visibility, but some good cover as well. Use it to your advantage when ever possible.&nbsp;<br>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'mp_pipeline_description', '<p><b> Spec vs. OpFor&nbsp;</b></p>\r\n<p>Morning on a gloomy day at an abandonded oil refinery is the setting for this map. A winding road spills into the center of the plant, with silos to the south and a train yard to the north. Two large warehouse buildings face each other in the center of the map, and an underground network of tunnels leads from the crew quarters tot he station house and building two.&nbsp;<br>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'mp_showdown_description', '<p><b> US Forces vs. Opfor&nbsp;</b></p>\r\n<p>The setting is a desert palace comple');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'mp_overgrown_description', '<p><b>Spec Ops vs. OpFor&nbsp;</b></p>\r\n<p>This map also takes place on a farm, but the time of day is morning. A dried up riverbed seperates the farm from the small abandoned town on tthe south side. Two main bridges connect the two sides of the level, and a main road runs down the center of the town on the south sode. There are several buildings accesible on both sides of the riverbead, and lots of vegitation in which to take cover.&nbsp;<br>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'mp_strike_description', '<p><b> US OFrces vs. OpFor&nbsp;</b></p>\r\n<p>This large urban desert area provides tons of buildings and secondary levels for players to take cover. The marketplace is full of shops, and the streets see lots of action. It takes place in the morning, so visibility is high. Use the multitude of building interiors to advance your team throughout the\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'mp_vacant_description', '<p><b>Spec Ops vs. Spetsnaz&nbsp;</b></p>\r\n<p>This is an abondoned shipping facility near the end of the day. The Spetsnaz have set up a temporary operations center to plan their attacks on the Spec Ops. The office complex consists of a maze of hallways and offices, including a warehouse and an Ops cente. It''s surrounded by a parking lot on the east side and a loading/ unloading area on the south and west sides.&nbsp;<br>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'mp_shipment_description', '<p><b>US Forces vs. OpFor&nbsp;</b></p>\r\n<p>This is a very small, very fun map, no matter how many players ore involved. It takes place in the late afternoon in a walled-off cargo container storage drop on the docks. Gravel and short grass provides the footing, while the symmetrically stacked cargo containers provide the cover.&nbsp;<br>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_m4_reflex_mp', '<p>Fully automatic with low recoil. Effective at medium range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Red Dot Sight</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_m16_reflex_mp', '<p>Semi-automatic with three rounds burst fire. Effective at Medium to long \r\nrange.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Red Dot Sight</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_frag_grenade_mp', '');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_g36c_mp', '<p>Fully automatic with a high rate of fire. Effective at medium range.</p>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_deserteaglegold_mp', '<p>Gold plated semi-automatic with high power. Effective at close range.</p>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_claymore_mp', '');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_p90_reflex_mp', '<p>Fully automatic with a high capacity. Efective at close to medium range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Red Dot Sight</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_p90_silencer_mp', '<p>Fully automatic with a high capacity. Efective at close to medium range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Silencer</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_g36c_gl_mp', '<p>Fully automatic with a high rate of fire. Effective at medium range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Grenade Launcher</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_m1014_reflex_mp', '<p>Semi-automatic combat shotgun. Effective at close range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Red Dot Sight</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_deserteagle_mp', '<p>Semi-automatic with high power. Effective at close range.</p>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_frag_grenade_short_mp', '');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_m4_mp', '<p>Fully automatic with low recoil. Effective at medium range.</p>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_artillery_mp', '');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_m16_gl_mp', '<p>Semi-automatic with three rounds burst fire. Effective at Medium to long \r\nrange.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Grenade Launcher</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_winchester1200_grip_mp', '<p>Pump action shotgun. Effective at close range.</p>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_cobra_20mm_mp', '');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_p90_mp', '<p>Fully automatic with a high capacity. Efective at close to medium range.</p>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_g36c_reflex_mp', '<p>Fully automatic with a high rate of fire. Effective at medium range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Red Dot Sight</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_p90_acog_mp', '<p>Fully automatic with a high capacity. Efective at close to medium range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>ACOG Scope</ul>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_m4_gl_mp', '<p>Fully automatic with low recoil. Effective at medium range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Grenade Launcher</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_destructible_car', '');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_beretta_mp', '<p>Semi-automatic with a high capacity. Effective at close range.</p>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_saw_bipod_stand_mp', '<p>Fully automatic with a high rate of fire. Effective at medium to long range.</p>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_mp5_reflex_mp', '<p>Fully automatic with good accuracy. Effective at close to medium range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Red Dot Sight</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_m60e4_reflex_mp', '<p>Fully automatic with high power. Effective at medium to long range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Red Dot Sight</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_saw_bipod_crouch_mp', '<p>Fully automatic with a high rate of fire. Effective at medium to long range.</p>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_winchester1200_mp', '<p>Pump action shotgun. Effective at close range.</p>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_m60e4_mp', '<p>Fully automatic with high power. Effective at medium to long range.</p>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_mp5_silencer_mp', '<p>Fully automatic with good accuracy. Effective at close to medium range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Silencer</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_g36c_silencer_mp', '<p>Fully automatic with a high rate of fire. Effective at medium range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Silencer</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_m4_silencer_mp', '<p>Fully automatic with low recoil. Effective at medium range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Silencer</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_ak47_gl_mp', '<p>Fully automatic with high power. Effective at medium range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Grenade Launcher</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_g3_gl_mp', '<p>Single-fire with a high capacity. Effective at medium to long range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Grenade Launcher</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_m16_acog_mp', '<p>Semi-automatic with three rounds burst fire. Effective at Medium to long \r\nrange.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>ACOG Scope</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_usp_silencer_mp', '<p>Semi-automatic with a medium capacity and power. Effective at close range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Silencer</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_concussion_grenade_mp', '');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_flash_grenade_mp', '');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_saw_mp', '<p>Fully automatic with a high rate of fire. Effective at medium to long range.</p>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_m40a3_mp', '<p>Bolt-action sniper rifle. Effective at long range.</p>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_remington700_mp', '<p>Bolt-action sniper rifle. Effective at long range.</p>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_beretta_silencer_mp', '<p>Semi-automatic with a high capacity. Effective at close range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Silencer</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_mp5_mp', '<p>Fully automatic with good accuracy. Effective at close to medium range.</p>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_winchester1200_reflex_mp', '<p>Pump action shotgun. Effective at close range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Red Dot Sight</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_colt45_mp', '<p>Semi-automatic with medium capacity and power. Effective at close range.</p>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_m60e4_grip_mp', '<p>Fully automatic with high power. Effective at medium to long range.</p>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_c4_mp', '');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_rpg_mp', '');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_ak74u_reflex_mp', '<p>Fully automatic with high power. Effective at close to medium range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Red Dot Sight</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_barrett_mp', '<p>Semi-automatic sniper rifle. Effective at long range.</p>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_ak74u_mp', '<p>Fully automatic with high power. Effective at close to medium range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Red Dot Sight</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_m60e4_acog_mp', '<p>Fully automatic with high power. Effective at medium to long range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>ACOG Scope</ul>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_m14_reflex_mp', '<p>Single-fire with high power. Effective at medium to long range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Red Dot Sight</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_ak74u_silencer_mp', '<p>Fully automatic with high power. Effective at close to medium range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Silencer</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_m21_mp', '<p>Semi-automatic sniper rifle. Effective at long range.</p>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_ak74u_acog_mp', '<p>Fully automatic with high power. Effective at close to medium range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>ACOG Scope</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_m14_gl_mp', '<p>Single-fire with high power. Effective at medium to long range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Grenade Launcher</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_dragunov_mp', '<p>Semi-automatic sniper rifle. Effective at long range.</p>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_ak47_reflex_mp', '<p>Fully automatic with high power. Effective at medium range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Red Dot Sight</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_m4_acog_mp', '<p>Fully automatic with low recoil. Effective at medium range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>ACOG Scope</ul>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_g3_mp', '<p>Single-fire with a high capacity. Effective at medium to long range.</p>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_usp_mp', '<p>Semi-automatic with a medium capacity and power. Effective at close range.</p>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_g3_reflex_mp', '<p>Single-fire with a high capacity. Effective at medium to long range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Red Dot Sight</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_colt45_silencer_mp', '<p>Semi-automatic with medium capacity and power. Effective at close range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Silencer</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_ak47_silencer_mp', '<p>Fully automatic with high power. Effective at medium range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Silencer</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_barrett_acog_mp', '<p>Semi-automatic sniper rifle. Effective at long range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>ACOG Scope</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_uzi_reflex_mp', '<p>Fully automatic with a high rate of fire. Effective at close to medium range</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Red Dot Sight</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_rpd_reflex_mp', '<p>Fully automatic with good power and quick fire rate. Effective at medium to \r\nlong range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Red Dot Sight</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_rpd_grip_mp', '<p>Fully automatic with good power and quick fire rate. Effective at medium to \r\nlong range.</p>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_g3_silencer_mp', '<p>Single-fire with a high capacity. Effective at medium to long range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Silencer</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_m16_silencer_mp', '<p>Semi-automatic with three rounds burst fire. Effective at Medium to long \r\nrange.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Silencer</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_rpd_mp', '<p>Fully automatic with good power and quick fire rate. Effective at medium to \r\nlong range.</p>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_uzi_mp', '<p>Fully automatic with a high rate of fire. Effective at close to medium range</p>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_uzi_silencer_mp', '<p>Fully automatic with a high rate of fire. Effective at close to medium range</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Silencer</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_saw_grip_mp', '<p>Fully automatic with a high rate of fire. Effective at medium to long range.</p>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_g36c_acog_mp', '<p>Fully automatic with a high rate of fire. Effective at medium range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>ACOG Scope</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_m14_silencer_mp', '<p>Single-fire with high power. Effective at medium to long range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Silencer</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_ak47_mp', '<p>Fully automatic with high power. Effective at medium range.</p>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_skorpion_reflex_mp', '<p>Fully automatic with a high rate of fire. Effective at close range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Red Dot Sight</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_cobra_ffar_mp', '');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_m1014_mp', '<p>Semi-automatic combat shotgun. Effective at close range.</p>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_m14_mp', '<p>Single-fire with high power. Effective at medium to long range.</p>\r\n<ul>\r\n	<li>Attachments:</li>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_saw_reflex_mp', '<p>Fully automatic with a high rate of fire. Effective at medium to long range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Red Dot Sight</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_dragunov_acog_mp', '<p>Semi-automatic sniper rifle. Effective at long range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>ACOG Scope</ul>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_ak47_acog_mp', '<p>Fully automatic with high power. Effective at medium range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>ACOG Scope</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_skorpion_mp', '<p>Fully automatic with a high rate of fire. Effective at close range.</p>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_saw_acog_mp', '<p>Fully automatic with a high rate of fire. Effective at medium to long range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>ACOG Scope</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_m1014_grip_mp', '<p>Semi-automatic combat shotgun. Effective at close range.</p>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_g3_acog_mp', '<p>Single-fire with a high capacity. Effective at medium to long range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>ACOG Scope</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_m16_mp', '<p>Semi-automatic with three rounds burst fire. Effective at Medium to long \r\nrange.</p>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_m14_acog_mp', '<p>Single-fire with high power. Effective at medium to long range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>ACOG Scope</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_rpd_acog_mp', '<p>Fully automatic with good power and quick fire rate. Effective at medium to \r\nlong range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>ACOG Scope</ul>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_m21_acog_mp', '<p>Semi-automatic sniper rifle. Effective at long range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>ACOG Scope</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_skorpion_silencer_mp', '<p>Fully automatic with a high rate of fire. Effective at close range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>Silencer</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_mp5_acog_mp', '<p>Fully automatic with good accuracy. Effective at close to medium range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>ACOG Scope</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_hind_ffar_mp', '');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_m40a3_acog_mp', '<p>Bolt-action sniper rifle. Effective at long range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>ACOG Scope</ul>');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_uzi_acog_mp', '<p>Fully automatic with a high rate of fire. Effective at close to medium range</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>ACOG Scope</ul>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_remington700_acog_mp', '<p>Bolt-action sniper rifle. Effective at long range.</p>\r\n<ul>\r\n	<li>Attachments:</li>\r\n	<ul>ACOG Scope</ul>\r\n');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES ('EN', 'weapon_smoke_grenade_mp', '');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('EN', 'medal_pro_knifekills', 'Player with the most knife kills' );
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('EN', 'medal_pro_claymorec4', 'Player with the most claymore and c4 kills' );
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('EN', 'MOD_RIFLE_BULLET', 'Killed by a Rifle Bullet.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('EN', 'MOD_HEAD_SHOT', 'Most likely the head has been blown off. ');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('EN', 'MOD_GRENADE_SPLASH', 'Kill by a grenade splash.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('EN', 'MOD_SUICIDE', 'Player killed himself, most often by accident. ');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('EN', 'MOD_MELEE', 'Either stabbed (into the back), or killed by knife. Both is very humiliating. ');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('EN', 'MOD_PISTOL_BULLET', 'Killed by a pistol bullet.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('EN', 'MOD_EXPLOSIVE', 'This represents a SD Explosion. Player was to close to the bomb ;).');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('EN', 'MOD_UNKNOWN', 'Unknown Damagetype');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('EN', 'MOD_GRENADE', 'Directly killed by a grenade.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('EN', 'MOD_PROJECTILE_SPLASH', 'Killed by a projectile Splash.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('EN', 'MOD_IMPACT', 'Impact by what? I don''t know ...');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('EN', 'MOD_PROJECTILE', 'Killed directly by a projectile. ');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'gametype_ctf', '2 Teams die um Flaggen Spielen. Das Team, dass zuerst die benötigte Punktezahl erreicht hat, hat gewonnen.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'gametype_dm', 'Jeder gegen Jeder. Der jenige, der zuerst die vorgegebene Punktezahl erreicht hat, hat gewonnen.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'gametype_dom', '2 Teams, 3 Flaggenpunkte. Das Team das mehr Flaggen besitzt, bekommt schneller und mehr Punkte. Gewonnen hat das Team, dass die vorgegebene Punktezahl erreicht hat.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'gametype_hq', '2 Teams und jeweils 1 Hauptquratier (HQ). Das Team dass das HQ eingenommen hat, muss es bis zur selbst zerstörung verteidigen. Durch das einhemen und behalten des HQ''s gibt es Punkte. Das Team dass zuerst die vorgegebenen Punkte erreicht hat, hat gewonnen.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'gametype_koth', '2 Teams und jeweils 1 Hauptquratier (HQ). Das Team dass das HQ eingenommen hat, muss es bis zur selbst zerstörung verteidigen. Durch das einhemen und behalten des HQ''s gibt es Punkte. Das Team dass zuerst die vorgegebenen Punkte erreicht hat, hat gewonnen.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'gametype_sab', '2 Teams versuchen als erstes an der Bombe zu sein. Diese müssen sie dann im gegnerischen Gebiet legen und bis zum Explosions Punkt verteidigen.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'gametype_sd', '2 Teams, 1 Bombe. Ein Team muss versuchen die Bombe an einem der vorgegeben Bombenpunkten zu legen und bis zu Explosion zu verteidigen. Gelingt dies, hat das Team gewonnen. Kann jedoch das andere Team das explodieren der Bombe verhindern, hat dieses gewonnen.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'gametype_tdm', '2 Teams die gegeneinander kämpfen. Das Team, das zuerst die vorgegebene Punktezahl erreicht hat, hat gewonnen.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'medal_anti_nademagnet', 'Spieler der die Granaten am meisten anzieht.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'medal_anti_no1target', 'Staatsfeind. spieler mit den meisten Toden.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'medal_anti_suicide', 'Spieler mit den meisten Selbstmorden.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'medal_anti_teamkiller', 'Spieler mit den meisten Team abschüssen.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'medal_anti_whiner', 'Spieler der am meisten rumheult.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'medal_pro_claymorec4', 'Spieler mit den meisten Claymore und C4 abschüsse.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'medal_pro_explosivekiller', 'Spieler mit den meisten explosiven abschüssen.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'medal_pro_headshot', 'Spiler mit den meisten Headshot abschüssen.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'medal_pro_killer', 'Spieler mit den meisten abschüssen.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'medal_pro_knifekills', 'Spieler mit den meisten Messer abschüssen.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'medal_pro_pistol', 'Spieler mit den meisten Pistolen abschüssen.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'medal_pro_slappyhappy', 'Spieler mit den meisten Schlag abschüssen.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'medal_pro_sniper', 'Spieler mit den meisten Scharfschützen abschüssen.');
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `stats_maps`
+-- 
+
+DROP TABLE IF EXISTS `stats_maps`;
+CREATE TABLE `stats_maps` (
+  `ID` int(11) NOT NULL auto_increment,
+  `MAPNAME` varchar(63) NOT NULL default '',
+  `DisplayName` varchar(127) NOT NULL default '',
+  `Description_id` varchar(255) NOT NULL default '',
+  `Gametypes` varchar(127) NOT NULL default '',
+  PRIMARY KEY  (`ID`,`MAPNAME`),
+  UNIQUE KEY `MAPNAME_UNIQUE` (`MAPNAME`),
+  KEY `MAPNAME` (`MAPNAME`)
+) TYPE=MyISAM COMMENT='The parser will fill this table with map lists. You can enan' AUTO_INCREMENT=1 ;
+
+-- 
+-- Dumping data for table `stats_maps`
+-- 
+
+INSERT INTO `stats_maps` (`ID`, `MAPNAME`, `DisplayName`, `Description_id`, `Gametypes`) VALUES (1, 'mp_bocage', 'Bocage', 'mp_brocage_description', 'DM, TDM, SD, RE, BEL, HQ');
+INSERT INTO `stats_maps` (`ID`, `MAPNAME`, `DisplayName`, `Description_id`, `Gametypes`) VALUES (2, 'mp_breakout', 'Breakout', 'mp_breakout_description', 'DM, TDM, SD, RE, BEL, HQ');
+INSERT INTO `stats_maps` (`ID`, `MAPNAME`, `DisplayName`, `Description_id`, `Gametypes`) VALUES (3, 'mp_brecourt', 'Brecourt', 'mp_brecourt_description', 'DM, TDM, SD, RE, BEL, HQ');
+INSERT INTO `stats_maps` (`ID`, `MAPNAME`, `DisplayName`, `Description_id`, `Gametypes`) VALUES (4, 'mp_burgundy', 'Burgundy', 'mp_burgundy_description', 'DM, TDM, SD, RE, BEL, HQ');
+INSERT INTO `stats_maps` (`ID`, `MAPNAME`, `DisplayName`, `Description_id`, `Gametypes`) VALUES (5, 'mp_carentan', 'Carentan', 'mp_carentan_description', 'DM, TDM, SD, RE, BEL, HQ');
+INSERT INTO `stats_maps` (`ID`, `MAPNAME`, `DisplayName`, `Description_id`, `Gametypes`) VALUES (6, 'mp_dawnville', 'Dawnville', 'mp_dawnville_description', 'DM, TDM, SD, RE, BEL, HQ');
+INSERT INTO `stats_maps` (`ID`, `MAPNAME`, `DisplayName`, `Description_id`, `Gametypes`) VALUES (7, 'mp_leningrad', 'Leningrad', 'mp_leningrad_description', 'DM, TDM, SD, RE, BEL, HQ');
+INSERT INTO `stats_maps` (`ID`, `MAPNAME`, `DisplayName`, `Description_id`, `Gametypes`) VALUES (8, 'mp_decoy', 'Decoy', 'mp_decoy_description', 'DM, TDM, SD, RE, BEL, HQ');
+INSERT INTO `stats_maps` (`ID`, `MAPNAME`, `DisplayName`, `Description_id`, `Gametypes`) VALUES (9, 'mp_downtown', 'Downtown', 'mp_downtown_description', 'DM, TDM, SD, RE, BEL, HQ');
+INSERT INTO `stats_maps` (`ID`, `MAPNAME`, `DisplayName`, `Description_id`, `Gametypes`) VALUES (10, 'mp_farmhouse', 'Farmhouse', 'mp_farmhouse_description', 'DM, TDM, SD, RE, BEL, HQ');
+INSERT INTO `stats_maps` (`ID`, `MAPNAME`, `DisplayName`, `Description_id`, `Gametypes`) VALUES (11, 'mp_matmata', 'Matmata', 'mp_matmata_description', 'DM, TDM, SD, RE, BEL, HQ');
+INSERT INTO `stats_maps` (`ID`, `MAPNAME`, `DisplayName`, `Description_id`, `Gametypes`) VALUES (12, 'mp_railyard', 'Railyard', 'mp_railyard_description', 'DM, TDM, SD, RE, BEL, HQ');
+INSERT INTO `stats_maps` (`ID`, `MAPNAME`, `DisplayName`, `Description_id`, `Gametypes`) VALUES (13, 'mp_toujane', 'Toujane', 'mp_toujane_description', 'DM, TDM, SD, RE, BEL, HQ');
+INSERT INTO `stats_maps` (`ID`, `MAPNAME`, `DisplayName`, `Description_id`, `Gametypes`) VALUES (14, 'mp_trainstation', 'Trainstation', 'mp_trainstation_description', 'DM, TDM, SD, RE, BEL, HQ');
+INSERT INTO `stats_maps` (`ID`, `MAPNAME`, `DisplayName`, `Description_id`, `Gametypes`) VALUES (15, 'mp_backlot', 'Backlot', 'mp_backlot_description', 'DM, WAR, KOTH, SAB, DOM, SD');
+INSERT INTO `stats_maps` (`ID`, `MAPNAME`, `DisplayName`, `Description_id`, `Gametypes`) VALUES (16, 'mp_bloc', 'Bloc', 'mp_bloc_description', 'DM, WAR, KOTH, SAB, DOM, SD');
+INSERT INTO `stats_maps` (`ID`, `MAPNAME`, `DisplayName`, `Description_id`, `Gametypes`) VALUES (17, 'mp_bog', 'Bog', 'mp_bog_description', 'DM, WAR, KOTH, SAB, DOM, SD');
+INSERT INTO `stats_maps` (`ID`, `MAPNAME`, `DisplayName`, `Description_id`, `Gametypes`) VALUES (18, 'mp_cargoship', 'CargoShip', 'mp_cargoship_description', 'DM, WAR, KOTH, SAB, DOM, SD');
+INSERT INTO `stats_maps` (`ID`, `MAPNAME`, `DisplayName`, `Description_id`, `Gametypes`) VALUES (19, 'mp_citystreets', 'District', 'mp_citystreets_description', 'DM, WAR, KOTH, SAB, DOM, SD');
+INSERT INTO `stats_maps` (`ID`, `MAPNAME`, `DisplayName`, `Description_id`, `Gametypes`) VALUES (20, 'mp_convoy', 'Ambush', 'mp_convoy_description', 'DM, WAR, KOTH, SAB, DOM, SD');
+INSERT INTO `stats_maps` (`ID`, `MAPNAME`, `DisplayName`, `Description_id`, `Gametypes`) VALUES (21, 'mp_countdown', 'Countdown', 'mp_countdown_description', 'DM, WAR, KOTH, SAB, DOM, SD');
+INSERT INTO `stats_maps` (`ID`, `MAPNAME`, `DisplayName`, `Description_id`, `Gametypes`) VALUES (22, 'mp_crash', 'Crash', 'mp_crash_description', 'DM, WAR, KOTH, SAB, DOM, SD');
+INSERT INTO `stats_maps` (`ID`, `MAPNAME`, `DisplayName`, `Description_id`, `Gametypes`) VALUES (23, 'mp_crossfire', 'Crossfire', 'mp_crossfire_description', 'DM, WAR, KOTH, SAB, DOM, SD');
+INSERT INTO `stats_maps` (`ID`, `MAPNAME`, `DisplayName`, `Description_id`, `Gametypes`) VALUES (24, 'mp_farm', 'Downpour', 'mp_farm_description', 'DM, WAR, KOTH, SAB, DOM, SD');
+INSERT INTO `stats_maps` (`ID`, `MAPNAME`, `DisplayName`, `Description_id`, `Gametypes`) VALUES (25, 'mp_pipeline', 'Pipeline', 'mp_pipeline_description', 'DM, WAR, KOTH, SAB, DOM, SD');
+INSERT INTO `stats_maps` (`ID`, `MAPNAME`, `DisplayName`, `Description_id`, `Gametypes`) VALUES (26, 'mp_showdown', 'Showdown', 'mp_showdown_description', 'DM, WAR, KOTH, SAB, DOM, SD');
+INSERT INTO `stats_maps` (`ID`, `MAPNAME`, `DisplayName`, `Description_id`, `Gametypes`) VALUES (27, 'mp_overgrown', 'Overgrown', 'mp_overgrown_description', 'DM, WAR, KOTH, SAB, DOM, SD');
+INSERT INTO `stats_maps` (`ID`, `MAPNAME`, `DisplayName`, `Description_id`, `Gametypes`) VALUES (28, 'mp_strike', 'Strike', 'mp_strike_description', 'DM, WAR, KOTH, SAB, DOM, SD');
+INSERT INTO `stats_maps` (`ID`, `MAPNAME`, `DisplayName`, `Description_id`, `Gametypes`) VALUES (29, 'mp_vacant', 'Vacant', 'mp_vacant_description', 'DM, WAR, KOTH, SAB, DOM, SD');
+INSERT INTO `stats_maps` (`ID`, `MAPNAME`, `DisplayName`, `Description_id`, `Gametypes`) VALUES (30, 'mp_shipment', 'Shipment', 'mp_shipment_description', 'DM, WAR, KOTH, SAB, DOM, SD');
+INSERT INTO `stats_maps` (`ID`, `MAPNAME`, `DisplayName`, `Description_id`, `Gametypes`) VALUES (31, 'mp_crash_snow', 'Crash Snow', 'mp_crash_snow_description', 'DM, WAR, KOTH, SAB, DOM, SD');
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `stats_weapons`
+-- 
+
+DROP TABLE IF EXISTS `stats_weapons`;
+CREATE TABLE `stats_weapons` (
+  `ID` smallint(6) NOT NULL auto_increment,
+  `INGAMENAME` varchar(32) NOT NULL default '',
+  `BULLETNAME` varchar(32) NOT NULL default '',
+  `WeaponType` tinyint(4) NOT NULL default '0',
+  `DisplayName` varchar(127) NOT NULL default '',
+  `Description_id` varchar(255) NOT NULL default '',
+  `ExternalInfoUrl` varchar(255) NOT NULL default '',
+  `Damage` int(11) NOT NULL default '0',
+  `Accuracy` int(11) NOT NULL default '0',
+  `Ammotype` varchar(64) NOT NULL default '',
+  PRIMARY KEY  (`ID`),
+  KEY `INGAMENAME` (`INGAMENAME`,`BULLETNAME`)
+) TYPE=MyISAM COMMENT='Table containing Informations about weapons' AUTO_INCREMENT=1 ;
+
+-- 
+-- Dumping data for table `stats_weapons`
+-- 
+
+INSERT INTO `stats_weapons` (`ID`, `INGAMENAME`, `BULLETNAME`, `WeaponType`, `DisplayName`, `Description_id`, `ExternalInfoUrl`, `Damage`, `Accuracy`, `Ammotype`) VALUES (4, 'mp44_mp', '', 7, 'MP44', 'weapon_mp44_mp', 'http://en.wikipedia.org/wiki/MP44', 0, 0, '');
+INSERT INTO `stats_weapons` (`ID`, `INGAMENAME`, `BULLETNAME`, `WeaponType`, `DisplayName`, `Description_id`, `ExternalInfoUrl`, `Damage`, `Accuracy`, `Ammotype`) VALUES (32, 'none', '', 0, 'No Weapon at all', 'weapon_none', '', 0, 0, '');
+
+-- 
+-- Moved REST of INSERTS into db_template_codww2only.txt and db_template_cod4only.txt
+-- 

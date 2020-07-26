@@ -1,0 +1,126 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel="stylesheet" href="../admin/css/admin.css" type="text/css">
+<title>Installation</title>
+</head>
+
+<body TOPMARGIN="0" LEFTMARGIN="0" MARGINWIDTH="0" MARGINHEIGHT="0">
+
+<table cellspacing="0" cellpadding="5" border="0" class="with_border">
+<tr>
+	<td>
+
+<div class="mainheader">
+<h1 align="center">Installing UltraStats</h1>
+</div>
+<p>Welcome to my quick and dirty install documentation. It is quick and dirty 
+because it is 0:00 am now and I am very tired, but it needs to be done ;) Please 
+keep in mind that this is still <font color="#FF0000"><b>BETA SOFTWARE</b></font>! 
+This release is intended for testing only, I expect still many bugs hidden 
+somewhere in the stats.</p>
+<blockquote>
+	<h2>Step 1 - Check prerequisites</h2>
+	<p>Before you start installing UltraStats, you should should make sure that you 
+have the following: </p>
+	<ul>
+		<li><b>Apache Webserver 1.3 or 2.0</b> or higher (Ask your Webserver ISP if you are 
+	not sure)</li>
+		<li><b>PHP 4.x or PHP 5.x</b> or higher is installed, UltraStats has been tested 
+	with both successfully.</li>
+		<li><b>MySQL Database</b> (4.x or 5.x or higher)! Optional, I recommend that you 
+	have PhpMyAdmin installed. You may will need it for testing and debugging. 
+	However the installation can be done WITHOUT PhpMyAdmin!</li>
+		<li>About <b>20MB</b> of free <b>Webspace</b> and at least <b>10MB</b> of database space. You 
+	will need more database space if your logfile grows. However UltraStats has 
+	a high optimized database layout. </li>
+	</ul>
+	<h2>Step 2 - Run the Installation Script</h2>
+	<p>I made it as easy as I could, you simple need to unpack the UltraStats 
+archive and upload it onto your Webserver. After you have done this, kindly open
+	<a href="http://www.yourwebhost.com/ultrastats/install.php">http://www.yourwebhost.com/ultrastats/install.php</a> and follow the 
+installation instructions. A few files and directories need write access, the 
+installer will tell you which files. </p>
+	<h2>Step 3 - Add your first Server</h2>
+	<p>If everything goes right, you should have your UltraStats Installation 
+running in 5-10 minutes. You can now proceed to the Admin Center, login and add 
+your first Server. Important is that you configure the correct Gamelog location. 
+This is a relative path on the Webserver.</p>
+	<p>I recommend to use something like this: 
+	<div class="with_border"><b>../gamelogs/games-server1.log</b></div>
+	<p>If you add the server, the script will try to create an empty file ( if not 
+already there ). If this fails, you will receive an error and the server will 
+not be added (until the path is correct and the file writeable and readable). 
+	</p>
+	<p>You can also configure a Remote FTP Path which can be used to automatically 
+download the Gamelog from the Webserver. <br>Use a remote ftp path like this:
+	<div class="with_border"><b><a href="ftp://username@127.0.0.1/.callofduty2/main/Server1_mp.log">ftp://username@127.0.0.1/.callofduty2/main/Server1_mp.log</a></b></div>
+    *Experimental Support for SCP has also been added! Kindly use scp;// instead
+    of ftp:// in the FTP Path parameter. But be warned, you will need the SSH2
+    Extension for PHP5 installed which itself is still beta and not easy to
+    install! For more see the package website of ssh2 for php: <a href="http://pecl.php.net/package/ssh2">http://pecl.php.net/package/ssh2</a>&nbsp;
+	<h2>
+    Step 4 - Download the Logfile</h2>
+	<p>This step assumes that you have configured a valid FTP Remote path. In order 
+to download the logfile click on the
+	<img src="../images/icons/download.png" width="16" border="1"> 
+icon. If the password is not within the ftp remote path, you will be prompted 
+for it automatically. Then the Gamelogfile is downloaded, assuming the path is 
+correct. The download script only downloads new stuff from the logfile, this 
+means it appends the log. This saves a lot of bandwidth and time if you are 
+going to configure updates by hour. </p>
+	<h2>Step 5 - Run the Parser</h2>
+	<p>Now comes the parser part, also very easy - you just need to click the 
+	<img src="../images/icons//gears_run.png" width="16" border="1"> 
+icon, and the parser will start. The script is designed to run max. 60 seconds. 
+An internal timer will abort processing after 50 seconds, and auto reloads 
+itself and resumes from the last position. The parser process will take a lot of 
+performance from your Webserver, specially the MySQL server. This is due the 
+many Insert statements. In the final version, I might be able to use bulk insert 
+to speed the process up. 
+</p>
+	<h2>Step 6 - Run Total/Final Calculations</h2>
+	<p>A very important step! For optimal performance, I have added some helper 
+tables to store top aliases. You will see this in the page generation time. Even 
+with large databases, the page generation will be very fast compared to other 
+stats applications. The step is so important because without, you will not see 
+any aliases on the main page!</p>
+	<h2>Finished</h2>
+	<p>Yes you are done :) Well not really, I think you need to experience all the 
+features UltraStats brings to you. Server Admin, Player Editor and User Admin 
+are currently working More administrative facilities will come in the final, I 
+have planned to add a Map Admin and such stuff. 
+</p>
+</blockquote>
+<p>If you experience any bugs, feel free to post into our
+<a href="http://www.shooter-szene.de/PNphpBB2-index-c-25.phtml">Forums</a>! 
+Thanks!</p>
+<p>&nbsp;</p>
+
+	</td>
+</tr>
+</table>
+
+
+<table width="100%" border="0" cellspacing="1" cellpadding="0" class="mainfooter">
+<tr>
+	<td align="center" class="line0">Created 2005-2006 - By <a href="http://www.eifelzocker.de" target="_blank">deltaray</a></td>
+	<td align="center" class="line1">
+		&nbsp;<a href="http://www.shooter-szene.de" target="_blank">Shooter-Szene.de</a> | 
+		&nbsp;<a href="http://www.ultrastats.org" target="_blank">Ultrastats</A> 
+	</td>
+	<td align="center" class="line0">
+		&nbsp;<B>Partners:</B> 
+	 </td>
+	<td align="center" class="line1">
+		&nbsp;<a href="http://www.clanwarzgamingservers.com" target="_blank">ClanWarz</a> |
+		&nbsp;<a href="http://www.mgs-server.com/" target="_blank">MGS-Server</a>
+	 </td>
+ </tr>
+ </table>
+
+	 
+</body>
+</html>

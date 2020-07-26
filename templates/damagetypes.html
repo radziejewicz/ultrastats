@@ -1,0 +1,149 @@
+<!-- INCLUDE include_header.html --> 
+
+<br>
+
+<!-- IF iserror="true" -->
+	<center>
+	<h3><font color="red">{LN_ERROR_INVALIDDAMAGETYPE}</font></h3>
+	</center>
+<!-- ENDIF iserror="true" -->
+
+<!-- IF damagetypeenabled="true" -->
+<table width="100%" cellpadding="0" cellspacing="5" border="0" align="center">
+<tr>
+	<td width="50%" valign="top">
+
+		<table width="100%" cellpadding="1" cellspacing="0" border="0" align="center">
+		<tr>
+			<td width="40%" valign="top">
+
+				<table width="100%" cellpadding="0" cellspacing="0" border="0" align="center">
+				<tr>
+					<td colspan="3" class="title" nowrap>{LN_DAMAGETYPE_DETAILS}</td>
+				</tr>
+				</table>
+				<table width="100%" cellpadding="0" cellspacing="1" border="0" align="center" class="with_border">
+				<tr>
+					<td colspan="2" width="266" nowrap valign="top" class="line1">
+					<img src="{DamageTypeImage}" alt="{DamagetypeDisplayName}" width="258">
+					</td>
+					<td width="100%" nowrap valign="top" class="line1" rowspan="4">
+						<table width="100%" cellpadding="2" cellspacing="0" border="0" align="center" >
+						<tr><td width="100%" class="cellmenu1" align="center"><B>{LN_DAMAGETYPE_DESCRIPTION}</B></td></tr>
+						</table>
+						<table width="100%" cellpadding="5" cellspacing="0" border="0" align="center" >
+						<tr>
+							<td width="100%">{Description}</td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td nowrap align="center" class="cellmenu2"><B>{LN_DAMAGETYPE_INGAMENAME}:</B></td>
+					<td nowrap valign="top" align="left" class="line1">{DAMAGETYPE}</td>
+				</tr>
+				</table>
+
+			</td>
+			<td width="60%" valign="top">
+
+			<!-- IF mostkillssenabled="true" -->
+				<table width="95%" cellpadding="1" cellspacing="0" border="0" align="center">
+				<tr>
+					<td class="title" width="400" nowrap>{LN_DAMAGETYPE_TOPPLAYERS}</td>
+				</tr>
+				</table>
+
+				<!-- IF mostkills_pagerenabled="true" -->
+				<table width="95%" align="center" border="0" cellpadding="1" cellspacing="1" class="with_border">
+				<tr>
+					<td class="cellmenu2" nowrap><B>Pages: &nbsp; </B>
+				<!-- BEGIN MOSTKILLSPAGES -->
+					&nbsp;<a href="?id={DAMAGETYPE}&mostkills_start={mypagebegin}&killedby_start={current_killedby_pagebegin}{additional_url}" target="_top">{mypagenumber}</a>
+				<!-- END MOSTKILLSPAGES -->
+					</td>
+					<td nowrap width="100%"class="line2"><I>&nbsp;{MOSTKILLS_MOREPAGES}</I></td>
+<!--					<td nowrap align="right" class="line2"><I>{LN_PLAYERS_ONLYLISTED} ({LN_PLAYERS_WITHMINPLAY}: <B>{web_mintime}</B> {LN_PLAYERS_SECANDMINKILLS}: <B>{web_minkills}</B>)</I></td>-->
+				</tr>
+				</table>
+				<!-- ENDIF mostkills_pagerenabled="true" -->
+
+				<table width="95%" cellpadding="0" cellspacing="1" border="0" align="center" class="with_border_alternate">
+				<tr>
+					<td width="20" class="cellmenu1" align="center" nowrap><B>{LN_TOPPLAY_NUM}</B></td>
+					<td width="100%" class="cellmenu1" align="center" nowrap><B>{LN_TOPPLAY_NAME}</B></td>
+					<td width="40" class="cellmenu1" align="center" nowrap><A HREF="players.php?sorting=Kills{additional_url}" class="cellmenu1_link" >{LN_TOPPLAY_KILLS}</A></td>
+					<td width="200" class="cellmenu1" align="center" nowrap><A HREF="players.php?sorting=Deaths{additional_url}" class="cellmenu1_link" >{LN_TOPPLAY_Deaths}</A></td>
+				</tr>
+
+				<!-- BEGIN mostkills -->
+				<tr>
+					<td align="right" class="{cssclass}"><B>{Number}</B></td>
+					<td class="{cssclass}"><A HREF="players-detail.php?id={PLAYERID}{additional_url}" title="{Alias}">{AliasAsHtml}</B></td>
+					<td align="right" class="{cssclass}"><B>{AllKills}</B>&nbsp;</td>
+					<td class="{cssclass}" align="left" nowrap>&nbsp;<img src="{BarImageLeft}" width="" height="9"><img src="{BarImageMiddle}" width="{KillBarWidth}%" height="9" alt="{KillBarPercent}"><img src="{BarImageRight}" width="" height="9">&nbsp;</td>
+
+				</tr>
+				<!-- END mostkills -->
+
+				</table>
+
+			<!-- ENDIF mostkillssenabled="true" -->
+				<br>
+			
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">&nbsp;</td>
+			<td valign="top">
+			<!-- IF mostkilledbyenabled="true" -->
+				<table width="95%" cellpadding="1" cellspacing="0" border="0" align="center">
+				<tr>
+					<td class="title" width="400" nowrap>{LN_DAMAGETYPE_TOPKILLEDBY}</td>
+				</tr>
+				</table>
+
+				<!-- IF killedby_pagerenabled="true" -->
+				<table width="95%" align="center" border="0" cellpadding="1" cellspacing="1" class="with_border">
+				<tr>
+					<td class="cellmenu2" nowrap><B>Pages: &nbsp; </B>
+				<!-- BEGIN KILLEDBYPAGES -->
+					&nbsp;<a href="?id={DAMAGETYPE}&killedby_start={mypagebegin}&mostkills_start={current_mostkills_pagebegin}{additional_url}" target="_top">{mypagenumber}</a>
+				<!-- END KILLEDBYPAGES -->
+					</td>
+					<td nowrap width="100%"class="line2"><I>&nbsp;{KILLEDBY_MOREPAGES}</I></td>
+<!--					<td nowrap align="right" class="line2"><I>{LN_PLAYERS_ONLYLISTED} ({LN_PLAYERS_WITHMINPLAY}: <B>{web_mintime}</B> {LN_PLAYERS_SECANDMINKILLS}: <B>{web_minkills}</B>)</I></td>-->
+				</tr>
+				</table>
+				<!-- ENDIF killedby_pagerenabled="true" -->
+
+				<table width="95%" cellpadding="0" cellspacing="1" border="0" align="center" class="with_border_alternate">
+				<tr>
+					<td width="20" class="cellmenu1" align="center" nowrap><B>{LN_TOPPLAY_NUM}</B></td>
+					<td width="100%" class="cellmenu1" align="center" nowrap><B>{LN_TOPPLAY_NAME}</B></td>
+					<td width="40" class="cellmenu1" align="center" nowrap><A HREF="players.php?sorting=Kills{additional_url}" class="cellmenu1_link" >{LN_TOPPLAY_KILLS}</A></td>
+					<td width="200" class="cellmenu1" align="center" nowrap><A HREF="players.php?sorting=Deaths{additional_url}" class="cellmenu1_link" >{LN_TOPPLAY_Deaths}</A></td>
+				</tr>
+
+				<!-- BEGIN mostkilledby -->
+				<tr>
+					<td align="right" class="{cssclass}"><B>{Number}</B></td>
+					<td class="{cssclass}"><A HREF="players-detail.php?id={ENEMYID}{additional_url}" title="{Enemy}">{EnemyAsHtml}</B></td>
+					<td align="right" class="{cssclass}"><B>{AllKills}</B>&nbsp;</td>
+					<td class="{cssclass}" align="left" nowrap>&nbsp;<img src="{BarImageLeft}" width="" height="9"><img src="{BarImageMiddle}" width="{KillBarWidth}%" height="9" alt="{KillBarPercent}"><img src="{BarImageRight}" width="" height="9">&nbsp;</td>
+
+				</tr>
+				<!-- END mostkilledby -->
+
+				</table>
+			<!-- ENDIF mostkilledbyenabled="true" -->
+			
+			</td>
+		</tr>
+
+		</table>
+</tr>
+</table>
+<!-- ENDIF damagetypeenabled="true" -->
+
+<!-- INCLUDE include_footer.html -->

@@ -1,0 +1,291 @@
+/* Generell Tag Classes */
+BODY
+{
+    FONT-FAMILY: ARIAL;
+    FONT-SIZE: 8pt;
+	BACKGROUND: #003752;
+	COLOR: #bababa; 
+
+	scrollbar-face-color: #6f7274;
+	scrollbar-highlight-color: #c1c2c3;
+	scrollbar-shadow-color: #c1c2c3; 
+	scrollbar-3dlight-color: #ffffff; 
+	scrollbar-arrow-color: #ffffff; 
+	scrollbar-track-color: #ffffff; 
+	scrollbar-darkshadow-color: #000000;
+}
+
+TD { font-family: Arial, Helvetica, sans-serif; font-size: 8pt; color: #F3F3F1 }
+
+/* Link Classes */
+.playerlink {
+	color:#bababa;
+	cursor:hand;
+}
+.playerlink:hover {
+	color:#fffff;
+	text-decoration: none;
+	cursor:hand;
+}
+
+/* Default Link Classes */
+a:link,a:active,a:visited,a.postlink
+{
+	FONT: Verdana, Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	background-color: transparent;
+	color:#bababa;
+	text-decoration:none;
+}
+a:hover
+{
+	FONT: Verdana, Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	color:#ffffff;
+}
+
+img
+{
+	border: 0px;
+}
+
+/* Title Classes */
+.title 
+{
+	FONT: bold 11px Verdana, Arial, Helvetica, sans-serif; 
+    background-image: url(images/bg_1.png);
+    background-repeat: repeat-x;
+	COLOR: #ffffff;
+	border: 1px solid;
+	border-color: #016496 #001a27 #001a27 #016496;
+	height: 20px;
+	text-align:center;
+	vertical-align:middle;
+}
+A.title, A.title:active, A.title:visited 
+{
+	FONT: bold 11px Verdana, Arial, Helvetica, sans-serif;
+	COLOR: #bababa;
+	TEXT-DECORATION: none;
+}
+A.title:hover 
+{
+	FONT: bold 11px Verdana, Arial, Helvetica, sans-serif;
+	COLOR: #ffffff; 
+	TEXT-DECORATION: none;
+}
+
+/* Default Font Classes */
+font
+{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+}
+
+/* Table / Border Classes */
+.table_with_border
+{ 
+	background-color:#002436;
+	border:1px solid;
+	border-color: #016496 #001a27 #001a27 #016496; 
+}
+
+.table_with_border_second
+{ 
+	background-color:#005577;
+	border:1px solid;
+	border-color: #016496 #001a27 #001a27 #016496; 
+}
+
+.with_border
+{
+	text-indent:3px;
+	background-color:#00283b;
+	border:1px #016496 solid;
+}
+
+.with_border_alternate
+{
+	text-indent:3px;
+	background-color:#006b9f;
+	border:1px #252525 ridge;
+}
+
+.mainheader
+{ 
+	border:1px solid;
+	background-color:#002436;
+	border-color: #016496 #001a27 #001a27 #016496; 
+}
+
+.mainfooter
+{ 
+	height: 20px;
+	background-color:#002436;
+	border-top: #050A0F 1px solid;
+	border-bottom: #050A0F 1px solid;
+}
+
+.imageborder
+{
+	border:1px solid;
+	border-color: #016496 #001a27 #001a27 #016496; 
+}
+
+/* Cells for listening */
+.line0
+{
+	font-size: 8pt;
+	color: #ffffff;
+	background-color: #19323f;
+}
+.line0:hover 
+{ 
+	background-color:#1f3f4f; 
+}
+
+.line1
+{
+	font-size: 8pt;
+	color: #ffffff;
+       background-color:#13435a;
+}
+.line1:hover 
+{ 
+	background-color:#13435a; 
+}
+
+.line2
+{
+	font-size: 8pt;
+	color: #ffffff;
+	background-color: #082838;
+}
+.line2:hover 
+{ 
+	background-color:#0a3549; 
+}
+
+.line_alt0
+{
+	font-size: 8pt;
+	color: #ffffff;
+	background-color: #014a6d;
+	background-image: url("../black/images/dither.png"); 
+}
+.line_alt0:hover 
+{ 
+	background-color:#000000; 
+	background-image: url("../black/images/dither.png"); 
+}
+
+.line_alt1
+{
+	font-size: 8pt;
+	color: #ffffff;
+	background-color: #000000;	
+	background-image: url("../black/images/dither.png"); 
+}
+.line_alt1:hover 
+{ 
+	background-color:#000000; 
+	background-image: url("../black/images/dither.png"); 
+}
+
+
+/* Cell Columns */
+.cellmenu1
+{
+	height: 15px;
+	border:1px solid;
+	border-color: #016496 #001a27 #001a27 #016496; 
+
+	text-indent:5px;
+	font-family: 10px Verdana, Arial, Helvetica, sans-serif;
+	color: #ffffff;
+	background-color: #014a6d;
+}
+.cellmenu1:hover 
+{ 
+	color: #ffffff;
+	text-decoration: none;
+}
+A.cellmenu1_link
+{
+	color: #bababa;
+	text-decoration: underline;
+}
+A.cellmenu1_link:hover
+{
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.cellmenu2
+{
+	height: 16px;
+	border:1px ridge;
+	border-color: #016496 #001a27 #001a27 #016496;
+
+	text-indent:5px;
+	font-family: 10px Verdana, Arial, Helvetica, sans-serif;
+	color: #ffffff;
+	background-color: #015b86;
+}
+.cellmenu2:hover 
+{ 
+	color: #bababa;
+	text-decoration: none;
+}
+
+/* Usefull Text Classes */
+.WinnerTeam
+{
+	color: #127C35;
+	text-decoration: none;
+}
+.LoserTeam
+{
+	color: #A53139;
+	text-decoration: none;
+}
+.DrawTeam
+{
+	color: #2B78AB;
+	text-decoration: none;
+}
+.ErrorMsg 
+{
+	FONT: bold 12px Verdana, Arial, Helvetica, sans-serif; 
+	COLOR: #FF2222;
+	border-top: 1px solid;
+	border-bottom: 1px solid;
+	border-color: #58363E;
+}
+
+
+/* Player Elements */
+.playerlegend
+{
+	padding:2px;
+	background-color: #272727; 
+	color: #ffffff; 
+}
+
+.playertext
+{
+	filter: glow(Color=#000000,Strength=1); 
+}
+
+/* Form elements */
+select, input, textarea
+{
+	background-color: #001926; 
+	color:#ffffff; 
+	font:bold 10px Verdana,Arial,Helvetica,sans-serif;
+	border: 1px solid;
+	border-color: #016496 #001a27 #001a27 #016496; 
+}
+
+
+

@@ -1,0 +1,282 @@
+<!-- INCLUDE include_header.html --> 
+
+<br>
+
+<!-- IF roundsenabled="true" -->
+<table width="100%" cellpadding="0" cellspacing="5" border="0" align="center">
+<tr>
+	<td width="10" valign="top" rowspan="2" nowrap>&nbsp;</td>
+	<td width="60%" valign="top">
+
+		<table width="100%" cellpadding="1" cellspacing="0" border="0" align="center">
+		<tr>
+			<td class="title" width="400" nowrap>{LN_ROUNDS_DETAILS} '{roundid}'</td>
+		</tr>
+		</table>
+
+		<!-- IF rounds_team_enabled="true" -->
+		<table width="100%" cellpadding="0" cellspacing="1" border="0" align="center" class="with_border_alternate">
+		<tr>
+			<td width="36" class="cellmenu1" align="left" nowrap><img src="{BASEPATH}images/main/{gen_gameversion_picpath}/flag-axis-small.png" width="24" alt="Axis"></td>
+			<td width="50%" class="cellmenu1" align="center" nowrap><B>{LN_ROUNDS_AXIS}</B></td>
+			<td width="50" class="cellmenu2" align="center" nowrap><B>{LN_ROUNDS_POINTS}</B></td>
+			<td width="30" class="line1" align="center" nowrap><p class="{AxisTeamClass}"><B>{AxisRoundWins}</B></p></td>
+			<td width="36" class="cellmenu1" align="left" nowrap><img src="{BASEPATH}images/main/{gen_gameversion_picpath}/flag-allies-small.png" width="24" alt="Axis"></td>
+			<td width="50%" class="cellmenu1" align="center" nowrap><B>{LN_ROUNDS_ALLIES}</B></td>
+			<td width="50" class="cellmenu2" align="center" nowrap><B>{LN_ROUNDS_POINTS}</B></td>
+			<td width="30" class="line1" align="center" nowrap><p class="{AlliesTeamClass}"><B>{AlliesRoundWins}</B></p></td>
+		</tr>
+		<tr>
+			<td colspan="4" valign="top" class="line2">
+				<table width="100%" cellpadding="0" cellspacing="1" border="0" align="center">
+				<tr>
+					<td width="20" class="cellmenu2" align="center" nowrap><B>{LN_TOPPLAY_NUM}</B></td>
+					<td width="100%" class="cellmenu2" align="center" nowrap><B>{LN_TOPPLAY_NAME}</B></td>
+					<td width="70" colspan="2" class="cellmenu2" align="center" nowrap><B>{LN_TOPPLAY_KILLS}/{LN_TOPPLAY_Deaths}</B></td>
+					<td width="40" class="cellmenu2" align="center" nowrap><B>{LN_PLAYER_RATIO}</B></td>
+				</tr>
+				<!-- BEGIN AxisPlayers -->
+				<tr>
+					<td align="right" class="{cssclass}"><B>{Number}</B></td>
+					<td class="{cssclass}"><A HREF="players-detail.php?id={PLAYERID}{additional_url}" title="{Alias}">{AliasAsHtml}</B></td>
+					<td align="right" class="{cssclass}"><B>{TotalKills}</B>&nbsp;</td>
+					<td align="right" class="{cssclass}"><B>{TotalKilled}</B>&nbsp;</td>
+					<td align="center" class="{cssclass}" nowrap>
+						<table width="100%" cellpadding="0" cellspacing="0" border="0" align="center" class="with_border">
+						<tr>
+							<td bgcolor="#770000" width="50%"><img vspace="0" hspace="0" align="left" src="{BarImageKillRatioMinus}" width="{KillRatioWidthMinus}%" height="9" title="{KillRatioWidthMinusText}"></td>
+							<td bgcolor="#007700" width="50%">
+							<!-- IF KillRatioWidthPlusText!="" -->
+							<img vspace="0" hspace="0" align="left" src="{BarImageKillRatioPlus}" width="{KillRatioWidthPlus}%" height="9" title="{KillRatioWidthPlusText}">
+							<!-- ENDIF KillRatioWidthPlusText!="" -->
+							</td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+				<!-- END AxisPlayers -->
+				</table>
+			</td>
+			<td colspan="4" valign="top" class="line2">
+				<table width="100%" cellpadding="0" cellspacing="1" border="0" align="center">
+				<tr>
+					<td width="20" class="cellmenu2" align="center" nowrap><B>{LN_TOPPLAY_NUM}</B></td>
+					<td width="100%" class="cellmenu2" align="center" nowrap><B>{LN_TOPPLAY_NAME}</B></td>
+					<td width="70" colspan="2" class="cellmenu2" align="center" nowrap><B>{LN_TOPPLAY_KILLS}/{LN_TOPPLAY_Deaths}</B></td>
+					<td width="40" class="cellmenu2" align="center" nowrap><B>{LN_PLAYER_RATIO}</B></td>
+				</tr>
+				<!-- BEGIN AlliesPlayers -->
+				<tr>
+					<td align="right" class="{cssclass}"><B>{Number}</B></td>
+					<td class="{cssclass}"><A HREF="players-detail.php?id={PLAYERID}{additional_url}" title="{Alias}">{AliasAsHtml}</B></td>
+					<td align="right" class="{cssclass}"><B>{TotalKills}</B>&nbsp;</td>
+					<td align="right" class="{cssclass}"><B>{TotalKilled}</B>&nbsp;</td>
+					<td align="center" class="{cssclass}" nowrap>
+						<table width="100%" cellpadding="0" cellspacing="0" border="0" align="center" class="with_border">
+						<tr>
+							<td bgcolor="#770000" width="50%"><img vspace="0" hspace="0" align="left" src="{BarImageKillRatioMinus}" width="{KillRatioWidthMinus}%" height="9" title="{KillRatioWidthMinusText}"></td>
+							<td bgcolor="#007700" width="50%">
+							<!-- IF KillRatioWidthPlusText!="" -->
+							<img vspace="0" hspace="0" align="left" src="{BarImageKillRatioPlus}" width="{KillRatioWidthPlus}%" height="9" title="{KillRatioWidthPlusText}">
+							<!-- ENDIF KillRatioWidthPlusText!="" -->
+							</td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+				<!-- END AlliesPlayers -->
+				</table>
+			</td>
+		</tr>
+		</table>
+		<!-- ENDIF rounds_team_enabled="true" -->
+
+
+		<!-- IF rounds_dm_enabled="true" -->
+		<table width="100%" cellpadding="0" cellspacing="1" border="0" align="center" class="with_border">
+		<tr>
+			<td width="20" class="cellmenu1" align="center" nowrap><B>{LN_TOPPLAY_NUM}</B></td>
+			<td width="100%" class="cellmenu1" align="center" nowrap><B>{LN_TOPPLAY_NAME}</B></td>
+			<td width="70" colspan="2" class="cellmenu1" align="center" nowrap><B>{LN_TOPPLAY_KILLS}/{LN_TOPPLAY_Deaths}</B></td>
+			<td width="40" class="cellmenu2" align="center" nowrap><B>{LN_PLAYER_RATIO}</B></td>
+		</tr>
+		<!-- BEGIN AllPlayers -->
+		<tr>
+			<td align="right" class="{cssclass}"><B>{Number}</B></td>
+			<td class="{cssclass}"><A HREF="players-detail.php?id={PLAYERID}{additional_url}" title="{Alias}">{AliasAsHtml}</B></td>
+			<td align="right" class="{cssclass}"><B>{TotalKills}</B>&nbsp;</td>
+			<td align="right" class="{cssclass}"><B>{TotalKilled}</B>&nbsp;</td>
+			<td align="center" class="{cssclass}" nowrap>
+				<table width="100%" cellpadding="0" cellspacing="0" border="0" align="center" class="with_border">
+				<tr>
+					<td bgcolor="#770000" width="50%"><img vspace="0" hspace="0" align="left" src="{BarImageKillRatioMinus}" width="{KillRatioWidthMinus}%" height="9" title="{KillRatioWidthMinusText}"></td>
+					<td bgcolor="#007700" width="50%">
+					<!-- IF KillRatioWidthPlusText!="" -->
+					<img vspace="0" hspace="0" align="left" src="{BarImageKillRatioPlus}" width="{KillRatioWidthPlus}%" height="9" title="{KillRatioWidthPlusText}">
+					<!-- ENDIF KillRatioWidthPlusText!="" -->
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		<!-- END AllPlayers -->
+		</table>
+		<!-- ENDIF rounds_dm_enabled="true" -->
+
+		<!-- IF rounds_unfinished_enabled="true" -->
+		<table width="100%" cellpadding="0" cellspacing="1" border="0" align="center" class="with_border">
+		<tr>
+			<td colspan="10" class="cellmenu1" align="center" nowrap><B>{LN_ROUNDS_PLAYERDIDNOTFINISH}</B></td>
+		</tr>
+		<tr>
+			<td width="20" class="cellmenu2" align="center" nowrap><B>{LN_TOPPLAY_NUM}</B></td>
+			<td width="50%" class="cellmenu2" align="center" nowrap><B>{LN_TOPPLAY_NAME}</B></td>
+			<td width="70" colspan="2" class="cellmenu2" align="center" nowrap><B>{LN_TOPPLAY_KILLS}/{LN_TOPPLAY_Deaths}</B></td>
+			<td width="40" class="cellmenu2" align="center" nowrap><B>{LN_PLAYER_RATIO}</B></td>
+			<td width="20" class="cellmenu2" align="center" nowrap><B>{LN_TOPPLAY_NUM}</B></td>
+			<td width="50%" class="cellmenu2" align="center" nowrap><B>{LN_TOPPLAY_NAME}</B></td>
+			<td width="70" colspan="2" class="cellmenu2" align="center" nowrap><B>{LN_TOPPLAY_KILLS}/{LN_TOPPLAY_Deaths}</B></td>
+			<td width="40" class="cellmenu2" align="center" nowrap><B>{LN_PLAYER_RATIO}</B></td>
+		</tr>
+		<tr>
+		<!-- BEGIN unfinishedplayers -->
+			<td align="right" class="{cssclass}"><B>{Number}</B></td>
+			<td class="{cssclass}"><A HREF="players-detail.php?id={PLAYERID}{additional_url}" title="{Alias}">{AliasAsHtml}</B></td>
+			<td align="right" class="{cssclass}"><B>{TotalKills}</B>&nbsp;</td>
+			<td align="right" class="{cssclass}"><B>{TotalKilled}</B>&nbsp;</td>
+			<td align="center" class="{cssclass}" nowrap>
+				<table width="100%" cellpadding="0" cellspacing="0" border="0" align="center" class="with_border">
+				<tr>
+					<td bgcolor="#770000" width="50%"><img vspace="0" hspace="0" align="left" src="{BarImageKillRatioMinus}" width="{KillRatioWidthMinus}%" height="9" title="{KillRatioWidthMinusText}"></td>
+					<td bgcolor="#007700" width="50%">
+					<!-- IF KillRatioWidthPlusText!="" -->
+					<img vspace="0" hspace="0" align="left" src="{BarImageKillRatioPlus}" width="{KillRatioWidthPlus}%" height="9" title="{KillRatioWidthPlusText}">
+					<!-- ENDIF KillRatioWidthPlusText!="" -->
+					</td>
+				</tr>
+				</table>
+			</td>
+			{NewTR}
+		<!-- END unfinishedplayers -->
+		</tr>
+		</table>
+		<!-- ENDIF rounds_unfinished_enabled="true" -->
+
+	</td>
+	<td width="10" valign="top" nowrap>&nbsp;</td>
+	<td width="40%" valign="top">
+
+		<table width="100%" cellpadding="1" cellspacing="0" border="0" align="center">
+		<tr>
+			<td width="50%" valign="top">
+
+			<table width="100%" cellpadding="0" cellspacing="0" border="0" align="center">
+			<tr>
+				<td class="title" nowrap>{LN_ROUNDS_AWARDS}</td>
+			</tr>
+			</table>
+			<!-- BEGIN Awards -->
+			<table width="100%" cellpadding="0" cellspacing="1" border="0" align="center" class="with_border_alternate">
+			<tr>
+				<td colspan="3" class="cellmenu1" align="center" nowrap><B>{DisplayName}</B></td>
+			</tr>
+			<tr>
+				<td class="cellmenu2" width="42" align="left" nowrap><img src="{MedalImage}" width="32" height="64" alt="{PLAYER_FinalMapDisplayName}"></td>
+				<td class="{cssclass}" align="center" valign="top">
+					<br><A HREF="players-detail.php?id={PLAYERID}{additional_url}" title="{Alias}">{AliasAsHtml}</B>
+					<br>{ValueTitel}: <B>{Value}</B>
+				</td>
+			</tr>
+			</table>
+			<!-- END Awards -->
+
+			</td>
+			<td width="50%" valign="top">
+
+			<table width="100%" cellpadding="0" cellspacing="0" border="0" align="center">
+			<tr>
+				<td class="title" nowrap>{LN_ROUNDS_SUM}</td>
+			</tr>
+			</table>
+
+			<table width="100%" cellpadding="2" cellspacing="1" border="0" align="center" class="with_border_alternate">
+			<tr>
+				<td class="cellmenu2" width="75" align="center" nowrap><b>{LN_LROUNDS_MAPNAME}</b></td>
+				<td class="line1" align="center" width="100%" valign="top">
+					<img src="{MapNameFile}" width="100" alt="{MapDisplayName}" class="imageborder">
+				</td>
+			</tr>
+			<tr>
+				<td class="cellmenu2" align="left" nowrap><b>{LN_LROUNDS_GAMETYPE}</b></td>
+				<td class="line2" align="center" valign="top">{GameTypeDisplayName}
+<!--					<img src="{MapNameFile}" width="100" alt="{MapDisplayName}" class="imageborder">-->
+				</td>
+			</tr>
+			<tr>
+				<td class="cellmenu2" align="left" nowrap><b>{LN_LROUNDS_TIME}</b></td>
+				<td class="line1" align="center" valign="top">{TimePlayed}</td>
+			</tr>
+			<tr>
+				<td class="cellmenu2" align="left" nowrap><b>{LN_LROUNDS_DURATION}</b></td>
+				<td class="line2" align="center" valign="top">{DurationTime}</td>
+			</tr>
+			</table>
+			<br>
+
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="2" valign="top">
+
+			<!-- IF gameactions_enabled="true" -->
+			<table width="100%" cellpadding="1" cellspacing="0" border="0" align="center">
+			<tr>
+				<td class="title" nowrap>{LN_ROUNDS_ACTIONS}</td>
+			</tr>
+			</table>
+			<!-- BEGIN gameactions -->
+			<table width="100%" cellpadding="0" cellspacing="1" border="0" align="center" class="with_border">
+			<tr>
+				<td width="100" class="cellmenu1" align="center" rowspan="{RowSpanCount}" nowrap><B>{LN_ROUNDS_ACTIONNAME}<br> {DisplayName}</B></td>
+				<td width="100%" class="cellmenu2" align="center" nowrap><B>{LN_TOPPLAY_NAME}</B></td>
+				<td width="50" class="cellmenu2" align="center" nowrap><B>{LN_PLAYER_ALIASCOUNT}</B></td>
+			</tr>
+				<!-- BEGIN myplayers -->
+				<tr>
+					<td class="{cssclass}"><A HREF="players-detail.php?id={PLAYERID}{additional_url}" title="{Alias}">{AliasAsHtml}</B></td>
+					<td align="right" class="{cssclass}"><B>{Count}</B>&nbsp;</td>
+				</tr>
+				<!-- END myplayers -->
+			</table>
+			<!-- END gameactions -->
+			<!-- ENDIF gameactions_enabled="true" -->
+
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td width="10" valign="top" rowspan="2" nowrap>&nbsp;</td>
+</tr>
+<tr>
+	<td valign="top" colspan="3">
+<br>
+		<table width="100%" cellpadding="1" cellspacing="0" border="0" align="center">
+		<tr>
+			<td class="title" nowrap>{LN_ROUNDS_CHATLOG}</td>
+		</tr>
+		<tr>
+			<td>
+			<iframe id="container" src="rounds-chatlog.php?id={roundid}{additional_url}" width="100%" height="300" class="with_border_alternate">
+				<p>{NO_INFRAME_POSSIBLE}</p>
+			</iframe>
+			</td>
+		</tr>
+		</table>
+	</td>
+
+</tr>
+</table>
+<!-- ENDIF roundsenabled="true" -->
+
+<!-- INCLUDE include_footer.html -->

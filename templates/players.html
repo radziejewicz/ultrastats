@@ -1,0 +1,79 @@
+<!-- INCLUDE include_header.html --> 
+
+<br>
+
+<table width="100%" cellpadding="0" cellspacing="5" border="0" align="center">
+<tr>
+	<td width="10" valign="top" nowrap>&nbsp;</td>
+	<td width="100%" valign="top">
+
+	<!-- IF playersenabled="true" -->
+		<table width="100%" cellpadding="1" cellspacing="0" border="0" align="center">
+		<tr>
+			<td class="title" width="400" nowrap>{web_topplayers} {LN_PLAYERS_MAINLASTROUNDS} '{sorting}'</td>
+		</tr>
+		</table>
+	
+		<!-- IF players_pagerenabled="true" -->
+		<table width="100%" align="center" border="0" cellpadding="1" cellspacing="1" class="with_border">
+		<tr>
+			<td class="cellmenu2" nowrap><B>Pages: &nbsp; </B></td>
+		<!-- BEGIN PLAYERPAGES -->
+			<td class="{cssclass}" nowrap><a href="?sorting={sorting}&start={mypagebegin}{additional_url}" target="_top">{mypagenumber}</a>&nbsp;</td>
+		<!-- END PLAYERPAGES -->
+			<td nowrap width="100%"class="line2"><I>&nbsp;{PLAYERS_MOREPAGES}</I></td>
+			<td nowrap align="right" class="line2"><I>{LN_PLAYERS_ONLYLISTED} ({LN_PLAYERS_WITHMINPLAY}: <B>{web_mintime}</B> {LN_PLAYERS_SECANDMINKILLS}: <B>{web_minkills}</B>)</I></td>
+		</tr>
+		</table>
+		<!-- ENDIF players_pagerenabled="true" -->
+
+		<table width="100%" cellpadding="0" cellspacing="1" border="0" align="center" class="with_border_alternate">
+		<tr>
+			<td width="20" class="cellmenu1" align="center" nowrap><B>{LN_TOPPLAY_NUM}</B></td>
+			<td width="100%" class="cellmenu1" align="center" nowrap><B>{LN_TOPPLAY_NAME}</B></td>
+			<td width="50" class="cellmenu1" align="center" nowrap><A HREF="players.php?sorting=Kills{additional_url}" class="cellmenu1_link" >{LN_TOPPLAY_KILLS}</A></td>
+			<td width="50" class="cellmenu1" align="center" nowrap><A HREF="players.php?sorting=Deaths{additional_url}" class="cellmenu1_link" >{LN_TOPPLAY_Deaths}</A></td>
+			<td width="50" class="cellmenu1" align="center" nowrap><A HREF="players.php?sorting=Teamkills{additional_url}" class="cellmenu1_link" >{LN_TOPPLAY_TeamKills}</A></td>
+			<td width="50" class="cellmenu1" align="center" nowrap><A HREF="players.php?sorting=Suicides{additional_url}" class="cellmenu1_link" >{LN_TOPPLAY_Suicides}</A></td>
+			<td colspan="2" width="200" class="cellmenu1" align="center" nowrap><A HREF="players.php?sorting=KillRatio{additional_url}" class="cellmenu1_link" >{LN_TOPPLAY_KillRatio}</A></td>
+<!--TODO!			<td colspan="2" width="200" class="cellmenu1" align="center" nowrap><A HREF="players.php?sorting=TotalSeconds{additional_url}" class="cellmenu1_link" >{LN_TOPPLAY_PlayedTime}</A></td>-->
+			<td colspan="2" width="200" class="cellmenu1" align="center" nowrap><B>{LN_TOPPLAY_PlayedTime}</B></td>
+		</tr>
+
+		<!-- BEGIN players -->
+		<tr>
+			<td align="right" class="{cssclass}"><B>{Number}</B></td>
+			<td class="{cssclass}"><A HREF="players-detail.php?id={GUID}{additional_url}" title="{Alias}">{AliasAsHtml}</B></td>
+			<td align="right" class="{cssclass}"><B>{Kills}</B>&nbsp;</td>
+			<td align="right" class="{cssclass}"><B>{Deaths}</B>&nbsp;</td>
+			<td align="right" class="{cssclass}"><B>{Teamkills}</B>&nbsp;</td>
+			<td align="right" class="{cssclass}"><B>{Suicides}</B>&nbsp;</td>
+			<td align="right" class="{cssclass}" width="75" nowrap><b>{KillRatio}</b></td>
+			<td align="right" class="{cssclass}" width="175">
+				<table width="100%" cellpadding="0" cellspacing="0" border="0" align="center" class="with_border">
+				<tr>
+					<td bgcolor="#770000" width="50%"><img align="left" src="{BarImageKillRatioMinus}" width="{KillRatioWidthMinus}%" height="9" title="{KillRatioWidthMinusText}"></td>
+					<td bgcolor="#007700" width="50%">
+					<!-- IF KillRatioWidthPlusText!="" -->
+					<img align="left" src="{BarImageKillRatioPlus}" width="{KillRatioWidthPlus}%" height="9" title="{KillRatioWidthPlusText}">
+					<!-- ENDIF KillRatioWidthPlusText!="" -->
+					</td>
+				</tr>
+				</table>
+			</td>
+			<td align="right" class="{cssclass}" nowrap><B>{TimePlayedString}</B></td>
+			<td align="left" class="{cssclass}" nowrap>&nbsp;<img src="{BarImageLeft}" width="" height="9"><img src="{BarImageMiddle}" width="{KillBarWidth}" height="9" alt="{KillBarPercent}"><img src="{BarImageRight}" width="" height="9">&nbsp; </td>
+		</tr>
+
+		<!-- END players -->
+
+		</table>
+
+	<!-- ENDIF playersenabled="true" -->
+	
+	</td>
+	<td width="10" valign="top" nowrap>&nbsp;</td>
+</tr>
+</table>
+
+<!-- INCLUDE include_footer.html -->

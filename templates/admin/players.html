@@ -1,0 +1,160 @@
+<!-- INCLUDE admin/admin_header.html --> 
+
+<!-- IF ISERROR="true" -->
+<center>
+<h3><font color="red">{ERROR_MSG}</font></h3>
+</center>
+<!-- ENDIF ISERROR="true" -->
+
+<table cellpadding="0" cellspacing="0" border="0" align="center" class="with_border">
+	<tr>
+		<td colspan="10" align="center" valign="top" class="title">
+		<strong>{LN_PLAYER_EDITOR}</strong></td>
+	</tr>
+	<tr>
+		<td align="center">
+<!-- IF LISTPLAYERS="true" -->
+
+		<table width="100%" border="0" cellspacing="1" cellpadding="0" class="with_border" align="center">
+		<tr> 
+			<td class="cellmenu1" nowrap><B>&nbsp;{LN_PLAYER_FILTER}&nbsp;</B></td>
+			<td class="line0" align="center" nowrap>
+				<form action="" method="get">
+				<input type="hidden" name="start" value="{current_pagebegin}">
+				<input type="textbox" size="40" name="playerfilter" value="{playerfilter}">
+				<input type="submit" value="{LN_PLAYER_DOFILTER}">
+			</td>
+			<td class="line1" width="100%" align="center">&nbsp;</td>
+			</form>
+		</tr>
+		</table>
+
+
+		<!-- IF players_pagerenabled="true" -->
+		<table width="100%" align="center" border="0" cellpadding="1" cellspacing="1" class="with_border">
+		<tr>
+			<td class="cellmenu2" nowrap><B>Pages: &nbsp; </B></td>
+		<!-- BEGIN PLAYERPAGES -->
+			<td class="{cssclass}" nowrap><a href="?playerfilter={playerfilter}&start={mypagebegin}" target="_top">{mypagenumber}</a>&nbsp;</td>
+		<!-- END PLAYERPAGES -->
+			<td nowrap width="100%"class="line2"><I>&nbsp;{PLAYERS_MOREPAGES}</I></td>
+		</tr>
+		</table>
+		<!-- ENDIF players_pagerenabled="true" -->
+
+		<table border="0" cellpadding="2" cellspacing="1" bgcolor="#DDDDDD">
+		<tr>
+			<td align="center" width="50" class="cellmenu1"><b>{LN_SERVERNUMBER}</b></td>
+			<td align="center" width="100" class="cellmenu1"><b>{LN_PLAYER_GUID}</b></td>
+			<td align="center" width="300" class="cellmenu1"><b>{LN_PLAYER_NAME}</b></td>
+			<td align="center" width="100" class="cellmenu1"><b>{LN_PLAYER_CLANMEMBER}</b></td>
+			<td align="center" width="100" class="cellmenu1"><b>{LN_PLAYER_BANNED}</b></td>
+			<td align="center" width="200" class="cellmenu1"><b>{LN_SERVERACTION}</b></td>
+		</tr>
+		<!-- BEGIN PLAYERS -->
+		<tr>
+			<td align="center" class="{cssclass}"><b>{Number}</b></td>
+			<td align="center" class="{cssclass}"><b>{GUID}</b></td>
+			<td align="center" class="{cssclass}"><A HREF="players.php?op=edit&id={GUID}" title="{Alias}">{AliasAsHtml}</a></td>
+			<td align="center" class="{cssclass}"><a href="?playerfilter={playerfilter}&start={current_pagebegin}&playerguid={GUID}&playerop=setclanmember&newval={set_clanmember}"><img src="{BASEPATH}{is_clanmember_string}" width="16"></a></td>
+			<td align="center" class="{cssclass}"><a href="?playerfilter={playerfilter}&start={current_pagebegin}&playerguid={GUID}&playerop=setban&newval={set_banned}"><img src="{BASEPATH}{is_banned_string}" width="16"></a></td>
+			<td align="center" class="{cssclass}">
+				&nbsp;<a href="players.php?op=edit&id={GUID}"><img src="{BASEPATH}images/icons/edit.png" width="16" title="{LN_ADMINEDIT}"></a>
+				&nbsp;<a href="players.php?playerfilter={playerfilter}&start={current_pagebegin}&op=delete&id={GUID}"><img src="{BASEPATH}images/icons/delete.png" width="16" title="{LN_ADMINDELETE}"></a>
+			</td>
+		</tr>
+		<!-- END PLAYERS -->
+		</table>
+<!-- ENDIF LISTPLAYERS="true" -->
+
+<!-- IF ISEDITPLAYER="true" -->
+		<form action="" method="post">
+			<table border="0" cellpadding="1" cellspacing="1" bgcolor="#DDDDDD" width="100%">
+			<tr>
+				<td align="left" class="cellmenu1" width="150" nowrap><b>{LN_PLAYER_NAME}</b></td>
+				<td align="right" class="line0" width="100%"><b>{AliasAsHtml}</b></td>
+			</tr>
+			<tr>
+				<td align="left" class="cellmenu2" nowrap><b>{LN_PLAYER_GUID}</b></td>
+				<td align="right" class="line1">{GUID}</td>
+			</tr>
+			<tr>
+				<td align="left" class="cellmenu1" nowrap><b>{LN_PLAYER_PBGUID}</b></td>
+				<td align="right" class="line0"><input type="text" name="playerpbguid" size="40" maxlength="7" value="{PBGUID}"></td>
+			</tr>
+
+			<tr>
+				<td align="left" class="cellmenu2" nowrap><b>{LN_PLAYER_CLANMEMBER}</b></td>
+				<td align="right" class="line1"><input type="checkbox" name="isclanmember" value="yes" {CHECKED_ISCLANMEMBED}></td>
+			</tr>
+			<tr>
+				<td align="left" class="cellmenu1" nowrap><b>{LN_PLAYER_BANNED}</b></td>
+				<td align="right" class="line0"><input type="checkbox" name="isbanned" value="yes" {CHECKED_ISBANNED}></td>
+			</tr>
+			<tr>
+				<td align="left" class="cellmenu2" nowrap><b>{LN_PLAYER_BANREASON}</b></td>
+				<td align="right" class="line1"><textarea name="banreason" cols="39" rows="5">{BanReason}</textarea></td>
+			</tr>
+
+			<tr>
+				<td align="center" colspan="2">
+					<input type="submit" value="{PLAYER_SENDBUTTON}">
+					<input type="hidden" name="op" value="{PLAYER_FORMACTION}">
+					<input type="hidden" name="id" value="{GUID}">
+					<input type="hidden" name="referer" value="{encoded_referer}">
+				</td>
+			</tr>
+			</table>
+		</form>
+<!-- ENDIF ISEDITPLAYER="true" -->
+
+<!-- IF ISDELETEPLAYER="true" -->
+	<!-- IF ISVERIFY="true" -->
+			<table width="600" cellpadding="2" cellspacing="0" border="0" align="center" class="with_border">
+			<tr>
+				<td colspan="10" align="center" valign="top" class="title"><strong><FONT COLOR="red">{LN_WARNING_DELETEPLAYER}</FONT></strong></td>
+			</tr>
+			</table>
+			<table width="600" cellpadding="2" cellspacing="1" border="0" align="center" class="with_border">
+			<tr>
+				<td align="center" class="line0" width="50%">
+					<br>
+					<A HREF="players.php?playerfilter={playerfilter}&start={current_pagebegin}&op=delete&id={GUID}&verify=yes">
+					<img src="{BASEPATH}images/icons/check.png" width="16"><br>
+					Yes, delete player '{AliasName}' with guid '{GUID}'</A>
+				</td>
+				<td align="center" class="line1" width="50%">
+					<A HREF="javascript:history.back;">
+					<br>
+					<img src="{BASEPATH}images/icons/redo.png" width="16"><br>
+					No, go back</A>
+				</td>
+			</tr>
+			</table>
+	<!-- ENDIF ISVERIFY="true" -->
+
+	<!-- IF ISVERIFY="false" -->
+		<table border="0" cellpadding="2" cellspacing="1" bgcolor="#DDDDDD">
+		<tr>
+			<td align="center" width="300" class="cellmenu1"><b>{LN_PLAYER_SQLTABLE}</b></td>
+			<td align="center" width="100" class="cellmenu1"><b>{LN_PLAYER_AFFECTEDRECORD}</b></td>
+		</tr>
+		<!-- BEGIN DeletedData -->
+		<tr>
+			<td align="center" class="{cssclass}"><b>{NAME}</b></td>
+			<td align="center" class="{cssclass}"><b>{DELETED_RECORD}</b> {LN_PLAYER_DELETED}</td>
+		</tr>
+		<!-- END DeletedData -->
+		</table>
+	<!-- ENDIF ISVERIFY="false" -->
+		<br>
+		<a href="players.php?playerfilter={playerfilter}&start={current_pagebegin}">{LN_PLAYER_BACKPLAYERLIST}</a>
+
+
+<!-- ENDIF ISDELETEPLAYER="true" -->
+
+		</td>
+	</tr>
+</table>
+
+<!-- INCLUDE admin/admin_footer.html -->

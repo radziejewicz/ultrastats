@@ -1,0 +1,94 @@
+<table align="center" width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td>
+
+<script type='text/javascript' src='{BASEPATH}js/common.js'></script>
+<script type='text/javascript' src='{BASEPATH}js/admin-menuoptionen.js'></script>
+<script language=JavaScript src="{BASEPATH}js/menu_misc.js" type=text/javascript></SCRIPT>	
+
+<script	language=JavaScript>
+	if(ns4)
+		_d.write("<scr"+"ipt language=JavaScript src={BASEPATH}js/menu_ns4.js><\/scr"+"ipt>");		
+	else
+		_d.write("<scr"+"ipt language=JavaScript src={BASEPATH}js/menu_dom.js><\/scr"+"ipt>"); 
+</script>
+
+<script language=javascript>
+	_menuCloseDelay=verzoegerung;
+	_menuOpenDelay=25	          // The time delay before menus open on mouse over
+	_followSpeed=5                // Follow scrolling speed
+	_followRate=40                // Follow scrolling Rate
+	_subOffsetTop=10              // Sub menu top offset
+	_subOffsetLeft=-10            // Sub menu left offset
+	_scrollAmount=3               // Only needed for Netscape 4.x
+	_scrollDelay=20               // Only needed for Netcsape 4.x
+
+with(myMnuStyle = new MenuStyle())
+{
+	onbgcolor		=	onmouseoverhintergrund;
+	oncolor			=	onmouseoverschriftfarbe;
+	offbgcolor		=	hintergrundfarbe;
+	offcolor		=	menupunktschriftfarbe;
+	bordercolor		=	rahmenfarbe;
+	borderstyle		=	"solid";
+	borderwidth		=	rahmenbreite;
+	separatorcolor	=	rahmenfarbe;
+	separatorsize	=	"1";
+	padding			=	"2";
+	fontsize		=	schriftgroesse;
+	fontstyle		=	fontstyle;
+	fontfamily		=	schriftart;
+	pagecolor		=	onmouseoverschriftfarbe; //"black";
+	pagebgcolor		=	onmouseoverhintergrund;
+	headercolor		=	menupunktschriftfarbe;
+	headerbgcolor	=	hintergrundfarbe;
+	subimage		=	"";
+	subimagepadding	=	"";
+	overfilter		=	"Fade(duration=0.2);Alpha(opacity=90);Shadow(color='"+rahmenfarbe+"', Direction=135, Strength=5)";
+	outfilter		=	"RandomBars(duration=0.3)";
+}
+
+with(myMenu=new menuname("MSbMnun Menu"))
+{
+	style=myMnuStyle;
+	alwaysvisible=1;
+	orientation="horizontal";
+	position="relative";
+	align="center";
+	SbMnu("text=&nbsp;Home&nbsp;url=../index.php;status=Back To Homepage;{MENU_HOMEPAGE};");
+	SbMnu("text=&nbsp;Admin Home&nbsp;url=index.php;status=Back To Admin Homepage;{MENU_PREFERENCES};");
+<!-- IF SESSION_LOGGEDIN="true" -->
+	SbMnu("text=&nbsp;Server Admin&nbsp;url=servers.php;{MENU_ADMINSERVERS};");
+	SbMnu("text=&nbsp;Player Editor&nbsp;url=players.php;{MENU_ADMINPLAYERS};");
+	SbMnu("text=&nbsp;User Admin&nbsp;url=users.php;{MENU_ADMINUSERS};");
+	SbMnu("text=&nbsp;Logoff&nbsp;url=login.php?op=logoff;{MENU_ADMINLOGOFF};");
+<!-- ENDIF SESSION_LOGGEDIN="true" -->
+	SbMnu("text=&nbsp;About UltraStats&nbsp;url=../about.php;status=More about UltraStats;{MENU_LINK};");
+	SbMnu("text=&nbsp;;itemwidth=100%;");
+}
+
+/*
+with(myMenu=new menuname("Player"))
+{
+	style=myMnuStyle;
+	overflow="scroll";
+	SbMnu("text=By Kills;url=players{EXTENSION}?order=Kills;");
+	SbMnu("text=By Deaths;url=players{EXTENSION}?order=Deaths;");
+	SbMnu("text=By Suicides;url=players{EXTENSION}?order=Suicides;");
+}
+
+
+with(myMenu=new menuname("Server"))
+{
+	style=myMnuStyle;
+	overflow="scroll";
+	SbMnu("text=Overall Stats;url=server{EXTENSION};");
+	SbMnu("text=<B>Live Status</B>;url=server-live{EXTENSION};");
+	SbMnu("text=Most played maps;url=server-maps{EXTENSION};");
+	SbMnu("text=Callvote Stats;url=server-actions{EXTENSION}?type=1;");
+	SbMnu("text=Adminaction Stats;url=server-actions{EXTENSION}?type=2;");
+}
+*/
+
+// This will draw the menus
+MakeMenus();
+</script>
+</td></tr></table>

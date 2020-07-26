@@ -1,0 +1,459 @@
+<!-- INCLUDE include_header.html --> 
+
+<br>
+
+<!-- IF error_noserver="true" -->
+	<center>
+	<h3><br><br><font color="red">{LN_ERROR_NOSERVERS}</font></h3>
+	</center>
+<!-- ENDIF error_noserver="true" -->
+
+<table width="100%" cellpadding="0" cellspacing="5" border="0" align="center">
+<tr>
+<!--<tr>
+	<td width="10" valign="top">&nbsp;</td>-->
+	<!-- IF servertotalsenable="true" -->
+	<td width="10" valign="top" rowspan="2">&nbsp;</td>
+	<td width="50%" valign="top" rowspan="2">
+
+		<table width="100%" cellpadding="1" cellspacing="0" border="0" align="center">
+		<tr>
+			<td class="title" width="350" nowrap>{LN_GLOBAL_STATS}</td>
+		</tr>
+		</table>
+		<table width="100%" cellpadding="0" cellspacing="1" border="0" align="center" class="with_border_alternate">
+		<tr>
+			<td class="line1" valign="top">
+				<img src="{serverlogoimg}" style="filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='{serverlogoimg}', sizingMethod='scale')" width="300" height="200" name="server_logo" align="center">
+				<script>CheckAlphaPNGImage('server_logo', '{BASEPATH}images/main/space.gif');</script>
+			</td>
+			<td class="line1" valign="top">
+				<br>
+				<table cellpadding="0" cellspacing="0" border="0" align="center" class="with_border">
+				<tr>
+					<td class="cellmenu1" width="135" align="center" nowrap><B>{LN_GLOBAL_LASTUPDATE}</B></td>
+				</tr>
+				<tr>
+					<td class="line1" align="center"><B>{global_lastupdate_TimeFormat}</B></td>
+				</tr>
+<!-- BLUB -->
+				</table>
+			</td>
+		</tr>
+		</table>
+		<br>
+
+	</td>
+
+	<td width="10" valign="top" rowspan="2">&nbsp;</td>
+
+	<td width="50%" valign="top">
+		<table width="100%" cellpadding="1" cellspacing="0" border="0" align="center">
+		<tr>
+			<td class="title" width="350" nowrap>Server Details for {server_name}</td>
+		</tr>
+		</table>
+		<table width="100%" cellpadding="0" cellspacing="1" border="0" align="center" class="with_border_alternate">
+		<tr>
+			<td width="50%" valign="top">
+
+			<table width="100%" cellpadding="0" cellspacing="1" border="0" align="center">
+			<tr>
+				<td width="100" class="cellmenu1" align="left" nowrap><B>{LN_SERVER_NAME}</B></td>
+				<td width="100%" class="line1" align="left">{server_name}</td>
+			</tr>
+			<tr>
+				<td width="100" class="cellmenu1" align="left" nowrap><B>{LN_SERVER_IP}</B></td>
+				<td width="100%" class="line1" align="left">{server_ipport}</td>
+			</tr>
+			<tr>
+				<td width="100" class="cellmenu1" align="left" nowrap><B>{LN_SERVER_Description}</B></td>
+				<td width="100%" class="line1" align="left">{server_description}</td>
+			</tr>
+			<tr>
+				<td width="100" class="cellmenu1" align="left" nowrap><B>{LN_SERVER_ModName}</B></td>
+				<td width="100%" class="line1" align="left">{server_modname}</td>
+			</tr>
+			<tr>
+				<td width="100" class="cellmenu1" align="left" nowrap><B>{LN_SERVER_AdminName}</B></td>
+				<td width="100%" class="line1" align="left">{server_adminname}</td>
+			</tr>
+			<tr>
+				<td width="100" class="cellmenu1" align="left" nowrap><B>{LN_SERVER_ClanName}</B></td>
+				<td width="100%" class="line1" align="left">{server_clanname}</td>
+			</tr>
+			</table>
+
+			</td>
+			<td width="50%" valign="top">
+
+			<table width="100%" cellpadding="0" cellspacing="1" border="0" align="center">
+			<tr>
+				<td colspan="2" class="cellmenu1" align="center" nowrap><B>{LN_SERVER_MostValues}</B></td>
+			</tr>
+			<!-- BEGIN server_totals -->
+			<tr>
+				<td class="cellmenu2" align="left" nowrap><B>{DisplayName}</B></td>
+				<td class="{cssclass}" width="100%" align="center">{VALUE_INT}</A></td>
+			</tr>
+			<!-- END server_totals -->
+			</tr>
+			</table>
+			
+			</td>
+		</tr>
+		</table>
+
+<!--	</td>
+	<td width="20" valign="top">&nbsp;</td>
+	<td width="50%" valign="top">
+-->
+	</td>
+	<td width="10" valign="top" rowspan="2">&nbsp;</td>
+</tr>
+<tr>
+	<td valign="top">
+
+		<!-- IF servertopsenable="true" -->
+		<table width="100%" cellpadding="1" cellspacing="0" border="0" align="center">
+		<tr>
+			<td colspan="4" class="title" width="350" nowrap>{LN_SERVER_TopValues} for {server_name}</td>
+		</tr>
+		</table>
+		<table width="100%" cellpadding="0" cellspacing="1" border="0" align="center" class="with_border_alternate">
+		<tr>
+			<td colspan="2" width="50%" class="cellmenu1" align="center" nowrap><B>{LN_SERVER_Top_Map}</B></td>
+			<td colspan="2" width="50%" class="cellmenu1" align="center" nowrap><B>{LN_SERVER_Top_Gametype}</B></td>
+		</tr>
+		<tr>
+			<td class="line1" align="center" nowrap width="50%" valign="top"><br>
+				<table width="90%" cellpadding="0" cellspacing="0" border="0" align="center" class="with_border">
+				<tr><td class="cellmenu2" align="center" nowrap><B>{LN_PLAYER_MAP}</B></td></tr>
+				<tr><td class="line2" align="center" nowrap>{server_top_map}</td></tr>
+				<tr><td width="50" class="cellmenu2" align="center" nowrap><B>{LN_PLAYER_COUNT}</B></td></tr>
+				<tr><td width="100%" class="line2" align="center" nowrap>{server_top_map_count}</td></tr>
+				</table>
+			</td>
+			<td class="line1" align="center" nowrap>
+				<B><A HREF="info-maps.php?id={server_top_map}{additional_url}"><img class="imageborder" width="100" src="{server_top_map_picture}" ></A></B>&nbsp;</td>
+			</td>
+
+			<td class="line1" align="center" nowrap width="50%" valign="top"><br>
+				<table width="90%" cellpadding="0" cellspacing="0" border="0" align="center" class="with_border">
+				<tr><td class="cellmenu2" align="center" nowrap><B>{LN_LROUNDS_GAMETYPE}</B></td></tr>
+				<tr><td class="line2" align="center" nowrap>{server_top_gametype}</td></tr>
+				<tr><td width="50" class="cellmenu2" align="center" nowrap><B>{LN_PLAYER_COUNT}</B></td></tr>
+				<tr><td width="100%" class="line2" align="center" nowrap>{server_top_gametype_count}</td></tr>
+				</table>
+			</td>
+			<td class="line1" align="center" nowrap>
+				<B><A HREF="info-gametypes.php?id={server_top_gametype}{additional_url}"><img class="imageborder" width="100" src="{server_top_gametype_picture}" ></A></B>&nbsp;</td>
+			</td>
+		</tr>
+		</table>
+		<!-- ENDIF servertopsenable="true" -->
+	</td>
+	<td width="10" valign="top">&nbsp;</td>
+	<!-- ENDIF servertotalsenable="true" -->
+
+<!-- IF serverlistenabled="true" -->
+	<td width="10" valign="top">&nbsp;</td>
+	<td width="50%" valign="top">
+
+		<table width="100%" cellpadding="1" cellspacing="0" border="0" align="center">
+		<tr>
+			<td class="title" width="350" nowrap>{LN_GLOBAL_STATS}</td>
+		</tr>
+		</table>
+		<table width="100%" cellpadding="0" cellspacing="1" border="0" align="center" class="with_border_alternate">
+		<tr>
+			<td class="line1" valign="top">
+			<img src="{BASEPATH}images/main/ultrastatslogo.png" style="filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='{BASEPATH}images/main/ultrastatslogo.png', sizingMethod='scale')" width="300" height="200" name="ultrastats_logo" align="center">
+			<script>CheckAlphaPNGImage('ultrastats_logo', '{BASEPATH}images/main/space.gif');</script>
+			
+			</td>
+			<td class="line1" valign="top">
+				<br>
+				<table cellpadding="0" cellspacing="1" border="0" align="center" class="with_border">
+				<tr>
+					<td class="cellmenu1" colspan="2" width="135" align="center" nowrap><B>{LN_GLOBAL_LASTUPDATE}</B></td>
+				</tr>
+				<tr>
+					<td class="line1" colspan="2" align="center"><B>{global_lastupdate_TimeFormat}</B></td>
+				</tr>
+
+				<!-- BEGIN GLOBALTOTALS -->
+
+				<!-- IF VALUE_INT="" -->
+				<tr>
+					<td class="cellmenu1" colspan="2" align="center" nowrap><B>{DisplayName}</B></td>
+				</tr>
+				<tr>
+					<td class="line1" colspan="2" align="center"><B>{VALUE_TXT}</B></td>
+				</tr>
+				<!-- ENDIF VALUE_INT="" -->
+				<!-- IF VALUE_INT!="" -->
+				<tr>
+					<td class="cellmenu2" align="left" nowrap><B>{DisplayName}</B></td>
+					<td class="line1" align="right"><B>{VALUE_INT}</B></td>
+				</tr>
+				<!-- ENDIF VALUE_INT!="" -->
+				<!-- END GLOBALTOTALS -->
+
+				</table>
+			</td>
+		</tr>
+		</table>
+		<br>
+
+	</td>
+	<td width="10" valign="top">&nbsp;</td>
+	<td width="50%" valign="top">
+
+		<table width="100%" cellpadding="1" cellspacing="1" border="0" align="center" class="with_border_alternate">
+		<tr>
+			<td colspan="4" class="title" width="350" nowrap>{LN_GLOBAL_SERVERLIST}</td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center" width="200" class="cellmenu1"><b>{LN_SERVER_NAME}</b></td>
+			<td align="center" width="50%" class="cellmenu1"><b>{LN_SERVER_IP}</b></td>
+			<td align="center" width="50%" class="cellmenu1"><b>{LN_GLOBAL_LASTSERVERUPDATE}</b></td>
+		</tr>
+		<!-- BEGIN SERVERS -->
+		<tr>
+			<td width="16" align="left" class="{cssclass}" nowrap><img src="{BASEPATH}images/icons/server.png" width="16" align="left"></td>
+			<td align="left" class="{cssclass}" nowrap><a href="index.php?serverid={ServerID}">{ServerName}</a></td>
+			<td align="center" class="{cssclass}" nowrap><A HREF="hlsw://{ServerIP}:{ServerPort}">{ServerIP}:{ServerPort}</A></td>
+			<td align="center" class="{cssclass}" nowrap><b>{LastUpdate_Formatted}</b></td>
+		</tr>
+		<!-- END SERVERS -->
+		</table>
+
+	</td>
+	<td width="10" valign="top" rowspan="2">&nbsp;</td>
+<!-- ENDIF serverlistenabled="true" -->
+
+
+<!--	<td width="10" valign="top">&nbsp;</td>-->
+</tr>
+<tr>
+	<td width="10" valign="top">&nbsp;</td>
+	<td width="50%" valign="top">
+
+	<!-- IF lastroundsenable="true" -->
+	<table width="100%" cellpadding="0" cellspacing="0" border="0" align="center">
+	<tr>
+		<td width="50%" valign="top">
+
+			<table width="100%" cellpadding="1" cellspacing="0" border="0" align="center">
+			<tr>
+				<td class="title" width="350" nowrap>10 {LN_MAINLASTROUNDS}</td>
+			</tr>
+			</table>
+			<table width="100%" cellpadding="0" cellspacing="1" border="0" align="center" class="with_border_alternate">
+
+			<!-- BEGIN lastrounds -->
+			<tr>
+				<td width="90" class="cellmenu1" align="center" nowrap><B>Date {Date}</B></td>
+				<td width="100%" colspan="2" class="cellmenu1" align="center" nowrap><B>{LN_LROUNDS_DETAILS}</B></td>
+				<td width="25" class="cellmenu1" align="center" nowrap><B>{LN_MAP}</B></td>
+				<td width="60" class="cellmenu1" align="left" nowrap><B>{LN_PLAYERS}</B></td>
+				<td colspan="4" class="cellmenu1" align="center" nowrap><B>{LN_LROUNDS_RESULTS}</B></td>
+			</tr>
+
+				<!-- BEGIN myrounds -->
+				<tr>
+					<td class="{cssclass}" align="center" nowrap><img src="{BASEPATH}images/icons/date-time.png" width="16" align="left"><B>{TimePlayed}</B></td>
+					<td class="cellmenu2" align="right" width="70" nowrap><B>{LN_LROUNDS_GAMETYPE}:</B></td>
+					<td width="100%" class="{cssclass}" align="left" nowrap><A HREF="info-gametypes.php?id={GameTypeName}{additional_url}"><!--<img src="{GametypeImage}" width="16">-->{FinalGameTypeDisplayName}</A></td>
+					<td rowspan="2" class="{cssclass}" align="left" nowrap><A HREF="info-maps.php?id={MAPNAME}{additional_url}"><img src="{MapImage}" width="32" alt="{FinalMapDisplayName}"></A>&nbsp</td>
+					<td class="{cssclass}" align="left" width="60" nowrap>{LN_COUNT}: <B>{PlayerCount}</B></td>
+			<!-- IF GameTypeName!="dm" -->
+					<td rowspan="2" class="{cssclass}" align="center"><font class="{AlliesTeamClass}"><img src="{BASEPATH}images/main/{gen_gameversion_picpath}/flag-allies-small.png" width="24" alt="Allies"></font></td>
+					<td rowspan="2" class="{cssclass}" align="center" width="40"><font class="{AlliesTeamClass}"><B>{AlliesRoundWins}</B></font></td>
+					<td rowspan="2" class="{cssclass}" align="center"><img src="{BASEPATH}images/main/{gen_gameversion_picpath}/flag-axis-small.png" width="24" alt="Axis"></td>
+					<td rowspan="2" class="{cssclass}" align="center"><font class="{AxisTeamClass}"><B>{AxisRoundWins}</B></font></td>
+			<!-- ENDIF GameTypeName!="dm" -->
+			<!-- IF GameTypeName="dm" -->
+					<td rowspan="2" class="{cssclass}" align="center"><font class="{AlliesTeamClass}"><img src="{BASEPATH}images/main/dm-winner-small.png" height="16" alt="Winner"></font></td>
+					<td rowspan="2" colspan="3" class="{cssclass}" align="center"><font class="WinnerTeam"><B>{LN_LROUNDS_WINNER}</B></font><br>
+				<!-- IF WinnerPlayerID="-1" -->
+						<B>Unknown</B></font>
+				<!-- ENDIF WinnerPlayerID="-1" -->
+				<!-- IF WinnerPlayerID!="-1" -->
+						<A HREF="players-detail.php?id={WinnerPlayerID}{additional_url}"><B>{WinnerPlayerHtmlName}</B></font>
+				<!-- ENDIF WinnerPlayerID!="-1" -->
+				&nbsp;</td>
+			<!-- ENDIF GameTypeName="dm" -->
+				</tr>
+				<tr>
+					<td class="{cssclass}" align="left" nowrap><img src="{BASEPATH}images/icons/arrow_right_blue.png" width="16" align="left"><A HREF="rounds-detail.php?id={ID}{additional_url}">{LN_LROUNDS_DETAILSONLY}</A></td>
+					<td class="cellmenu2" align="right" nowrap><B>{LN_LROUNDS_MAPNAME}:</B> </td>
+					<td class="{cssclass}" align="left" nowrap><A HREF="info-maps.php?id={MAPNAME}{additional_url}">{FinalMapDisplayName}</A></td>
+					<td class="{cssclass}" align="left" nowrap>&nbsp;</td>
+				</tr>
+				<!-- END myrounds -->
+
+			<!-- END lastrounds -->
+			</table>
+
+
+		</td>
+	</tr>
+	</table>
+	<!-- ENDIF lastroundsenable="true" -->
+
+	</td>
+	<td valign="top">&nbsp;</td>
+	<td width="50%" valign="top">
+
+	<!-- IF topplayersenable="true" -->
+		<table width="100%" cellpadding="1" cellspacing="0" border="0" align="center">
+		<tr>
+			<td colspan="4" class="title" width="350" nowrap>20 {LN_MAINTOPPLAYERS}</td>
+		</tr>
+		</table>
+		<table width="100%" cellpadding="0" cellspacing="1" border="0" align="center" class="with_border_alternate">
+		<tr>
+			<td width="20" class="cellmenu1" align="center" nowrap><B>{LN_TOPPLAY_NUM}</B></td>
+			<td width="100%" class="cellmenu1" align="center" nowrap><B>{LN_TOPPLAY_NAME}</B></td>
+			<td width="40" class="cellmenu1" align="center" nowrap><B>{LN_TOPPLAY_KILLS}</B></td>
+			<td width="40" class="cellmenu1" align="center" nowrap><B>{LN_TOPPLAY_Deaths}</B></td>
+			<td width="50" class="cellmenu1" align="center" nowrap><B>{LN_TOPPLAY_KillRatio}</B></td>
+			<td width="100" class="cellmenu1" align="center" nowrap><B>{LN_TOPPLAY_PlayedTime}</B></td>
+		</tr>
+
+		<!-- BEGIN topplayers -->
+		<tr>
+			<td class="cellmenu2" align="right"><B>{Number}</B></td>
+			<td class="{cssclass}"><A HREF="players-detail.php?id={GUID}{additional_url}" title="{Alias}">{AliasAsHtml}</A></td>
+			<td class="{cssclass}" align="right"><B>{Kills}</B></td>
+			<td class="{cssclass}" align="right"><B>{Deaths}</B></td>
+			<td class="{cssclass}" align="right">
+				<table width="100%" cellpadding="0" cellspacing="0" border="0" align="center" class="with_border">
+				<tr>
+					<td bgcolor="#770000" width="50%"><img align="left" src="{BarImageKillRatioMinus}" width="{KillRatioWidthMinus}%" height="9" title="{KillRatioWidthMinusText}"></td>
+					<td bgcolor="#007700" width="50%">
+					<!-- IF KillRatioWidthPlusText!="" -->
+					<img align="left" src="{BarImageKillRatioPlus}" width="{KillRatioWidthPlus}%" height="9" title="{KillRatioWidthPlusText}">
+					<!-- ENDIF KillRatioWidthPlusText!="" -->
+					</td>
+				</tr>
+				</table>
+			</td>
+			<td class="{cssclass}" align="right"><B>{TimePlayedString}</B></td>
+		</tr>
+		<!-- END topplayers -->
+
+		</table>
+	<!-- ENDIF topplayersenable="true" -->
+
+	</td>
+	<td width="10" valign="top">&nbsp;</td>
+</tr>
+
+<!-- IF web_medals="yes" -->
+<tr>
+	<td width="5" valign="top">&nbsp;</td>
+	<td colspan="3" valign="top">
+	<br>
+	<!-- IF medalsproenable="true" -->
+
+		<table border="0" width="100%" cellspacing="0" cellpadding="0" align="center">
+		<tr><td align="center" class="title"><a name="{DisplayName}"><B>{LN_PRO_Medals}</B></a></td></tr>
+		</table>
+
+		<table border="0" width="100%" cellspacing="0" cellpadding="0" align="center" class="with_border">
+		<tr>
+			<td align="center" width="50%">&nbsp;</td>
+		<!-- BEGIN medals_pro -->
+			<td align="center" valign="top">
+
+			<table width="140" border="0" cellspacing="1" cellpadding="0" align="center" class="with_border_alternate">
+			<tr><td align="center" class="cellmenu1"><a href="medals.php?id={NAME}" title="{LN_MEDAL_DERTAILS}" name="{DisplayName}"><B>{DisplayName} {LN_Medals}</B></a></td></tr>
+			<tr> 
+				<td width="140" class="line1" nowrap valign="top" align="center">
+				<B>{VALUE_TXT}: &nbsp;{VALUE_INT}&nbsp;</B>
+				<BR><a href="players-detail.php?id={PLAYER_ID}{additional_url}" title="{Alias}">{AliasAsHtml}</a>
+
+				<a href="medals.php?id={NAME}" title="{LN_MEDAL_DERTAILS}"><img src="{BASEPATH}images/medals/normal/{NAME}.png" style="filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='{BASEPATH}images/medals/normal/{NAME}.png', sizingMethod='scale')" width="128" height="256" name="{NAME}"></a>
+				<script>CheckAlphaPNGImage('{NAME}', '{BASEPATH}images/main/space.gif');</script>
+
+				</td>
+			</tr>
+			<tr> 
+				<td class="line0" valign="top" align="center">
+				{Description}
+				<br><br>
+				</td>
+			</tr>
+			</table>
+
+			</td>
+			<!-- IF rowend="" -->
+			<td align="center" width="3" nowrap></td>
+			<!-- ENDIF rowend="" -->
+			{rowend}
+		<!-- END medals_pro -->
+			<td width="50%">&nbsp;</td>
+		</tr>
+	  </table>
+	  <br>
+	<!-- ENDIF medalsproenable="true" -->
+	</td>
+	<td width="5" valign="top">&nbsp;</td>
+</tr>
+
+<tr>
+	<td width="5" valign="top">&nbsp;</td>
+	<td colspan="3" valign="top">
+	<!-- IF medalsantienable="true" -->
+
+		<table border="0" width="100%" cellspacing="0" cellpadding="0" align="center">
+		<tr><td align="center" class="title"><a href="medals.php?id={NAME}" title="{LN_MEDAL_DERTAILS}" name="{DisplayName}"><B>{LN_ANTI_Medals}</B></a></td></tr>
+		</table>
+
+		<table border="0" width="100%" cellspacing="0" cellpadding="0" align="center" class="with_border">
+		<tr>
+			<td align="center" width="50%">&nbsp;</td>
+		<!-- BEGIN medals_anti -->
+			<td align="center" valign="top">
+
+			<table width="140" border="0" cellspacing="1" cellpadding="0" align="center" class="with_border_alternate">
+			<tr><td align="center" class="cellmenu1"><a name="{DisplayName}"><B>{DisplayName} {LN_Medals}</B></a></td></tr>
+			<tr> 
+				<td width="140" class="line1" nowrap valign="top" align="center">
+				<B>{VALUE_TXT}: &nbsp;{VALUE_INT}&nbsp;</B>
+				<BR><a href="players-detail.php?id={PLAYER_ID}{additional_url}" title="{Alias}">{AliasAsHtml}</a>
+
+				<a href="medals.php?id={NAME}" title="{LN_MEDAL_DERTAILS}"><img src="{BASEPATH}images/medals/normal/{NAME}.png" style="filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='{BASEPATH}images/medals/normal/{NAME}.png', sizingMethod='scale')" width="128" height="256" name="{NAME}"></a>
+				<script>CheckAlphaPNGImage('{NAME}', '{BASEPATH}images/main/space.gif');</script>
+
+				</td>
+			</tr>
+			<tr> 
+				<td class="line0" valign="top" align="center">
+				{Description}
+				<br><br>
+				</td>
+			</tr>
+			</table>
+
+			</td>
+			<!-- IF rowend="" -->
+			<td align="center" width="3" nowrap></td>
+			<!-- ENDIF rowend="" -->
+			{rowend}
+		<!-- END medals_anti -->
+			<td width="50%">&nbsp;</td>
+		</table>
+	  <br>
+	<!-- ENDIF medalsantienable="true" -->
+	</td>
+	<td width="5" valign="top">&nbsp;</td>
+</tr>
+<!-- ENDIF web_medals="yes" -->
+
+</table>
+
+<!-- INCLUDE include_footer.html -->

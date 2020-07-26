@@ -1,0 +1,23 @@
+-- New Database Structure Updates
+ALTER TABLE `stats_aliases` CHANGE `PLAYERID` `PLAYERID` INT( 11 ) UNSIGNED NOT NULL DEFAULT '0';
+ALTER TABLE `stats_chat` CHANGE `PLAYERID` `PLAYERID` INT( 11 ) UNSIGNED NOT NULL DEFAULT '0';
+ALTER TABLE `stats_consolidated` CHANGE `PLAYER_ID` `PLAYER_ID` INT( 11 ) UNSIGNED NOT NULL DEFAULT '0';
+ALTER TABLE `stats_players` CHANGE `GUID` `GUID` INT( 11 ) UNSIGNED NOT NULL DEFAULT '0';
+ALTER TABLE `stats_players_static` CHANGE `GUID` `GUID` INT( 11 ) UNSIGNED NOT NULL DEFAULT '0';
+ALTER TABLE `stats_players_topalias` CHANGE `GUID` `GUID` INT( 11 ) UNSIGNED NOT NULL DEFAULT '0';
+ALTER TABLE `stats_player_kills` CHANGE `PLAYERID` `PLAYERID` INT( 11 ) UNSIGNED NOT NULL DEFAULT '0';
+ALTER TABLE `stats_player_kills` CHANGE `ENEMYID` `ENEMYID` INT( 11 ) UNSIGNED NOT NULL DEFAULT '0';
+ALTER TABLE `stats_roundactions` CHANGE `PLAYERID` `PLAYERID` INT( 11 ) UNSIGNED NOT NULL DEFAULT '0';
+ALTER TABLE `stats_time` CHANGE `PLAYERID` `PLAYERID` INT( 11 ) UNSIGNED NOT NULL DEFAULT '0';
+ALTER TABLE `stats_weapons` ADD `ExternalInfoUrl` VARCHAR( 255 ) NOT NULL AFTER `Description_id`;
+
+-- New Insert stuff
+-- ID's are auto generated
+INSERT INTO `stats_damagetypes` (`DAMAGETYPE`, `DisplayName`) VALUES ('MOD_GRENADE', 'Grenade');
+INSERT INTO `stats_damagetypes` (`DAMAGETYPE`, `DisplayName`) VALUES ('MOD_PROJECTILE_SPLASH', 'Projectile Splash');
+INSERT INTO `stats_damagetypes` (`DAMAGETYPE`, `DisplayName`) VALUES ('MOD_IMPACT', 'Impact');
+INSERT INTO `stats_damagetypes` (`DAMAGETYPE`, `DisplayName`) VALUES ('MOD_PROJECTILE', 'Projectile');
+INSERT INTO `stats_gametypes` (`NAME`, `DisplayName`, `Description_id`) VALUES ('koth', 'Headquarters', 'gametype_koth');
+INSERT INTO `stats_gametypes` (`NAME`, `DisplayName`, `Description_id`) VALUES ('war', 'Team Deathmatch', 'gametype_war');
+INSERT INTO `stats_gametypes` (`NAME`, `DisplayName`, `Description_id`) VALUES ('sab', 'Sabotage', 'gametype_sab');
+INSERT INTO `stats_gametypes` (`NAME`, `DisplayName`, `Description_id`) VALUES ('dom', 'Domination', 'gametype_dom');

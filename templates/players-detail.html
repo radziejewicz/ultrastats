@@ -1,0 +1,617 @@
+<!-- INCLUDE include_header.html --> 
+
+<br>
+
+<!-- IF iserror="true" -->
+	<center>
+	<h3><font color="red">{LN_ERROR_INVALIDPLAYER}</font></h3>
+	</center>
+<!-- ENDIF iserror="true" -->
+
+<!-- IF playerenabled="true" -->
+<script>
+	function HoverPlayerImage( myref, ImageBaseName, DisplayName, Ratio, elementref, myTeam )
+	{
+		myref.src = "{BASEPATH}images/player/" + myTeam + "/hover/" + ImageBaseName + ".png";
+
+		var color = "";
+		switch(Ratio)
+		{
+			case 0:
+				color = "#FFFF55"; break;
+			case 10:
+				color = "#FFFF00"; break;
+			case 20:
+				color = "#FFDD00"; break;
+			case 30:
+				color = "#FFBB00"; break;
+			case 40:
+				color = "#FF9900"; break;
+			case 50:
+				color = "#FF7700"; break;
+			case 60:
+				color = "#FF5500"; break;
+			case 70:
+				color = "#FF3300"; break;
+			case 80:
+				color = "#FF1100"; break;
+			case 90:
+				color = "#EE0000"; break;
+			case 100:
+				color = "#CC0000"; break;
+		}
+	
+		elementref.innerHTML = "Hitlocation<br><B>"+DisplayName+"</B><br><br>Damage<br><font color="+color+"><B>"+Ratio+"%</B></font>";
+	}
+
+	function OutPlayerImage( myref, ImageBaseName, MyLevel, elementref, myTeam )
+	{
+		myref.src = "{BASEPATH}images/player/" + myTeam + "/" + MyLevel + "/" + ImageBaseName + ".png";
+		elementref.innerHTML = "{LN_PLAYER_HITLMOUSEHELP}";
+	}
+	
+</script>
+
+<table width="100%" cellpadding="0" cellspacing="5" border="0" align="center">
+<tr>
+	<td width="10" valign="top" rowspan="4" nowrap>&nbsp;</td>
+	<td width="50%" valign="top">
+
+	<table width="100%" cellpadding="1" cellspacing="0" border="0" align="center">
+	<tr>
+		<td colspan="2" class="title" width="400" nowrap>{LN_PLAYER_DETAILS}</td>
+	</tr>
+	<tr>
+		<td width="100%" nowrap valign="top">
+			<table width="100%" cellpadding="0" cellspacing="1" border="0" align="center" class="with_border_alternate">
+			<tr>
+				<td width="150" class="cellmenu1" align="center" nowrap><B>{LN_TOPPLAY_NAME}</B></td>
+				<td width="100%" colspan="2" class="line0" align="center" nowrap><A HREF="players-detail.php?id={playerguid}{additional_url}" title="{Alias}">{AliasAsHtml}</A></td>
+			</tr>
+			<tr>
+				<td width="150" class="cellmenu1" align="center" nowrap><B>{LN_TOPPLAY_PBGUID}</B></td>
+				
+				<td width="100%" colspan="2" class="line1" align="center" nowrap><A HREF="http://www.punksbusted.com/cgi-bin/membership/rpi.cgi?par={PBGuid}&limit=20&query=Search" title="{Alias}">... {PBGuid} </a><i>({LN_TOPPLAY_PBGUIDLAST8})</i></td>
+			</tr>
+			<tr>
+				<td width="150" class="cellmenu1" align="center" nowrap><B>{LN_TOPPLAY_KILLS}</B></td>
+				<td width="100%" colspan="2" class="line0" align="center" nowrap><b>{Kills}</b></td>
+			</tr>
+			<tr>
+				<td width="150" class="cellmenu1" align="center" nowrap><B>{LN_TOPPLAY_Deaths}</B></td>
+				<td width="100%" colspan="2" class="line1" align="center" nowrap><b>{Deaths}</b></td>
+			</tr>
+			<tr>
+				<td width="150" class="cellmenu1" align="center" nowrap><B>{LN_TOPPLAY_TeamKills}</B></td>
+				<td width="100%" colspan="2" class="line0" align="center" nowrap><b>{Teamkills}</b></td>
+			</tr>
+			<tr>
+				<td width="150" class="cellmenu1" align="center" nowrap><B>{LN_TOPPLAY_Suicides}</B></td>
+				<td width="100%" colspan="2" class="line1" align="center" nowrap><b>{Suicides}</b></td>
+			</tr>
+			<tr>
+				<td width="150" class="cellmenu1" align="center" nowrap><B>{LN_TOPPLAY_KillRatio}</B></td>
+				<td colspan="2" class="line0" align="center" nowrap>
+					<b>{KillRatio}</b>
+					<table width="100%" cellpadding="0" cellspacing="0" border="0" align="center" class="with_border">
+					<tr>
+						<td bgcolor="#770000"><img align="left" src="{BarImageKillRatioMinus}" width="{KillRatioWidthMinus}%" height="9" title="{KillRatioWidthMinusText}"></td>
+						<td bgcolor="#007700">
+						<!-- IF KillRatioWidthPlusText!="" -->
+						<img align="left" src="{BarImageKillRatioPlus}" width="{KillRatioWidthPlus}%" height="9" title="{KillRatioWidthPlusText}">
+						<!-- ENDIF KillRatioWidthPlusText!="" -->
+						</td>
+					</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td width="150" class="cellmenu1" align="center" nowrap><B>{LN_TOPPLAY_PlayedTime}</B></td>
+				<td width="100%" colspan="2"class="line1" align="center" nowrap><b>{TimePlayedString}</b></td>
+			</tr>
+			</table>
+
+		</td>
+		<td width="150" nowrap valign="top">
+<!-- IF isfavmap="true" -->
+			<table width="90%" cellpadding="0" cellspacing="1" border="0" align="right" class="with_border_alternate">
+			<tr>
+				<td class="cellmenu1" align="center" nowrap><B>{LN_PLAYER_FAVMAP}</B></td>
+			</tr>
+			<tr>
+				<td class="line1" align="center" nowrap><A HREF="info-maps.php?id={PLAYER_MAPNAME}{additional_url}"><img src="{PLAYER_MapImage}" width="100" alt="{PLAYER_FinalMapDisplayName}" class="imageborder"></A></td>
+			</tr>
+			<tr>
+				<td class="line2" align="center" nowrap><A HREF="info-maps.php?id={PLAYER_MAPNAME}{additional_url}">{PLAYER_FinalMapDisplayName}</A></td>
+			</tr>
+			<tr>
+				<td class="line1" align="center" nowrap>{LN_PLAYER_PLAYED} <B>{PLAYER_MAPCOUNT}</B></A></td>
+			</tr>
+			</table>
+<!-- ENDIF isfavmap="true" -->
+		</td>
+	</tr>
+	</table>
+	<br>
+	<table width="100%" cellpadding="1" cellspacing="0" border="0" align="center">
+	<tr>
+		<td colspan="2" class="title" nowrap>{LN_PLAYER_TOPALIASES}</td>
+	</tr>
+	<tr>
+		<td width="100%" nowrap valign="top">
+
+			<table width="100%" cellpadding="0" cellspacing="1" border="0" align="center" class="with_border_alternate">
+			<tr>
+				<td width="50" class="cellmenu1" align="center" nowrap><B>{LN_PLAYER_ALIASCOUNT}</B></td>
+				<td width="100%" class="cellmenu1" align="center" nowrap><B>{LN_PLAYER_ALIAS}</B></td>
+			</tr>
+			<!-- BEGIN aliases -->
+			<tr>
+				<td class="{cssclass}" align="center" nowrap><B>{Count}</B></td>
+				<td class="{cssclass}" align="center" nowrap><B>{Aliases_AliasAsHtml}</B></td>
+			</tr>
+			<!-- END aliases -->
+			</table>
+
+		</td>
+
+		<td width="150" nowrap valign="top">
+<!-- IF isfavweapon="true" -->
+			<table width="90%" cellpadding="0" cellspacing="1" border="0" align="right" class="with_border_alternate">
+			<tr>
+				<td class="cellmenu1" align="center" nowrap><B>{LN_PLAYER_FAVWEAPON}</B></td>
+			</tr>
+			<tr>
+				<td class="line1" align="center" nowrap><A HREF="weapons.php?id={PLAYER_WEAPONID}{additional_url}"><img src="{PLAYER_WeaponImage}" width="100" alt="{PLAYER_FinalWeaponDisplayName}" class="imageborder"></A></td>
+			</tr>
+			<tr>
+				<td class="line2" align="center" nowrap><A HREF="weapons.php?id={PLAYER_WEAPONID}{additional_url}">{PLAYER_FinalWeaponDisplayName}</A></td>
+			</tr>
+			<tr>
+				<td class="line1" align="center" nowrap>{LN_PLAYER_KILLED} <B>{PLAYER_WEAPONCOUNT}</B></A></td>
+			</tr>
+			</table>
+<!-- ENDIF isfavweapon="true" -->
+		</td>
+	</tr>
+	</table>
+	</td>
+	<td width="10" valign="top" rowspan="4" nowrap>&nbsp;</td>
+	<td width="50%" valign="top">
+
+	<!-- IF lastroundsenable="true" -->
+		<table width="100%" cellpadding="1" cellspacing="0" border="0" align="center">
+		<tr>
+			<td class="title" nowrap>{LN_PLAYER_LASTROUNDS}</td>
+		</tr>
+		</table>
+		<table width="100%" cellpadding="0" cellspacing="1" border="0" align="center" class="with_border_alternate">
+		<tr>
+			<td width="25" class="cellmenu1" align="center" nowrap><B>{LN_TOPPLAY_NUM}</B></td>
+			<td colspan="2" width="210" class="cellmenu1" align="center" nowrap><B>{LN_LROUNDS_TIME}</B></td>
+			<td colspan="2" width="100%" class="cellmenu1" align="center" nowrap><B>{LN_LROUNDS_DETAILS}</B></td>
+		</tr>
+
+		<!-- BEGIN lastrounds -->
+		<tr>
+			<td class="{cssclass}" align="center"><B>{Number}</B></td>
+			<td class="{cssclass}" nowrap><img src="{BASEPATH}images/icons/date-time.png" width="16" align="left">{TimePlayed}</td>
+			<td class="{cssclass}" align="center"><img src="{BASEPATH}images/icons/arrow_right_blue.png" width="16" align="left"><A HREF="rounds-detail.php?id={ID}{additional_url}">{LN_PLAYER_DETAILS}</A></td>
+			<td class="{cssclass}" align="left"><A HREF="info-gametypes.php?id={GameTypeName}{additional_url}">{FinalGameTypeDisplayName}</A></td>
+			<td class="{cssclass}" align="left"><A HREF="info-maps.php?id={MAPNAME}{additional_url}"><img src="{MapImage}" width="20" alt="{FinalMapDisplayName}"></A>&nbsp;<B>{FinalMapDisplayName}</B></td>
+		</tr>
+		<!-- END lastrounds -->
+
+		</table>
+	<!-- ENDIF lastroundsenable="true" -->
+
+		<br>
+
+	<!-- IF ischatlog="true" -->
+		<table width="100%" cellpadding="0" cellspacing="1" border="0" align="center" class="with_border_alternate">
+		<tr>
+			<td colspan="2" class="title" align="center" nowrap><B>{LN_PLAYER_LASTQUOTES}</B></td>
+		</tr>
+		<!-- BEGIN ChatLog -->
+		<tr>
+			<td class="{cssclass}" align="center" nowrap><B><img src="{BASEPATH}images/icons/arrow_right_blue.png" width="16" align="left"><A HREF="rounds-detail.php?id={ROUNDID}{additional_url}">{LN_LROUNDS_DETAILS}</A>&nbsp;&nbsp;</B></td>
+			<td class="{cssclass}" align="left" width="100%"><B>{TextSaidAsHtml}</B>&nbsp;</td>
+		</tr>
+		<!-- END ChatLog -->
+		</table>
+	<!-- ENDIF ischatlog="true" -->
+
+	</td>
+	<td width="10" valign="top" rowspan="4" nowrap>&nbsp;</td>
+</tr>
+
+<tr>
+	<td width="50%" valign="top">
+<!-- IF isweaponstats="true" -->
+	<table width="100%" cellpadding="1" cellspacing="0" border="0" align="center">
+	<tr>
+		<td colspan="2" class="title" width="400" nowrap>{LN_PLAYER_TOPWEAPONS}</td>
+	</tr>
+	<tr>
+		<td width="100%" nowrap valign="top">
+			<table width="100%" cellpadding="0" cellspacing="1" border="0" align="center" class="with_border_alternate">
+			<tr>
+				<td width="175" class="cellmenu1" align="center" nowrap><B>{LN_PLAYER_WEAPON}</B></td>
+				<td width="35" class="cellmenu1" align="center" nowrap><B>{LN_PLAYER_KILLS}</B></td>
+				<td width="100%" class="cellmenu1" align="center" nowrap><B>{LN_PLAYER_RATIO}</B></td>
+			</tr>
+			<!-- BEGIN weaponstats -->
+			<tr>
+				<td class="{cssclass}" align="left" nowrap><B><A HREF="weapons.php?id={INGAMENAME}{additional_url}"><img src="{WeaponImage}" width="51" height="18" alt="{DisplayName}">&nbsp;{DisplayName}</A></B></td>
+				<td class="{cssclass}" align="center" nowrap><B>{TotalKills}</B></td>
+				<td class="{cssclass}" align="left" nowrap>&nbsp;<img src="{BarImageLeft}" width="" height="9"><img src="{BarImageMiddle}" width="{KillBarWidth}%" height="9" alt="{KillBarPercent}"><img src="{BarImageRight}" width="" height="9">&nbsp;</td>
+			</tr>
+			<!-- END weaponstats -->
+			</table>
+		</td>
+	</tr>
+	</table>
+<!-- ENDIF isweaponstats="true" -->
+	</td>
+
+
+	<td width="50%" valign="top">
+<!-- IF ismapstats="true" -->
+	<table width="100%" cellpadding="1" cellspacing="0" border="0" align="center">
+	<tr>
+		<td colspan="2" class="title" width="400" nowrap>{LN_PLAYER_TOPPLAYEDMAPS}</td>
+	</tr>
+	<tr>
+		<td width="100%" nowrap valign="top">
+			<table width="100%" cellpadding="0" cellspacing="1" border="0" align="center" class="with_border_alternate">
+			<tr>
+				<td width="40" class="cellmenu1" align="center" nowrap><B>{LN_PLAYER_MAP}</B></td>
+				<td width="100" class="cellmenu1" align="center" nowrap><B>{LN_PLAYER_MAPNAME}</B></td>
+				<td width="85" class="cellmenu1" align="center" nowrap><B>{LN_PLAYER_COUNT}</B></td>
+				<td width="100%" class="cellmenu1" align="center" nowrap><B>{LN_PLAYER_RATIO}</B></td>
+			</tr>
+			<!-- BEGIN mapstats -->
+			<tr>
+				<td class="{cssclass}" align="left" nowrap><A HREF="info-maps.php?id={MAPNAME}{additional_url}"><img src="{MapImage}" width="35" alt="{FinalMapDisplayName}"></A></td>
+				<td class="{cssclass}" align="left" nowrap><A HREF="info-maps.php?id={MAPNAME}{additional_url}">{FinalMapDisplayName}</A></td>
+				<td class="{cssclass}" align="center" nowrap><B>{mapcount}</B></td>
+				<td class="{cssclass}" align="left" nowrap>&nbsp;<img src="{BarImageLeft}" width="" height="9"><img src="{BarImageMiddle}" width="{KillBarWidth}%" height="9" alt="{KillBarPercent}"><img src="{BarImageRight}" width="" height="9">&nbsp;</td>
+			</tr>
+			<!-- END mapstats -->
+			</table>
+		</td>
+	</tr>
+	</table>
+<!-- ENDIF ismapstats="true" -->
+	</td>
+</tr>
+
+<tr>
+	<td width="50%" valign="top">
+<!-- IF isvictimstats="true" -->
+	<table width="100%" cellpadding="1" cellspacing="0" border="0" align="center">
+	<tr>
+		<td colspan="2" class="title" width="400" nowrap>{LN_PLAYER_TOPVICTIMS}</td>
+	</tr>
+	<tr>
+		<td width="100%" nowrap valign="top">
+			<table width="100%" cellpadding="0" cellspacing="1" border="0" align="center" class="with_border_alternate">
+			<tr>
+				<td width="175" class="cellmenu1" align="center" nowrap><B>{LN_PLAYER_VICTIM_NAME}</B></td>
+				<td width="35" class="cellmenu1" align="center" nowrap><B>{LN_PLAYER_KILLS}</B></td>
+				<td width="100%" class="cellmenu1" align="center" nowrap><B>{LN_PLAYER_RATIO}</B></td>
+			</tr>
+			<!-- BEGIN victimstats -->
+			<tr>
+				<td class="{cssclass}" align="left" nowrap><A HREF="players-detail.php?id={ENEMYID}{additional_url}" title="{EnemyAlias}">{EnemyAliasHtml}</A></td>
+				<td class="{cssclass}" align="center" nowrap><B>{TotalKills}</B></td>
+				<td class="{cssclass}" align="left" nowrap>&nbsp;<img src="{BarImageLeft}" width="" height="9"><img src="{BarImageMiddle}" width="{KillBarWidth}%" height="9" alt="{KillBarPercent}"><img src="{BarImageRight}" width="" height="9">&nbsp;</td>
+			</tr>
+			<!-- END victimstats -->
+			</table>
+		</td>
+	</tr>
+	</table>
+<!-- ENDIF isweaponstats="true" -->
+	</td>
+
+	<td width="50%" valign="top">
+<!-- IF iskilledbystats="true" -->
+	<table width="100%" cellpadding="1" cellspacing="0" border="0" align="center">
+	<tr>
+		<td colspan="2" class="title" width="400" nowrap>{LN_PLAYER_TOPKILLEDBY}</td>
+	</tr>
+	<tr>
+		<td width="100%" nowrap valign="top">
+			<table width="100%" cellpadding="0" cellspacing="1" border="0" align="center" class="with_border_alternate">
+			<tr>
+				<td width="175" class="cellmenu1" align="center" nowrap><B>{LN_PLAYER_KILLER_NAME}</B></td>
+				<td width="35" class="cellmenu1" align="center" nowrap><B>{LN_PLAYER_KILLS}</B></td>
+				<td width="100%" class="cellmenu1" align="center" nowrap><B>{LN_PLAYER_RATIO}</B></td>
+			</tr>
+			<!-- BEGIN killedstats -->
+			<tr>
+				<td class="{cssclass}" align="left" nowrap><A HREF="players-detail.php?id={PLAYERID}{additional_url}" title="{KillerAlias}">{KillerAliasHtml}</A></td>
+				<td class="{cssclass}" align="center" nowrap><B>{TotalKills}</B></td>
+				<td class="{cssclass}" align="left" nowrap>&nbsp;<img src="{BarImageLeft}" width="" height="9"><img src="{BarImageMiddle}" width="{KillBarWidth}%" height="9" alt="{KillBarPercent}"><img src="{BarImageRight}" width="" height="9">&nbsp;</td>
+			</tr>
+			<!-- END killedstats -->
+			</table>
+		</td>
+	</tr>
+	</table>
+<!-- ENDIF iskilledbystats="true" -->
+
+	</td>
+</tr>
+
+<tr>
+	<td width="50%" valign="top">
+
+<!-- BEGIN KILLEDDETAILS -->
+	<table width="100%" cellpadding="1" cellspacing="0" border="0" align="center">
+	<tr>
+		<td colspan="2" class="title" width="400" nowrap>{LN_PLAYER_TOPHITLOCATIONS}</td>
+	</tr>
+	<tr>
+		<td nowrap valign="top" class="table_with_border_second">
+
+		<table border="0" cellpadding="0" cellspacing="0" width="220">
+		<tr>
+			<td colspan="12"><img src="{BASEPATH}images/player/allies/allmodels_1.png" width="220" border="0" height="9"></td>
+			<td><img src="{BASEPATH}images/player/allies/space.gif" width="1" border="0" height="9"></td>
+		</tr>
+		<tr>
+			<td colspan="2" rowspan="3"><img src="{BASEPATH}images/player/allies/allmodels_2.png" width="24" border="0" height="57"></td>
+			<td colspan="5" rowspan="2"><img src="{BASEPATH}images/player/allies/{head_level}/{head}.png" width="84" border="0" height="42" onmouseover="HoverPlayerImage(this, '{head}', '{head_display}', {head_level}, document.all('playerlegend'), 'allies');" onmouseout="OutPlayerImage(this, '{head}', {head_level}, document.all('playerlegend'), 'allies');"></td>
+			<td colspan="5"><img src="{BASEPATH}images/player/allies/allmodels_4.png" width="112" border="0" height="10"></td>
+			<td><img src="{BASEPATH}images/player/allies/space.gif" width="1" border="0" height="10"></td>
+		</tr>
+		<tr>
+			<td colspan="2" rowspan="2"><img src="{BASEPATH}images/player/allies/allmodels_5.png" width="25" border="0" height="47"></td>
+			<td colspan="2" rowspan="4" class="playerlegend" id="playerlegend" align="center">{LN_PLAYER_HITLMOUSEHELP}</td>
+			<td rowspan="2"><img src="{BASEPATH}images/player/allies/allmodels_7.png" width="13" border="0" height="47"></td>
+			<td><img src="{BASEPATH}images/player/allies/space.gif" width="1" border="0" height="32"></td>
+		</tr>
+		<tr>
+			<td colspan="5"><img src="{BASEPATH}images/player/allies/{neck_level}/{neck}.png" width="84" border="0" height="15" onmouseover="HoverPlayerImage(this, '{neck}', '{neck_display}', {neck_level}, document.all('playerlegend'), 'allies');" onmouseout="OutPlayerImage(this, '{neck}', {neck_level}, document.all('playerlegend'), 'allies');"></td>
+			<td><img src="{BASEPATH}images/player/allies/space.gif" width="1" border="0" height="15"></td>
+		</tr>
+		<tr>
+			<td><img src="{BASEPATH}images/player/allies/allmodels_9.png" width="8" border="0" height="36"></td>
+			<td colspan="2"><img src="{BASEPATH}images/player/allies/{left_arm_upper_level}/{left_arm_upper}.png" width="37" border="0" height="36" onmouseover="HoverPlayerImage(this, '{left_arm_upper}', '{left_arm_upper_display}', {left_arm_upper_level}, document.all('playerlegend'), 'allies');" onmouseout="OutPlayerImage(this, '{left_arm_upper}', {left_arm_upper_level}, document.all('playerlegend'), 'allies');"></td>
+			<td colspan="3"><img src="{BASEPATH}images/player/allies/{torso_upper_level}/{torso_upper}.png" width="47" border="0" height="36" onmouseover="HoverPlayerImage(this, '{torso_upper}', '{torso_upper_display}', {torso_upper_level}, document.all('playerlegend'), 'allies');" onmouseout="OutPlayerImage(this, '{torso_upper}', {torso_upper_level}, document.all('playerlegend'), 'allies');"></td>
+			<td colspan="2"><img src="{BASEPATH}images/player/allies/{right_arm_upper_level}/{right_arm_upper}.png" width="28" border="0" height="36" onmouseover="HoverPlayerImage(this, '{right_arm_upper}', '{right_arm_upper_display}', {right_arm_upper_level}, document.all('playerlegend'), 'allies');" onmouseout="OutPlayerImage(this, '{right_arm_upper}', {right_arm_upper_level}, document.all('playerlegend'), 'allies');"></td>
+			<td><img src="{BASEPATH}images/player/allies/allmodels_13.png" width="13" border="0" height="36"></td>
+			<td><img src="{BASEPATH}images/player/allies/allmodels_14.png" width="13" border="0" height="36"></td>
+			<td><img src="{BASEPATH}images/player/allies/space.gif" width="1" border="0" height="36"></td>
+		</tr>
+		<tr>
+			<td rowspan="5"><img src="{BASEPATH}images/player/allies/allmodels_15.png" width="8" border="0" height="59"></td>
+			<td colspan="2" rowspan="3"><img src="{BASEPATH}images/player/allies/{left_arm_lower_level}/{left_arm_lower}.png" width="37" border="0" height="41" onmouseover="HoverPlayerImage(this, '{left_arm_lower}', '{left_arm_lower_display}', {left_arm_lower_level}, document.all('playerlegend'), 'allies');" onmouseout="OutPlayerImage(this, '{left_arm_lower}', {left_arm_lower_level}, document.all('playerlegend'), 'allies');"></td>
+			<td colspan="3" rowspan="3"><img src="{BASEPATH}images/player/allies/{left_hand_level}/{left_hand}.png" width="47" border="0" height="41" onmouseover="HoverPlayerImage(this, '{left_hand}', '{left_hand_display}', {left_hand_level}, document.all('playerlegend'), 'allies');" onmouseout="OutPlayerImage(this, '{left_hand}', {left_hand_level}, document.all('playerlegend'), 'allies');"></td>
+			<td colspan="2" rowspan="2"><img src="{BASEPATH}images/player/allies/{right_arm_lower_level}/{right_arm_lower}.png" width="28" border="0" height="20" onmouseover="HoverPlayerImage(this, '{right_arm_lower}', '{right_arm_lower_display}', {right_arm_lower_level}, document.all('playerlegend'), 'allies');" onmouseout="OutPlayerImage(this, '{right_arm_lower}', {right_arm_lower_level}, document.all('playerlegend'), 'allies');"></td>
+			<td><img src="{BASEPATH}images/player/allies/allmodels_19.png" width="13" border="0" height="12"></td>
+			<td><img src="{BASEPATH}images/player/allies/allmodels_20.png" width="13" border="0" height="12"></td>
+			<td><img src="{BASEPATH}images/player/allies/space.gif" width="1" border="0" height="12"></td>
+		</tr>
+		<tr>
+			<td colspan="4" rowspan="4"><img src="{BASEPATH}images/player/allies/allmodels_21.png" width="100" border="0" height="47"></td>
+			<td><img src="{BASEPATH}images/player/allies/space.gif" width="1" border="0" height="8"></td>
+		</tr>
+		<tr>
+			<td colspan="2" rowspan="2"><img src="{BASEPATH}images/player/allies/{right_hand_level}/{right_hand}.png" width="28" border="0" height="28" onmouseover="HoverPlayerImage(this, '{right_hand}', '{right_hand_display}', {right_hand_level}, document.all('playerlegend'), 'allies');" onmouseout="OutPlayerImage(this, '{right_hand}', {right_hand_level}, document.all('playerlegend'), 'allies');"></td>
+			<td><img src="{BASEPATH}images/player/allies/space.gif" width="1" border="0" height="21"></td>
+		</tr>
+		<tr>
+			<td colspan="2" rowspan="2"><img src="{BASEPATH}images/player/allies/allmodels_23.png" width="37" border="0" height="18"></td>
+			<td colspan="3" rowspan="2"><img src="{BASEPATH}images/player/allies/{torso_lower_level}/{torso_lower}.png" width="47" border="0" height="18" onmouseover="HoverPlayerImage(this, '{torso_lower}', '{torso_lower_display}', {torso_lower_level}, document.all('playerlegend'), 'allies');" onmouseout="OutPlayerImage(this, '{torso_lower}', {torso_lower_level}, document.all('playerlegend'), 'allies');"></td>
+			<td><img src="{BASEPATH}images/player/allies/space.gif" width="1" border="0" height="7"></td>
+		</tr>
+		<tr>
+			<td colspan="2"><img src="{BASEPATH}images/player/allies/allmodels_25.png" width="28" border="0" height="11"></td>
+			<td><img src="{BASEPATH}images/player/allies/space.gif" width="1" border="0" height="11"></td>
+		</tr>
+		<tr>
+			<td rowspan="3"><img src="{BASEPATH}images/player/allies/allmodels_26.png" width="8" border="0" height="115"></td>
+			<td colspan="3"><img src="{BASEPATH}images/player/allies/{left_leg_upper_level}/{left_leg_upper}.png" width="55" border="0" height="24" onmouseover="HoverPlayerImage(this, '{left_leg_upper}', '{left_leg_upper_display}', {left_leg_upper_level}, document.all('playerlegend'), 'allies');" onmouseout="OutPlayerImage(this, '{left_leg_upper}', {left_leg_upper_level}, document.all('playerlegend'), 'allies');"></td>
+			<td rowspan="3"><img src="{BASEPATH}images/player/allies/allmodels_28.png" width="16" border="0" height="115"></td>
+			<td colspan="5"><img src="{BASEPATH}images/player/allies/{right_leg_upper_level}/{right_leg_upper}.png" width="66" border="0" height="24" onmouseover="HoverPlayerImage(this, '{right_leg_upper}', '{right_leg_upper_display}', {right_leg_upper_level}, document.all('playerlegend'), 'allies');" onmouseout="OutPlayerImage(this, '{right_leg_upper}', {right_leg_upper_level}, document.all('playerlegend'), 'allies');"></td>
+			<td colspan="2" rowspan="3"><img src="{BASEPATH}images/player/allies/allmodels_30.png" width="75" border="0" height="115"></td>
+			<td><img src="{BASEPATH}images/player/allies/space.gif" width="1" border="0" height="24"></td>
+		</tr>
+		<tr>
+			<td colspan="3"><img src="{BASEPATH}images/player/allies/{left_leg_lower_level}/{left_leg_lower}.png" width="55" border="0" height="24" onmouseover="HoverPlayerImage(this, '{left_leg_lower}', '{left_leg_lower_display}', {left_leg_lower_level}, document.all('playerlegend'), 'allies');" onmouseout="OutPlayerImage(this, '{left_leg_lower}', {left_leg_lower_level}, document.all('playerlegend'), 'allies');"></td>
+			<td colspan="5"><img src="{BASEPATH}images/player/allies/{right_leg_lower_level}/{right_leg_lower}.png" width="66" border="0" height="24" onmouseover="HoverPlayerImage(this, '{right_leg_lower}', '{right_leg_lower_display}', {right_leg_lower_level}, document.all('playerlegend'), 'allies');" onmouseout="OutPlayerImage(this, '{right_leg_lower}', {right_leg_lower_level}, document.all('playerlegend'), 'allies');"></td>
+			<td><img src="{BASEPATH}images/player/allies/space.gif" width="1" border="0" height="24"></td>
+		</tr>
+		<tr>
+			<td colspan="3"><img src="{BASEPATH}images/player/allies/{left_foot_level}/{left_foot}.png" width="55" border="0" height="67" onmouseover="HoverPlayerImage(this, '{left_foot}', '{left_foot_display}', {left_foot_level}, document.all('playerlegend'), 'allies');" onmouseout="OutPlayerImage(this, '{left_foot}', {left_foot_level}, document.all('playerlegend'), 'allies');"></td>
+			<td colspan="5"><img src="{BASEPATH}images/player/allies/{right_foot_level}/{right_foot}.png" width="66" border="0" height="67" onmouseover="HoverPlayerImage(this, '{right_foot}', '{right_foot_display}', {right_foot_level}, document.all('playerlegend'), 'allies');" onmouseout="OutPlayerImage(this, '{right_foot}', {right_foot_level}, document.all('playerlegend'), 'allies');"></td>
+			<td><img src="{BASEPATH}images/player/allies/space.gif" width="1" border="0" height="67"></td>
+		</tr>
+		<tr>
+			<td colspan="12"><img src="{BASEPATH}images/player/allies/allmodels_35.png" width="220" border="0" height="4"></td>
+			<td><img src="{BASEPATH}images/player/allies/space.gif" width="1" border="0" height="4"></td>
+		</tr>
+		<tr>
+			<td><img src="{BASEPATH}images/player/allies/space.gif" width="8" border="0" height="1"></td>
+			<td><img src="{BASEPATH}images/player/allies/space.gif" width="16" border="0" height="1"></td>
+			<td><img src="{BASEPATH}images/player/allies/space.gif" width="21" border="0" height="1"></td>
+			<td><img src="{BASEPATH}images/player/allies/space.gif" width="18" border="0" height="1"></td>
+			<td><img src="{BASEPATH}images/player/allies/space.gif" width="16" border="0" height="1"></td>
+			<td><img src="{BASEPATH}images/player/allies/space.gif" width="13" border="0" height="1"></td>
+			<td><img src="{BASEPATH}images/player/allies/space.gif" width="16" border="0" height="1"></td>
+			<td><img src="{BASEPATH}images/player/allies/space.gif" width="12" border="0" height="1"></td>
+			<td><img src="{BASEPATH}images/player/allies/space.gif" width="13" border="0" height="1"></td>
+			<td><img src="{BASEPATH}images/player/allies/space.gif" width="12" border="0" height="1"></td>
+			<td><img src="{BASEPATH}images/player/allies/space.gif" width="62" border="0" height="1"></td>
+			<td><img src="{BASEPATH}images/player/allies/space.gif" width="13" border="0" height="1"></td>
+			<td><img src="{BASEPATH}images/player/allies/space.gif" width="1" border="0" height="1"></td>
+		</tr>
+		</table>
+
+		</td>
+	
+		<td width="100%" nowrap valign="top" class="table_with_border_second">
+			<br>
+			<table width="90%" cellpadding="0" cellspacing="1" border="0" align="center" class="with_border_alternate">
+			<tr>
+				<td width="35" class="cellmenu1" align="center" nowrap><B>{LN_TOPPLAY_NUM}</B></td>
+				<td width="100%" class="cellmenu1" align="center" nowrap><B>{LN_PLAYER_HITLOCATION}</B></td>
+				<td width="50" class="cellmenu1" align="center" nowrap><B>{LN_PLAYER_HITLKILLSCOUNT}</B></td>
+			</tr>
+			<!-- BEGIN hitlocations -->
+			<tr>
+				<td class="{cssclass}" align="left" nowrap><B>{Number}</B></td>
+				<td class="{cssclass}" align="center" nowrap><B>{DisplayName}</B></td>
+				<td class="{cssclass}" align="right" nowrap><B>{TotalKills}</B></td>
+			</tr>
+			<!-- END hitlocations -->
+			</table>
+
+		</td>
+
+	</tr>
+	</table>
+<!-- END KILLEDDETAILS -->
+
+	</td>
+	<td width="50%" valign="top">
+
+<!-- BEGIN KILLEDBYDETAILS -->
+	<table width="100%" cellpadding="1" cellspacing="0" border="0" align="center">
+	<tr>
+		<td colspan="2" class="title" width="400" nowrap>{LN_PLAYER_TOPHITLOCATIONS_KILLED}</td>
+	</tr>
+	<tr>
+		<td nowrap valign="top" class="table_with_border_second">
+
+		<table border="0" cellpadding="0" cellspacing="0" width="220">
+		<tr>
+			<td colspan="12"><img src="{BASEPATH}images/player/axis/allmodels_1.png" width="220" border="0" height="9"></td>
+			<td><img src="{BASEPATH}images/player/axis/space.gif" width="1" border="0" height="9"></td>
+		</tr>
+		<tr>
+			<td colspan="2" rowspan="3"><img src="{BASEPATH}images/player/axis/allmodels_2.png" width="24" border="0" height="57"></td>
+			<td colspan="5" rowspan="2"><img src="{BASEPATH}images/player/axis/{head_level}/{head}.png" width="84" border="0" height="42" onmouseover="HoverPlayerImage(this, '{head}', '{head_display}', {head_level}, document.all('playerlegend_killedby'), 'axis');" onmouseout="OutPlayerImage(this, '{head}', {head_level}, document.all('playerlegend_killedby'), 'axis');"></td>
+			<td colspan="5"><img src="{BASEPATH}images/player/axis/allmodels_4.png" width="112" border="0" height="10"></td>
+			<td><img src="{BASEPATH}images/player/axis/space.gif" width="1" border="0" height="10"></td>
+		</tr>
+		<tr>
+			<td colspan="2" rowspan="2"><img src="{BASEPATH}images/player/axis/allmodels_5.png" width="25" border="0" height="47"></td>
+			<td colspan="2" rowspan="4" class="playerlegend" id="playerlegend_killedby" align="center">{LN_PLAYER_HITLMOUSEHELP}</td>
+			<td rowspan="2"><img src="{BASEPATH}images/player/axis/allmodels_7.png" width="13" border="0" height="47"></td>
+			<td><img src="{BASEPATH}images/player/axis/space.gif" width="1" border="0" height="32"></td>
+		</tr>
+		<tr>
+			<td colspan="5"><img src="{BASEPATH}images/player/axis/{neck_level}/{neck}.png" width="84" border="0" height="15" onmouseover="HoverPlayerImage(this, '{neck}', '{neck_display}', {neck_level}, document.all('playerlegend_killedby'), 'axis');" onmouseout="OutPlayerImage(this, '{neck}', {neck_level}, document.all('playerlegend_killedby'), 'axis');"></td>
+			<td><img src="{BASEPATH}images/player/axis/space.gif" width="1" border="0" height="15"></td>
+		</tr>
+		<tr>
+			<td><img src="{BASEPATH}images/player/axis/allmodels_9.png" width="8" border="0" height="36"></td>
+			<td colspan="2"><img src="{BASEPATH}images/player/axis/{left_arm_upper_level}/{left_arm_upper}.png" width="37" border="0" height="36" onmouseover="HoverPlayerImage(this, '{left_arm_upper}', '{left_arm_upper_display}', {left_arm_upper_level}, document.all('playerlegend_killedby'), 'axis');" onmouseout="OutPlayerImage(this, '{left_arm_upper}', {left_arm_upper_level}, document.all('playerlegend_killedby'), 'axis');"></td>
+			<td colspan="3"><img src="{BASEPATH}images/player/axis/{torso_upper_level}/{torso_upper}.png" width="47" border="0" height="36" onmouseover="HoverPlayerImage(this, '{torso_upper}', '{torso_upper_display}', {torso_upper_level}, document.all('playerlegend_killedby'), 'axis');" onmouseout="OutPlayerImage(this, '{torso_upper}', {torso_upper_level}, document.all('playerlegend_killedby'), 'axis');"></td>
+			<td colspan="2"><img src="{BASEPATH}images/player/axis/{right_arm_upper_level}/{right_arm_upper}.png" width="28" border="0" height="36" onmouseover="HoverPlayerImage(this, '{right_arm_upper}', '{right_arm_upper_display}', {right_arm_upper_level}, document.all('playerlegend_killedby'), 'axis');" onmouseout="OutPlayerImage(this, '{right_arm_upper}', {right_arm_upper_level}, document.all('playerlegend_killedby'), 'axis');"></td>
+			<td><img src="{BASEPATH}images/player/axis/allmodels_13.png" width="13" border="0" height="36"></td>
+			<td><img src="{BASEPATH}images/player/axis/allmodels_14.png" width="13" border="0" height="36"></td>
+			<td><img src="{BASEPATH}images/player/axis/space.gif" width="1" border="0" height="36"></td>
+		</tr>
+		<tr>
+			<td rowspan="5"><img src="{BASEPATH}images/player/axis/allmodels_15.png" width="8" border="0" height="59"></td>
+			<td colspan="2" rowspan="3"><img src="{BASEPATH}images/player/axis/{left_arm_lower_level}/{left_arm_lower}.png" width="37" border="0" height="41" onmouseover="HoverPlayerImage(this, '{left_arm_lower}', '{left_arm_lower_display}', {left_arm_lower_level}, document.all('playerlegend_killedby'), 'axis');" onmouseout="OutPlayerImage(this, '{left_arm_lower}', {left_arm_lower_level}, document.all('playerlegend_killedby'), 'axis');"></td>
+			<td colspan="3" rowspan="3"><img src="{BASEPATH}images/player/axis/{left_hand_level}/{left_hand}.png" width="47" border="0" height="41" onmouseover="HoverPlayerImage(this, '{left_hand}', '{left_hand_display}', {left_hand_level}, document.all('playerlegend_killedby'), 'axis');" onmouseout="OutPlayerImage(this, '{left_hand}', {left_hand_level}, document.all('playerlegend_killedby'), 'axis');"></td>
+			<td colspan="2" rowspan="2"><img src="{BASEPATH}images/player/axis/{right_arm_lower_level}/{right_arm_lower}.png" width="28" border="0" height="20" onmouseover="HoverPlayerImage(this, '{right_arm_lower}', '{right_arm_lower_display}', {right_arm_lower_level}, document.all('playerlegend_killedby'), 'axis');" onmouseout="OutPlayerImage(this, '{right_arm_lower}', {right_arm_lower_level}, document.all('playerlegend_killedby'), 'axis');"></td>
+			<td><img src="{BASEPATH}images/player/axis/allmodels_19.png" width="13" border="0" height="12"></td>
+			<td><img src="{BASEPATH}images/player/axis/allmodels_20.png" width="13" border="0" height="12"></td>
+			<td><img src="{BASEPATH}images/player/axis/space.gif" width="1" border="0" height="12"></td>
+		</tr>
+		<tr>
+			<td colspan="4" rowspan="4"><img src="{BASEPATH}images/player/axis/allmodels_21.png" width="100" border="0" height="47"></td>
+			<td><img src="{BASEPATH}images/player/axis/space.gif" width="1" border="0" height="8"></td>
+		</tr>
+		<tr>
+			<td colspan="2" rowspan="2"><img src="{BASEPATH}images/player/axis/{right_hand_level}/{right_hand}.png" width="28" border="0" height="28" onmouseover="HoverPlayerImage(this, '{right_hand}', '{right_hand_display}', {right_hand_level}, document.all('playerlegend_killedby'), 'axis');" onmouseout="OutPlayerImage(this, '{right_hand}', {right_hand_level}, document.all('playerlegend_killedby'), 'axis');"></td>
+			<td><img src="{BASEPATH}images/player/axis/space.gif" width="1" border="0" height="21"></td>
+		</tr>
+		<tr>
+			<td colspan="2" rowspan="2"><img src="{BASEPATH}images/player/axis/allmodels_23.png" width="37" border="0" height="18"></td>
+			<td colspan="3" rowspan="2"><img src="{BASEPATH}images/player/axis/{torso_lower_level}/{torso_lower}.png" width="47" border="0" height="18" onmouseover="HoverPlayerImage(this, '{torso_lower}', '{torso_lower_display}', {torso_lower_level}, document.all('playerlegend_killedby'), 'axis');" onmouseout="OutPlayerImage(this, '{torso_lower}', {torso_lower_level}, document.all('playerlegend_killedby'), 'axis');"></td>
+			<td><img src="{BASEPATH}images/player/axis/space.gif" width="1" border="0" height="7"></td>
+		</tr>
+		<tr>
+			<td colspan="2"><img src="{BASEPATH}images/player/axis/allmodels_25.png" width="28" border="0" height="11"></td>
+			<td><img src="{BASEPATH}images/player/axis/space.gif" width="1" border="0" height="11"></td>
+		</tr>
+		<tr>
+			<td rowspan="3"><img src="{BASEPATH}images/player/axis/allmodels_26.png" width="8" border="0" height="115"></td>
+			<td colspan="3"><img src="{BASEPATH}images/player/axis/{left_leg_upper_level}/{left_leg_upper}.png" width="55" border="0" height="24" onmouseover="HoverPlayerImage(this, '{left_leg_upper}', '{left_leg_upper_display}', {left_leg_upper_level}, document.all('playerlegend_killedby'), 'axis');" onmouseout="OutPlayerImage(this, '{left_leg_upper}', {left_leg_upper_level}, document.all('playerlegend_killedby'), 'axis');"></td>
+			<td rowspan="3"><img src="{BASEPATH}images/player/axis/allmodels_28.png" width="16" border="0" height="115"></td>
+			<td colspan="5"><img src="{BASEPATH}images/player/axis/{right_leg_upper_level}/{right_leg_upper}.png" width="66" border="0" height="24" onmouseover="HoverPlayerImage(this, '{right_leg_upper}', '{right_leg_upper_display}', {right_leg_upper_level}, document.all('playerlegend_killedby'), 'axis');" onmouseout="OutPlayerImage(this, '{right_leg_upper}', {right_leg_upper_level}, document.all('playerlegend_killedby'), 'axis');"></td>
+			<td colspan="2" rowspan="3"><img src="{BASEPATH}images/player/axis/allmodels_30.png" width="75" border="0" height="115"></td>
+			<td><img src="{BASEPATH}images/player/axis/space.gif" width="1" border="0" height="24"></td>
+		</tr>
+		<tr>
+			<td colspan="3"><img src="{BASEPATH}images/player/axis/{left_leg_lower_level}/{left_leg_lower}.png" width="55" border="0" height="24" onmouseover="HoverPlayerImage(this, '{left_leg_lower}', '{left_leg_lower_display}', {left_leg_lower_level}, document.all('playerlegend_killedby'), 'axis');" onmouseout="OutPlayerImage(this, '{left_leg_lower}', {left_leg_lower_level}, document.all('playerlegend_killedby'), 'axis');"></td>
+			<td colspan="5"><img src="{BASEPATH}images/player/axis/{right_leg_lower_level}/{right_leg_lower}.png" width="66" border="0" height="24" onmouseover="HoverPlayerImage(this, '{right_leg_lower}', '{right_leg_lower_display}', {right_leg_lower_level}, document.all('playerlegend_killedby'), 'axis');" onmouseout="OutPlayerImage(this, '{right_leg_lower}', {right_leg_lower_level}, document.all('playerlegend_killedby'), 'axis');"></td>
+			<td><img src="{BASEPATH}images/player/axis/space.gif" width="1" border="0" height="24"></td>
+		</tr>
+		<tr>
+			<td colspan="3"><img src="{BASEPATH}images/player/axis/{left_foot_level}/{left_foot}.png" width="55" border="0" height="67" onmouseover="HoverPlayerImage(this, '{left_foot}', '{left_foot_display}', {left_foot_level}, document.all('playerlegend_killedby'), 'axis');" onmouseout="OutPlayerImage(this, '{left_foot}', {left_foot_level}, document.all('playerlegend_killedby'), 'axis');"></td>
+			<td colspan="5"><img src="{BASEPATH}images/player/axis/{right_foot_level}/{right_foot}.png" width="66" border="0" height="67" onmouseover="HoverPlayerImage(this, '{right_foot}', '{right_foot_display}', {right_foot_level}, document.all('playerlegend_killedby'), 'axis');" onmouseout="OutPlayerImage(this, '{right_foot}', {right_foot_level}, document.all('playerlegend_killedby'), 'axis');"></td>
+			<td><img src="{BASEPATH}images/player/axis/space.gif" width="1" border="0" height="67"></td>
+		</tr>
+		<tr>
+			<td colspan="12"><img src="{BASEPATH}images/player/axis/allmodels_35.png" width="220" border="0" height="4"></td>
+			<td><img src="{BASEPATH}images/player/axis/space.gif" width="1" border="0" height="4"></td>
+		</tr>
+		<tr>
+			<td><img src="{BASEPATH}images/player/axis/space.gif" width="8" border="0" height="1"></td>
+			<td><img src="{BASEPATH}images/player/axis/space.gif" width="16" border="0" height="1"></td>
+			<td><img src="{BASEPATH}images/player/axis/space.gif" width="21" border="0" height="1"></td>
+			<td><img src="{BASEPATH}images/player/axis/space.gif" width="18" border="0" height="1"></td>
+			<td><img src="{BASEPATH}images/player/axis/space.gif" width="16" border="0" height="1"></td>
+			<td><img src="{BASEPATH}images/player/axis/space.gif" width="13" border="0" height="1"></td>
+			<td><img src="{BASEPATH}images/player/axis/space.gif" width="16" border="0" height="1"></td>
+			<td><img src="{BASEPATH}images/player/axis/space.gif" width="12" border="0" height="1"></td>
+			<td><img src="{BASEPATH}images/player/axis/space.gif" width="13" border="0" height="1"></td>
+			<td><img src="{BASEPATH}images/player/axis/space.gif" width="12" border="0" height="1"></td>
+			<td><img src="{BASEPATH}images/player/axis/space.gif" width="62" border="0" height="1"></td>
+			<td><img src="{BASEPATH}images/player/axis/space.gif" width="13" border="0" height="1"></td>
+			<td><img src="{BASEPATH}images/player/axis/space.gif" width="1" border="0" height="1"></td>
+		</tr>
+		</table>
+
+		</td>
+	
+		<td width="100%" nowrap valign="top" class="table_with_border_second">
+			<br>
+			<table width="90%" cellpadding="0" cellspacing="1" border="0" align="center" class="with_border_alternate">
+			<tr>
+				<td width="35" class="cellmenu1" align="center" nowrap><B>{LN_TOPPLAY_NUM}</B></td>
+				<td width="100%" class="cellmenu1" align="center" nowrap><B>{LN_PLAYER_HITLOCATION}</B></td>
+				<td width="50" class="cellmenu1" align="center" nowrap><B>{LN_PLAYER_HITLKILLSCOUNT}</B></td>
+			</tr>
+			<!-- BEGIN hitlocations -->
+			<tr>
+				<td class="{cssclass}" align="left" nowrap><B>{Number}</B></td>
+				<td class="{cssclass}" align="center" nowrap><B>{DisplayName}</B></td>
+				<td class="{cssclass}" align="right" nowrap><B>{TotalKills}</B></td>
+			</tr>
+			<!-- END hitlocations -->
+			</table>
+
+		</td>
+
+	</tr>
+	</table>
+<!-- END KILLEDBYDETAILS -->
+
+	</td>
+</tr>
+</table>
+
+
+<!-- ENDIF playerenabled="true" -->
+
+<!-- INCLUDE include_footer.html -->

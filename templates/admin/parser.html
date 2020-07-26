@@ -1,0 +1,80 @@
+<!-- INCLUDE admin/admin_header.html --> 
+
+<!-- IF ISERROR="true" -->
+<center>
+<h3><font color="red">{ERROR_MSG}</font></h3>
+</center>
+<!-- ENDIF ISERROR="true" -->
+
+<table width="90%" cellpadding="0" cellspacing="0" border="0" align="center" class="with_border">
+	<tr>
+		<td colspan="10" align="center" valign="top" class="title">
+		<strong>{LN_ADMINCENTER_PARSER} | <a href="servers.php">{LN_SERVERLIST}</a></strong></td>
+	</tr>
+<!-- BEGIN SERVER -->
+	<tr>
+		<td colspan="10" align="center" valign="top" class="title">
+		<strong>Current Server ID '{ID}'</strong></td>
+	</tr>
+
+	<tr>
+		<td align="center">
+			<table border="0" cellpadding="2" cellspacing="1" bgcolor="#DDDDDD">
+			<tr>
+				<td align="center" width="150" class="line1" nowrap><b>{LN_SERVERNAME}</b></td>
+				<td align="center" width="100%" class="line1">{Name}</td>
+			</tr>
+			<tr>
+				<td align="center" width="150" class="line1" nowrap><b>{LN_SERVERTOOLS}</b></td>
+				<td colspan="2" align="center" class="line0">
+					&nbsp;<a href="servers.php?op=edit&id={ID}"><img src="{BASEPATH}images/icons/edit.png" width="16" title="{LN_ADMINEDIT}"></a>
+					&nbsp;<a href="parser.php?op=delete&id={ID}"><img src="{BASEPATH}images/icons/delete.png" width="16" title="{LN_ADMINDELETE}"></a>
+					&nbsp;<a href="parser.php?op=updatestats&id={ID}"><img src="{BASEPATH}images/icons/gears_run.png" width="16" title="{LN_ADMINPARSESTATS}"></a>
+					&nbsp;<a href="parser.php?op=createaliases&id={ID}"><img src="{BASEPATH}images/icons/businessmen.png" width="16" title="{LN_ADMINCREATEALIASES}"></a>
+					&nbsp;<a href="servers.php?op=dbstats&id={ID}"><img src="{BASEPATH}images/icons/line-chart.png" width="16" title="{LN_ADMINDBSTATS}"></a>
+					&nbsp;<a href="parser.php?op=resetlastlogline&id={ID}"><img src="{BASEPATH}images/icons/recycle.png" width="16" title="{LN_ADMINRESETLASTLOGLINE}"></a>
+					&nbsp;<a href="parser.php?op=deletestats&id={ID}"><img src="{BASEPATH}images/icons/garbage_empty.png" width="16" title="{LN_ADMINDELETESTATS}"></a>
+					&nbsp;<a href="parser.php?op=getnewlogfile&id={ID}"><img src="{BASEPATH}images/icons/download.png" width="16" title="{LN_ADMINGETNEWLOG}"></a>
+				</td>
+			</tr>
+<!-- END SERVER -->
+
+<!-- IF RUNPARSER="true" -->
+
+<!-- IF parseroperation="updatestats" -->
+			<tr>
+				<td align="center" width="150" class="line1" nowrap><b>{LN_GAMELOGLOCATION}</b></td>
+				<td align="center" width="100%" class="line1">{GameLogLocation}</td>
+			</tr>
+			<tr>
+				<td align="center" width="150" class="line0" nowrap><b>{LN_LASTLINE}</b></td>
+				<td align="center" width="100%" class="line0">{LastLogLine}</td>
+			</tr>
+<!-- ENDIF parseroperation="updatestats" -->
+
+<!-- BEGIN SERVER -->
+			</table>
+		</td>
+	</tr>
+<!-- END SERVER -->
+</table>
+
+	<br>
+	<center>
+	<table width="90%" cellpadding="0" cellspacing="0" border="0" align="center" class="with_border">
+		<tr>
+			<td colspan="10" align="center" valign="top" class="title">
+			<strong>{LN_EMBEDDED_PARSER}</strong></td>
+		</tr>
+	</table>
+
+	<iframe id="container" src="parser-core.php?op={parseroperation}&id={serverid}" width="90%" height="500" name="parser_in_a_box" class="with_border">
+		<p>{NO_INFRAME_POSSIBLE}</p>
+	</iframe>
+	</center>
+
+<!-- ENDIF RUNPARSER="true" -->
+
+<br><br>
+
+<!-- INCLUDE admin/admin_footer.html -->

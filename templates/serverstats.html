@@ -1,0 +1,159 @@
+<!-- INCLUDE include_header.html --> 
+
+<br>
+
+<!-- IF iserror="true" -->
+	<center>
+	<h3><font color="red">{LN_ERROR_NOSERVERMAPS}</font></h3>
+	</center>
+<!-- ENDIF iserror="true" -->
+
+<!-- IF serverlistenabled="true" -->
+<table width="100%" cellpadding="0" cellspacing="5" border="0" align="center">
+<tr>
+	<td width="10" valign="top">&nbsp;</td>
+	<td>
+
+	<table width="100%" cellpadding="1" cellspacing="1" border="0" align="center" class="with_border_alternate">
+	<tr>
+		<td colspan="5" class="title" width="350" nowrap>{LN_GLOBAL_SERVERLIST}</td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center" width="200" class="cellmenu1" nowrap><b>{LN_SERVER_NAME}</b></td>
+		<td align="center" width="150" class="cellmenu1" nowrap><b>{LN_SERVER_IP}</b></td>
+		<td align="center" width="150" class="cellmenu1" nowrap><b>{LN_GLOBAL_LASTSERVERUPDATE}</b></td>
+		<td align="center" width="100%" class="cellmenu1" nowrap><b>{LN_SERVER_Description}</b></td>
+	</tr>
+	<!-- BEGIN SERVERS -->
+	<tr>
+		<td width="16" align="left" class="{cssclass}" nowrap><img src="{BASEPATH}images/icons/server.png" width="16" align="left"></td>
+		<td align="left" class="{cssclass}" nowrap><a href="serverstats.php?serverid={ServerID}">{ServerName}</a></td>
+		<td align="center" class="{cssclass}" nowrap><A HREF="hlsw://{ServerIP}:{ServerPort}">{ServerIP}:{ServerPort}</A></td>
+		<td align="center" class="{cssclass}" nowrap><b>{LastUpdate_Formatted}</b></td>
+		<td align="left" class="{cssclass}" nowrap>{ServerDescription}</td>
+	</tr>
+	<!-- END SERVERS -->
+	</table>
+
+	</td>
+	<td width="10" valign="top">&nbsp;</td>
+</tr>
+</table>
+<!-- ENDIF serverlistenabled="true" -->
+
+
+<!-- IF mapssenabled="true" -->
+<table width="100%" cellpadding="0" cellspacing="5" border="0" align="center">
+<tr>
+	<td width="10" valign="top">&nbsp;</td>
+	<td>
+
+<!--		
+		<table width="100%" cellpadding="0" cellspacing="0" border="0" align="center">
+		<tr>
+			<td colspan="2" class="title" nowrap>{LN_SERVER_DETAILS}</td>
+		</tr>
+		</table>
+		<br><br>
+-->
+
+		<table width="100%" cellpadding="0" cellspacing="0" border="0" align="center">
+		<tr>
+			<td colspan="2" class="title" nowrap>{LN_SERVER_MAPSTATS}</td>
+		</tr>
+		</table>
+
+		<!-- IF maps_pagerenabled="true" -->
+		<table width="100%" align="center" border="0" cellpadding="1" cellspacing="1" class="with_border">
+		<tr>
+			<td class="cellmenu2" nowrap><B>Pages: &nbsp; </B></td>
+		<!-- BEGIN PLAYERPAGES -->
+			<td class="{cssclass}" nowrap><a href="?start={mypagebegin}{additional_url}" target="_top">{mypagenumber}</a>&nbsp;</td>
+		<!-- END PLAYERPAGES -->
+			<td nowrap width="100%"class="line2"><I>&nbsp;{MAPS_MOREPAGES}</I></td>
+		</tr>
+		</table>
+		<!-- ENDIF maps_pagerenabled="true" -->
+
+		<!-- BEGIN playedmaps -->
+		<table width="100%" cellpadding="0" cellspacing="1" border="0" align="center" class="with_border_alternate">
+		<tr>
+			<td width="50%" valign="top" class="{cssclass}">
+
+				<table width="100%" cellpadding="2" cellspacing="1" border="0" align="center">
+				<tr>
+					<td width="50" class="cellmenu1" align="center" nowrap><B>No. {Number}</B></td>
+					<td width="100%" class="cellmenu1" align="center"><B>{LN_SERVER_MAPDETAILS} '{MapDisplayName}'</B></td>
+				</tr>
+				</table>
+
+				<table width="100%" cellpadding="0" cellspacing="1" border="0" align="center" >
+				<tr>
+					<td width="209" nowrap valign="top">
+					<A HREF="info-maps.php?id={MAPNAME}{additional_url}"><img class="imageborder" src="{MapImage}" alt="{MapDisplayName}" width="200"></A>
+					</td>
+					<td width="100%" nowrap valign="top" rowspan="3">
+						<br>
+
+						<table width="95%" cellpadding="1" cellspacing="0" border="0" align="center" class="with_border">
+						<tr>
+							<td nowrap width="150" align="center" class="cellmenu2"><B>{LN_MAP_INGAMENAME}</B></td>
+							<td nowrap width="100%" align="center" valign="top" class="line0"><A HREF="info-maps.php?id={MAPNAME}{additional_url}">{MAPNAME}</A></td>
+						</tr>
+						<tr>
+							<td nowrap width="150" align="center" class="cellmenu2"><B>{LN_SERVER_PLAYEDCOUNT}</B></td>
+							<td nowrap width="100%" align="center" valign="top" class="line1"><B>{MapCount}</B></td>
+						</tr>
+						<tr>
+							<td nowrap width="150" align="center" class="cellmenu2"><B>{LN_SERVER_MOSTGAMETYPE}</B></td>
+							<td nowrap width="100%" align="center" valign="top" class="line2"><A HREF="info-gametypes.php?id={GameTypeName}{additional_url}">{GameTypeName}</A> ({GameTypeCount} times)</td>
+						</tr>
+						</table>
+
+					</td>
+				</tr>
+				</table>
+
+			</td>
+			<td width="50%" valign="top" class="{cssclass}">
+
+			<!-- IF lastroundsenable="true" -->
+				<table width="100%" cellpadding="2" cellspacing="1" border="0" align="center">
+				<tr>
+					<td class="cellmenu1" align="center" nowrap><B>{LN_SERVER_LASTROUNDS}</B></td>
+				</tr>
+				</table>
+
+				<br>
+				<table width="95%" cellpadding="0" cellspacing="1" border="0" align="center" class="with_border">
+				<tr>
+					<td width="25" class="cellmenu2" align="center" nowrap><B>{LN_TOPPLAY_NUM}</B></td>
+					<td colspan="2" class="cellmenu2" width="210" align="center" nowrap><B>{LN_LROUNDS_TIME}</B></td>
+					<td width="100%" class="cellmenu2" align="center" nowrap><B>{LN_LROUNDS_DETAILS}</B></td>
+				</tr>
+
+				<!-- BEGIN lastrounds -->
+				<tr>
+					<td class="{sub_cssclass}" align="center"><B>{Number}</B></td>
+					<td class="{sub_cssclass}"><img src="{BASEPATH}images/icons/date-time.png" width="16" align="left">{TimePlayed}</td>
+					<td class="{sub_cssclass}" align="center"><img src="{BASEPATH}images/icons/arrow_right_blue.png" width="16" align="left"><A HREF="rounds-detail.php?id={ROUNDID}{additional_url}">{LN_PLAYER_DETAILS}</A></td>
+					<td class="{sub_cssclass}" align="left"><A HREF="info-gametypes.php?id={GameTypeName}{additional_url}">{FinalGameTypeDisplayName}</A></td>
+				</tr>
+				<!-- END lastrounds -->
+
+				</table>
+				<br>
+			<!-- ENDIF lastroundsenable="true" -->
+
+			</td>
+		</tr>
+		</table>
+		<!-- END playedmaps -->
+
+	</td>
+	<td width="10" valign="top">&nbsp;</td>
+</tr>
+</table>
+<!-- ENDIF mapssenabled="true" -->
+
+<!-- INCLUDE include_footer.html -->

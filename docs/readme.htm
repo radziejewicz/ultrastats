@@ -1,0 +1,149 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<link rel="stylesheet" href="../admin/css/admin.css" type="text/css">
+<title>Installation</title>
+</head>
+
+<body TOPMARGIN="0" LEFTMARGIN="0" MARGINWIDTH="0" MARGINHEIGHT="0">
+
+<table cellspacing="0" cellpadding="5" border="0" class="with_border">
+<tr>
+	<td>
+
+<div class="mainheader">
+<h1 align="center">About UltraStats</h1>
+</div>
+<p>Somebody really reads this document, hurra :D! So you proberly want to know
+more about UltraStats ;)!</p>
+<p>There have been some beta releases in 2006, and a little bit silence since
+that. Now with Call of Duty 4 the interests in making stats for this franchise
+returned to me, and so here it is. The first BETA Version of UltraStats which
+supports Call of Duty 4.&nbsp;</p>
+<p>
+<font color="#FF0000"><b>THIS IS BETA SOFTWARE</b></font>, do not expect Final 
+Release quality! I expect that there are still bugs in the UltraStats! If you 
+found a bug, please check the <b>known Issues</b> section before you post a new 
+thread into our
+<a target="_blank" href="http://www.shooter-szene.de/PNphpBB2-index-c-25.phtml">
+Forums</a> ;)!</p>
+<h2>What is UltraStats? </h2>
+<p>UltraStats is a stats parser and web front-end for Call of Duty (+UO), Call
+of Duty 2 and Call of Duty 4.</p>
+<h2>What features are supported yet?</h2>
+<p>Currently there is already a bunch of features available, for details see 
+List below: </p>
+<ul>
+	<li>Main Overview with Top Played Rounds, Top Players, Serverlist and 
+	Medallist</li>
+	<li>Total Statistics and per Server statistics, so you can either view 
+	statistics for all servers consolidated, or only for a Server. </li>
+	<li>Round based Stats, this means each played round is recorded and can be 
+	viewed in a large list. It is also possible to filter the rounds by gametype</li>
+	<li>Round Details, for each round you will be able to view details like 
+	Kills Deaths, a chatlog and round ration per player. </li>
+	<li>Player Search, you can search either by Ingame-GUID or PlayerAlias</li>
+	<li>Player Stats, lists players by different criteria's like most kills or 
+	deaths. </li>
+	<li>Player Details, which is available for each player. Many things like 
+	Favorite Weapon and Map are displayed, a hit location model where the player 
+	hit others and were hit. </li>
+	<li>Weapon Stats, display details about the weapons and the Top Killer's and 
+	Top Killed By. If you filter by server, you will only see the weapons that 
+	have been used on the server.</li>
+	<li>Server Stats, shows the maps played on the Server, sorted by PlayCount. 
+	For each map you can also browse through the last played rounds. </li>
+	<li>Admin Center, gives you the possibility to fully administrate 
+	UltraStats. You can edit players, add / edit servers, download and parse 
+	logfiles, or clean up the database.</li>
+	<li>Ban Players, if you think someone cheats you can simple ban him in the 
+	Player editor. He will be totally hidden in the stats, but the data remains 
+	intact. You can also delete him if you want to totally get rid if him ;)!</li>
+	<li>MultiLanguage, by default there is english and german, but other 
+	languages are easily possible. Contact us if you are interested in 
+	translation UltraStats into your foreign language!</li>
+	<li>Time Logging, a little bit experimential as it is a mix of the file 
+	creation date of the logfile, and the time entries in the logfile, which 
+	start from 0 everytime the server is restarted. </li>
+</ul>
+<h2>What features are planned for the future? </h2>
+<p>My todo list grows every day, but here is a list of most important things 
+this will be added till the final release: </p>
+<ul>
+	<li>Admin Center: Weapon Editor, so you can edit the weapon details. </li>
+	<li>Admin Center: String Editor, so you can edit map, weapon and others 
+	texts in the database. </li>
+	<li>Admin Center: Player Editor, additional fields will be available like 
+	adding a picture and description for players. Typically you would do this 
+	for Clan members. </li>
+	<li>Admin Center: User Access Level, which means you will be able to define 
+	different access levels for users. Useful for GameServer ISP's who do not 
+	want the Clans to have full control on the stats. </li>
+	<li>Clanfilter: You can already set a flag to specify who is a Clanmember 
+	and who is not. In the final version, you will be able to only display Stats 
+	for Clan members. </li>
+	<li>ServerStats: Add LiveView, so you can see who is actually playing on the 
+	Server. </li>
+	<li>RoundStats: Calcute Rounds Results based on Actions, for better detailed 
+	results. </li>
+	<li>SkillValue: Will be added, so you have an additional value which will be 
+	a configurable value from Kills, Deaths, GameActions and so on. </li>
+	<li>Add Menu into Language System, hasn't been done yet. </li>
+	<li>Add more map and weapon description, also in german language!</li>
+	<li>lots of other stuff which I can't remember at the moment ;)</li>
+	<li>Time Filter, Year and month. The database already logs Year and month 
+	data, with the final, it will be possible to filter the statistics by Year 
+	and even by Month. A very nice feature for monthly stats without deleting 
+	the database. </li>
+</ul>
+<h2>Known Issues</h2>
+<p>There are some problems I am aware of, but haven't got the time to really fix 
+them. You will find a list below: </p>
+<ul>
+	<li>Time Calculation is <b><font color="#FF0000"> not accurate</font></b> yet, for some reason the time runs 
+	forward. I will have to rewrite the time calc coding in order to fix
+      this.&nbsp; </li>
+	<li></li>
+</ul>
+<h2>Important Notices! </h2>
+<p>There are things you have to take care when you use UltraStats. </p>
+<ul>
+	<li><b>MultiServer</b> - If you are using more then one Server in your 
+	UltraStats Installation, make sure that your game server is using DIFFERENT 
+	game log files! During development, I had the case where one log file 
+	contained the data of two servers. The log file was totally garbage and did 
+	not produce any useful results!</li>
+</ul>
+<p>&nbsp;</p>
+<p>If you experience any bugs, feel free to post into our
+<a href="http://www.shooter-szene.de/PNphpBB2-index-c-25.phtml">Forums</a>! 
+Thanks!</p>
+<p>&nbsp;</p>
+
+	</td>
+</tr>
+</table>
+
+
+<table width="100%" border="0" cellspacing="1" cellpadding="0" class="mainfooter">
+<tr>
+	<td align="center" class="line0">Created 2005-2008 - By <a href="http://www.eifelzocker.de" target="_blank">deltaray</a></td>
+	<td align="center" class="line1">
+		&nbsp;<a href="http://www.shooter-szene.de" target="_blank">Shooter-Szene.de</a> | 
+		&nbsp;<a href="http://www.ultrastats.org" target="_blank">Ultrastats</A> 
+	</td>
+	<td align="center" class="line0">
+		&nbsp;<B>Partners:</B> 
+	 </td>
+	<td align="center" class="line1">
+		&nbsp;<a href="http://www.clanwarzgamingservers.com" target="_blank">ClanWarz</a> |
+		&nbsp;<a href="http://www.mgs-server.com/" target="_blank">MGS-Server</a>
+	 </td>
+ </tr>
+ </table>
+
+	 
+</body>
+</html>

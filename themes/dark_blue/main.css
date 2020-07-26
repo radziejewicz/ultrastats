@@ -1,0 +1,278 @@
+/* Generell Tag Classes */
+BODY
+{
+    BACKGROUND-COLOR: #010101;
+    COLOR: #FFFFFF;
+    FONT-FAMILY: ARIAL;
+    FONT-SIZE: 8pt;
+
+	scrollbar-face-color: #1a2328;
+	scrollbar-highlight-color: #253239;
+	scrollbar-shadow-color: #DEE3E7;
+	scrollbar-3dlight-color: #D1D7DC;
+	scrollbar-arrow-color:  #006699;
+	scrollbar-track-color: #EFEFEF;
+	scrollbar-darkshadow-color: #98AAB1
+}
+
+TD { font-family: Arial, Helvetica, sans-serif; font-size: 8pt; color: #BBBBBB }
+
+/* Link Classes */
+.playerlink { color:#FFFFFF;  cursor:hand; }
+.playerlink:hover { color:#666666; text-decoration: none; cursor:hand; }
+
+/* Default Link Classes */
+a:link,a:active,a:visited,a.postlink
+{
+	FONT: Verdana, Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	background-color: transparent;
+	color:#666666;
+	text-decoration:none;
+}
+a:hover
+{
+	FONT: Verdana, Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	color:#FFFFFF;
+}
+
+img
+{
+	border: 0px;
+}
+
+/* Title Classes */
+.title 
+{
+	FONT: bold 11px Verdana, Arial, Helvetica, sans-serif; 
+     background-image: url(images/bg_1.png);
+     background-repeat: repeat-x;
+	COLOR: #FFFFFF;
+	border: 0px solid;
+	height: 20px;
+	text-align:center;
+	vertical-align:middle;
+}
+A.title, A.title:active, A.title:visited 
+{
+	FONT: bold 11px Verdana, Arial, Helvetica, sans-serif;
+	COLOR: #FFFFFF;
+	TEXT-DECORATION: none;
+}
+A.title:hover 
+{
+	FONT: bold 11px Verdana, Arial, Helvetica, sans-serif;
+	COLOR: #FFFFFF; 
+	TEXT-DECORATION: none;
+}
+
+/* Default Font Classes */
+font
+{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+}
+
+/* Table / Border Classes */
+.table_with_border
+{ 
+     background-image: url(../images/themes/dark_blue/bg_1.png);
+     background-repeat: repeat-x;
+}
+
+.table_with_border_second
+{ 
+     background-image: url(../images/themes/dark_blue/bg_1.png);
+     background-repeat: repeat-x;
+}
+
+.with_border
+{
+	text-indent:3px;
+	background-color:#010101;
+	border:1px #253239 solid;
+}
+
+.with_border_alternate
+{
+	text-indent:3px;
+	background-color:#010101;
+	border:1px #253239 ridge;
+}
+
+.mainheader
+{ 
+	border:1px solid;
+	background-color:#010101;
+	border-color: #010101 #253239 #253239 #010101; 
+}
+
+.mainfooter
+{ 
+	height: 20px;
+	background-color:#253239;
+	border-top: #010101 1px solid;
+	border-bottom: #010101 1px solid;
+}
+
+.imageborder
+{
+	border:1px solid;
+	border-color: #010101 #253239 #253239 #010101; 
+}
+
+/* Cells for listening */
+.line0
+{
+	font-size: 8pt;
+	color: #FFFFFF;
+	background-color: #010101;
+}
+.line0:hover 
+{ 
+	background-color:#253239; 
+}
+
+.line1
+{
+	font-size: 8pt;
+	color: #FFFFFF;
+	background-color: #010101;
+}
+.line1:hover 
+{ 
+	background-color:#1a2328; 
+}
+
+.line2
+{
+	font-size: 8pt;
+	color: #FFFFFF;
+	background-color: #1a2328;
+}
+.line2:hover 
+{ 
+	background-color:#253239; 
+}
+
+.line_alt0
+{
+	font-size: 8pt;
+	color: #FFFFFF;
+	background-color: #AAAAAA;
+	background-image: url("images/dither.png"); 
+}
+.line_alt0:hover 
+{ 
+	background-color:#253239; 
+	background-image: url("images/dither.png"); 
+}
+
+.line_alt1
+{
+	font-size: 8pt;
+	color: #FFFFFF;
+	background-color: #253239;	
+	background-image: url("images/dither.png"); 
+}
+.line_alt1:hover 
+{ 
+	background-color:#253239; 
+	background-image: url("images/dither.png"); 
+}
+
+
+/* Cell Columns */
+.cellmenu1
+{
+	height: 16px;
+	border:1px ridge;
+	border-color: #010101 #253239 #253239 #010101;
+
+	text-indent:5px;
+	font-family: 10px Verdana, Arial, Helvetica, sans-serif;
+	color: #FFFFFF;
+	background-color: #253239;
+}
+.cellmenu1:hover 
+{ 
+	color: #FFFF99;
+	text-decoration: none;
+}
+A.cellmenu1_link
+{
+	color: #FFFFFF;
+	text-decoration: underline;
+}
+A.cellmenu1_link:hover
+{
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.cellmenu2
+{
+	height: 15px;
+	border:1px inset;
+	border-color: #010101 #253239 #253239 #253239;
+
+	text-indent:5px;
+	font-family: 10px Verdana, Arial, Helvetica, sans-serif;
+	color: #FFFFFF;
+	background-color: #253239;
+}
+.cellmenu2:hover 
+{ 
+	color: #A31D32;
+	text-decoration: none;
+}
+
+/* Usefull Text Classes */
+.WinnerTeam
+{
+	color: #127C35;
+	text-decoration: none;
+}
+.LoserTeam
+{
+	color: #A53139;
+	text-decoration: none;
+}
+.DrawTeam
+{
+	color: #2B78AB;
+	text-decoration: none;
+}
+.ErrorMsg 
+{
+	FONT: bold 12px Verdana, Arial, Helvetica, sans-serif; 
+	COLOR: #FF0000;
+	border-top: 1px solid;
+	border-bottom: 1px solid;
+	border-color: #253239;
+}
+
+/* Player Elements */
+.playerlegend
+{
+	padding:2px;
+	background-color: #253239; 
+	color: #FFFFFF; 
+}
+
+.playertext
+{
+	filter: glow(Color=#000000,Strength=1); 
+}
+
+/* Form elements */
+select, input, textarea
+{
+	background-color: #010101; 
+	color:#FFFFFF; 
+	font:bold 10px Verdana,Arial,Helvetica,sans-serif;
+	border: 1px solid;
+	border-color: #010101 #253239 #253239 #010101; 
+}
+

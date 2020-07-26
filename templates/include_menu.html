@@ -1,0 +1,144 @@
+<table align="center" width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td>
+
+<script type='text/javascript' src='themes/{user_theme}/main-menuoptionen.js'></script>
+<script language=JavaScript src="{BASEPATH}js/menu_misc.js" type=text/javascript></SCRIPT>	
+
+<script	language=JavaScript>
+	if(ns4)
+		_d.write("<scr"+"ipt language=JavaScript src={BASEPATH}js/menu_ns4.js><\/scr"+"ipt>");		
+	else
+		_d.write("<scr"+"ipt language=JavaScript src={BASEPATH}js/menu_dom.js><\/scr"+"ipt>"); 
+</script>
+
+<script language=javascript>
+	_menuCloseDelay=verzoegerung;
+	_menuOpenDelay=25	          // The time delay before menus open on mouse over
+	_followSpeed=5                // Follow scrolling speed
+	_followRate=40                // Follow scrolling Rate
+	_subOffsetTop=10              // Sub menu top offset
+	_subOffsetLeft=-10            // Sub menu left offset
+	_scrollAmount=3               // Only needed for Netscape 4.x
+	_scrollDelay=20               // Only needed for Netcsape 4.x
+
+with(myMnuStyle = new MenuStyle())
+{
+	onbgcolor		=	onmouseoverhintergrund;
+	oncolor			=	onmouseoverschriftfarbe;
+	offbgcolor		=	hintergrundfarbe;
+	offcolor		=	menupunktschriftfarbe;
+	bordercolor		=	rahmenfarbe;
+	borderstyle		=	"solid";
+	borderwidth		=	rahmenbreite;
+	separatorcolor	=	rahmenfarbe;
+	separatorsize	=	"1";
+	padding			=	2;
+	fontsize		=	schriftgroesse;
+	fontstyle		=	fontstyle;
+	fontfamily		=	schriftart;
+	pagecolor		=	onmouseoverschriftfarbe; //"black";
+	pagebgcolor		=	onmouseoverhintergrund;
+	headercolor		=	menupunktschriftfarbe;
+	headerbgcolor	=	hintergrundfarbe;
+	subimage		=	"";
+	subimagepadding	=	"";
+	overfilter		=	"Fade(duration=0.2);Alpha(opacity=90);Shadow(color='"+rahmenfarbe+"', Direction=135, Strength=5)";
+	outfilter		=	"RandomBars(duration=0.3)";
+}
+
+with(myMenu=new menuname("MSbMnun Menu"))
+{
+	style=myMnuStyle;
+	alwaysvisible=1;
+	orientation="horizontal";
+	position="relative";
+	align="center";
+	SbMnu("text=&nbsp;Home&nbsp;url=index.php?{additional_url};status=Back To Homepage;{MENU_HOMEPAGE};");
+	SbMnu("text=&nbsp;Round Stats&nbsp;url=rounds.php?{additional_url};status=Played Rounds Statistics;showmenu=RoundStats;{MENU_FOLDER_OPEN};{MENU_FOLDER_CLOSED};");
+	SbMnu("text=&nbsp;Search&nbsp;url=find-players.php?{additional_url};status=Search for players;{MENU_SEARCH};");
+	SbMnu("text=&nbsp;Player Stats&nbsp;url=players.php?{additional_url};status=Player Statistics;showmenu=PlayersStats;{MENU_FOLDER_OPEN};{MENU_FOLDER_CLOSED};");
+	SbMnu("text=&nbsp;Weapon Stats&nbsp;url=weapons.php?{additional_url};status=Weapon Statistics;showmenu=WeaponStats;{MENU_FOLDER_OPEN};{MENU_FOLDER_CLOSED};");
+	SbMnu("text=&nbsp;Damagetype Stats&nbsp;url=damagetypes.php?{additional_url};status=Damagetype Statistics;showmenu=DamagetypeStats;{MENU_FOLDER_OPEN};{MENU_FOLDER_CLOSED};");
+	SbMnu("text=&nbsp;Server Stats&nbsp;url=serverstats.php?{additional_url};status=Server Statistics;showmenu=ServerStats;{MENU_FOLDER_OPEN};{MENU_FOLDER_CLOSED};");
+	SbMnu("text=&nbsp;Admin Center&nbsp;url=admin/;status=Admin Homepage;{MENU_PREFERENCES};");
+	SbMnu("text=&nbsp;About UltraStats&nbsp;url=about.php;status=More about UltraStats;{MENU_LINK};");
+	SbMnu("text=&nbsp;;itemwidth=100%;");
+}
+
+with(myMenu=new menuname("RoundStats"))
+{
+	style=myMnuStyle;
+	overflow="scroll";
+	SbMnu("text=Sorted by Date;url=rounds.php?{additional_url};");
+	SbMnu("text=Sorted by Gametype;showmenu=RoundStatsByGameType;");
+
+}
+
+with(myMenu=new menuname("RoundStatsByGameType"))
+{
+	style=myMnuStyle;
+	overflow="scroll";
+	<!-- BEGIN gametypes -->
+	SbMnu("text=Sorted by {GameTypeDisplayName};url=rounds.php?id={NAME}{additional_url};");
+	<!-- END gametypes -->
+}
+
+with(myMenu=new menuname("PlayersStats"))
+{
+	style=myMnuStyle;
+	overflow="scroll";
+	SbMnu("text=Top Players by Kills;url=players.php?sorting=Kills{additional_url};");
+	SbMnu("text=Top Players by Deaths;url=players.php?sorting=Deaths{additional_url};");
+	SbMnu("text=Top Players by Teamkills;url=players.php?sorting=Teamkills{additional_url};");
+	SbMnu("text=Top Players by Suicides;url=players.php?sorting=Suicides{additional_url};");
+	SbMnu("text=Top Players by Ratio;url=players.php?sorting=KillRatio{additional_url};");
+}
+
+with(myMenu=new menuname("WeaponStats"))
+{
+	style=myMnuStyle;
+	overflow="scroll";
+
+	<!-- BEGIN weapontypes_menu -->
+		<!-- IF menuenabled="true" -->
+		SbMnu("text={Name};showmenu={ID}stats;");
+		<!-- ENDIF menuenabled="true" -->
+	<!-- END weapontypes_menu -->
+}
+
+<!-- BEGIN weapontypes -->
+	<!-- IF menuenabled="true" -->
+	with(myMenu=new menuname("{ID}stats"))
+	{
+		style=myMnuStyle;
+		overflow="scroll";
+
+		<!-- BEGIN myweapons -->
+		SbMnu("text={WeaponDisplayName};url=weapons.php?id={INGAMENAME}{additional_url};");
+		<!-- END myweapons -->
+	}
+	<!-- ENDIF menuenabled="true" -->
+<!-- END weapontypes -->
+
+with(myMenu=new menuname("DamagetypeStats"))
+{
+	style=myMnuStyle;
+	overflow="scroll";
+
+	<!-- BEGIN damagetypes_menu -->
+		SbMnu("text={DisplayName};url=damagetypes.php?id={DAMAGETYPE}{additional_url};");
+	<!-- END damagetypes_menu -->
+}
+
+with(myMenu=new menuname("ServerStats"))
+{
+	style=myMnuStyle;
+	overflow="scroll";
+	SbMnu("text=Played Maps;url=serverstats.php?{additional_url};");
+}
+
+
+
+// This will draw the menus
+MakeMenus();
+</script>
+</td></tr></table>

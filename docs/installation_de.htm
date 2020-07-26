@@ -1,0 +1,136 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="de">
+<link rel="stylesheet" href="../admin/css/admin.css" type="text/css">
+<title>Installation</title>
+</head>
+
+<body TOPMARGIN="0" LEFTMARGIN="0" MARGINWIDTH="0" MARGINHEIGHT="0">
+
+<table cellspacing="0" cellpadding="5" border="0" class="with_border">
+<tr>
+	<td>
+
+<div class="mainheader">
+<h1 align="center">Installation der UltraStats</h1>
+</div>
+<p>Willkommen zu meiner kurzen und knappen Dokumentation. Sie ist kurz und knapp, da es im 
+jetzt ca. 0:00 Uhr ist und ich ein wenig Müde bin, aber es muss getan 
+werden&nbsp;;)! Bitte denke daran das es sich um <font color="#FF0000"><b>BETA SOFTWARE</b></font> 
+handelt! Diese Veröffentlichung dient nur zum testen, Ich vermute das sich in 
+den UltraStats noch einige Bugs versteckt haben.</p>
+<blockquote>
+	<h2>Schritt 1 - Überprüfe die Vorraussetzungen</h2>
+	<p>Bevor du beginnst die Ultrastats zu installieren, solltest du Sicherstellen das die folgenden Dinge vorhanden sind: </p>
+	<ul>
+		<li><b>Apache Webserver 1.3 oder 2.0</b> oder höher (Frage deinen&nbsp; Webserver 
+		Anbieter falls du nicht sicher bist)</li>
+		<li><b>PHP 4.x oder PHP 5.x</b> oder höher ist installiert, die UltraStats 
+		wurden mit beiden Versionen erfolgreich getestet.</li>
+		<li><b>MySQL Datenbank</b> (4.x oder 5.x oder höher)! Optional&nbsp; 
+		empfehle ich PhpMyAdmin installiert zu haben. Du benötigst es vielleicht 
+		zum debuggen oder testen. 
+		Allerdings kann die Installation auch OHNE PhpMyAdmin abgeschlossen 
+		werden!</li>
+		<li>Etwa <b>20MB</b> freien <b>Webspace</b> und mindestens <b>10MB</b> 
+		freien Datenbank Platz. Du wirst mehr Datenbank Platz brauchen wenn das 
+		Logfile größer wird. Allerdings haben die Ultrastats eine sehr 
+		optimierte Datenbankstruktur und verbrauchen somit sehr wenig Datenbank 
+		Platz. </li>
+	</ul>
+	<h2>Schritt 2 - Starte das Installations-Script</h2>
+	<p>Ich habe es so leicht gemacht wie ich nur konnte, um die Installation so 
+	einfach wie möglich zu gestalten. Du musst die Ultrastats nur entpacken und 
+	auf deinem Webserver aufladen. Nachdem dieses geschehen ist, öffne folgende 
+	URL in deinem Browser:
+	<a href="http://www.yourwebhost.com/ultrastats/install.php">http://www.yourwebhost.com/ultrastats/install.php</a> 
+	und folge den Installations-Anweisungen. Einige Dateien und Ordner benötigen 
+	Schreibrechte, der Installer wird dir zeige welche das sind. </p>
+	<h2>Schritt 3 - Füge deinen Ersten Server hinzu</h2>
+	<p>Falls alles richtig Funktioniert hat, sollte die Ultrastats Installation 
+	in 5-10 Minuten laufen. Du kannst nun weiter fortfahren und dich im Admin Center einloggen und deines 
+	ersten Server hinzufügen. Wichtig ist der korrekte Pfad zum Gamelog. 
+	Dies ist ein relativer Pfad auf dem Webserver.</p>
+	<p>Es sollte in etwa so aussehen wie in diesem Bespielt: 
+	<div class="with_border"><b>../gamelogs/games-server1.log</b></div>
+	<p>Wenn du den Server hinzufügst, wird das Script eine leere Datei 
+	anlegen ( falls nicht schon eine vorhanden ist ). Wenn dies fehlschlägt, wirst 
+	du einen Fehler erhalten und der Server wird NICHT hinzugefügt (entweder ist 
+	der Pfad nicht korrekt oder die Datei ist nicht Schreib/Lesbar). 
+	</p>
+	<p>Du kannst auch einen Externen FTP Pfad nutzen welcher die Gameslog 
+	automatisch vom Webserver runterläd. <br>Nutzen einen Externen FTP Pfad wie 
+	in diesem Beispiel:
+	<div class="with_border"><b>ftp://username@127.0.0.1/.callofduty2/main/Server1_mp.log</b></div>
+    *Experimenteller Support für&nbsp; SCP wurde ebenfalls hinzugefügt.
+    Einfach scp;// anstatt ftp:// im FTP Parameter verwenden! Aber Vorsicht, man
+    benötigt die SSH2 Erweiterung für PHP welche selbst noch im BETA Stadium
+    steht. Für mehr siehe die Webseite von ssh2 für&nbsp; php: <a href="http://pecl.php.net/package/ssh2">http://pecl.php.net/package/ssh2</a>
+	<h2>Schritt 4 - Download das Logfile</h2>
+	<p>Dieser Schritt setzt voraus das du einen gültigen Externen FTP Pfad 
+	angegeben hast. Um das Logfile runterzuladen klicke auf dieses
+	<img src="../images/icons/download.png" width="16" border="1"> 
+icon. Falls das Passwort nicht im Externen FTP Pfad enthalten ist, wirst du eine 
+	automatische Abfrage erhalten. Ist das Gameslog runtergeladen, können wir 
+	annehmen das der Pfad in Ordnung ist. Das Download Script läd nur den neusten Teil 
+	des Logfiles runter und nicht jedes Mal das gesamte Logfile. Dadurch gewinnt 
+	man viel Zeit und man benötigt weniger Traffic, falls du die Ultrastats jede 
+	Stunde aktualisieren willst. </p>
+	<h2>Schritt 5 - Starte den Parser</h2>
+	<p>Nun folgt der Parser Teil, auch sehr leicht - du musst nur auf dies 
+	<img src="../images/icons//gears_run.png" width="16" border="1"> 
+icon klicken, und der Parser startet. Das Script ist konfiguriert dass es maximal 60 
+	Sekunden läuft. 
+	Ein Interner Zähler wird den Prozess nach 50 Sekunden abbrechen, und einen 
+	automatischen Reload machen. Anschließend wird wieder an der Position anfangen, wo aufgehört 
+	wurde. Der Parser wird einiges an Leistung von deinem Webserver benötigen, 
+	speziell beim MySQL Server. Dieses ist aufgrund der Vielzahl an Daten die 
+	verarbeitet werden müssen. In der Final Version werde ich vielleicht in der Lage sein 
+	die Geschwindigkeit zu beschleunigen. 
+</p>
+	<h2>Schritt&nbsp; 6 - Starte Total/Final Berechnungen</h2>
+	<p>Ein sehr wichtiger Schritt! Für optimale Leistung habe ich einige 
+	Hilfstabellen eingebaut, z.B. um die meiste verwendeten Spieler Aliase zu sichern. Dieses 
+	wirst du anhand der Seitengenerierungszeit merken. Selbst große Datenbanken 
+	werden kein Problem darstellen. Dieser 
+	Schritt ist außerdem sehr wichtig, da du sonst keine Namen sehen wirst auf der 
+	Hauptseite!</p>
+	<h2>Ende</h2>
+	<p>Ja du bist Fertig :)! Naja noch nicht ganz, Ich denke du wirst einige Zeit 
+	und Erfahrung brauchen um alle Features der UltraStats zu testen und 
+	auszuprobieren. Server Admin, Player Editor und User Admin funktionieren zur 
+	Zeit schon. Weitere Möglichkeiten zur Administration werden in der Final Version 
+	noch folgen.</p>
+</blockquote>
+<p>Falls du Bugs findest oder Erfahrungen austauschen willst, dann schreibe dieses 
+Bitte in unserem <a href="http://www.shooter-szene.de/PNphpBB2-index-c-25.phtml">Forum</a>! 
+Danke!</p>
+<p>&nbsp;</p>
+
+	</td>
+</tr>
+</table>
+
+
+<table width="100%" border="0" cellspacing="1" cellpadding="0" class="mainfooter">
+<tr>
+	<td align="center" class="line0">Created 2005-2006 - By <a href="http://www.eifelzocker.de" target="_blank">deltaray</a></td>
+	<td align="center" class="line1">
+		&nbsp;<a href="http://www.shooter-szene.de" target="_blank">Shooter-Szene.de</a> | 
+		&nbsp;<a href="http://www.ultrastats.org" target="_blank">Ultrastats</A> 
+	</td>
+	<td align="center" class="line0">
+		&nbsp;<B>Partners:</B> 
+	 </td>
+	<td align="center" class="line1">
+		&nbsp;<a href="http://www.clanwarzgamingservers.com" target="_blank">ClanWarz</a> |
+		&nbsp;<a href="http://www.mgs-server.com/" target="_blank">MGS-Server</a>
+	 </td>
+ </tr>
+ </table>
+
+	 
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!-- INCLUDE include_header.html --> 
+
+<br>
+
+<!-- IF roundsenabled="true" -->
+<table width="100%" cellpadding="0" cellspacing="5" border="0" align="center">
+<tr>
+	<td width="10" valign="top" nowrap>&nbsp;</td>
+	<td width="100%" valign="top">
+
+		<table width="100%" cellpadding="1" cellspacing="0" border="0" align="center">
+		<tr>
+			<td class="title" nowrap>{LN_ROUNDS_ALLROUNDS} {titlesortedby}</td>
+		</tr>
+		</table>
+
+		<!-- IF rounds_pagerenabled="true" -->
+		<table width="100%" align="center" border="0" cellpadding="1" cellspacing="1" class="with_border">
+		<tr>
+			<td class="cellmenu2" nowrap><B>Pages: &nbsp; </B></td>
+		<!-- BEGIN ROUNDPAGES -->
+			<td class="{cssclass}" nowrap><a href="?id={sorting}&start={mypagebegin}{additional_url}" target="_top">{mypagenumber}</a>&nbsp;</td>
+		<!-- END ROUNDPAGES -->
+			<td nowrap width="100%"class="line2"><I>&nbsp;{ROUNDS_MOREPAGES}</I></td>
+<!--			<td nowrap align="right" class="line2"></td>-->
+		</tr>
+		</table>
+		<!-- ENDIF rounds_pagerenabled="true" -->
+
+		<table width="100%" cellpadding="0" cellspacing="1" border="0" align="center" class="with_border_alternate">
+<!--		<tr>
+			<td width="125" class="cellmenu1" align="center" nowrap><B>{LN_LROUNDS_TIME}</B></td>
+			<td width="100%" colspan="2"class="cellmenu1" align="center" nowrap><B>{LN_LROUNDS_DETAILS}</B></td>
+			<td width="35" class="cellmenu1" align="center" nowrap><B>&nbsp;</B></td>
+			<td width="100" colspan="2" class="cellmenu1" align="center" nowrap><B>{LN_LROUNDS_RESULTS}</B></td>
+		</tr>
+-->
+		<!-- BEGIN allrounds -->
+		<tr>
+			<td width="95" class="cellmenu1" align="center" nowrap><B>Date {Date}</B></td>
+			<td width="100%" colspan="{rounddetailsspan}" class="cellmenu1" align="center" nowrap><B>{LN_LROUNDS_DETAILS}</B></td>
+			<td width="25" class="cellmenu1" align="center" nowrap><B>{LN_MAP}</B></td>
+			<td width="60" class="cellmenu1" align="left" nowrap><B>{LN_PLAYERS}</B></td>
+			<td width="125" colspan="4" class="cellmenu1" align="center" nowrap><B>{LN_LROUNDS_RESULTS}</B></td>
+		</tr>
+			<!-- BEGIN myrounds -->
+			<tr>
+				<td class="{cssclass}" align="center"><img src="{BASEPATH}images/icons/date-time.png" width="16" align="left"><B>{TimePlayed}</B></td>
+				<td width="100%" class="{cssclass}" align="left"><img src="{BASEPATH}images/icons/arrow_right_blue.png" width="16" align="left"><A HREF="rounds-detail.php?id={ID}{additional_url}">{LN_LROUNDS_DETAILS}</A></td>
+				<!-- IF ShowServer="true" -->
+				<td class="cellmenu2" align="left" width="70" nowrap>{LN_LROUNDS_SERVER}: </td>
+				<td class="{cssclass}" align="left" nowrap><A HREF="rounds.php?serverid={ServerID}{additional_url}">{ServerName}</A></td>
+				<!-- ENDIF ShowServer="true" -->
+				<td class="cellmenu2" align="left" width="70" nowrap>{LN_LROUNDS_GAMETYPE}: </td>
+				<td class="{cssclass}" align="left" nowrap><A HREF="info-gametypes.php?id={GameTypeName}{additional_url}">{FinalGameTypeDisplayName}</A></td>
+				<td class="cellmenu2" nowrap>{LN_LROUNDS_MAPNAME}: </td>
+				<td class="{cssclass}" align="left" nowrap><A HREF="info-maps.php?id={MAPNAME}{additional_url}">{FinalMapDisplayName}</A></td>
+				<td class="{cssclass}" align="left" nowrap><A HREF="info-maps.php?id={MAPNAME}{additional_url}"><img src="{MapImage}" width="24" alt="{FinalMapDisplayName}"></A>&nbsp</td>
+				<td class="{cssclass}" align="left" width="60" nowrap>{LN_COUNT}: <B>{PlayerCount}</B></td>
+		<!-- IF GameTypeName!="dm" -->
+				<td class="{cssclass}" align="center"><font class="{AlliesTeamClass}"><img src="{BASEPATH}images/main/{gen_gameversion_picpath}/flag-allies-small.png" width="24" alt="Allies"></font></td>
+				<td class="{cssclass}" align="center" width="40"><font class="{AlliesTeamClass}"><B>{AlliesRoundWins}</B></font></td>
+				<td class="{cssclass}" align="center"><img src="{BASEPATH}images/main/{gen_gameversion_picpath}/flag-axis-small.png" width="24" alt="Axis"></td>
+				<td class="{cssclass}" align="center"><font class="{AxisTeamClass}"><B>{AxisRoundWins}</B></font></td>
+		<!-- ENDIF GameTypeName!="dm" -->
+	<!-- IF false="false" -->
+	<td class="{cssclass}">{LN_LROUNDS_DURATION}: <B>{ROUNDDURATION}</B> minutes </td>
+	<!-- ENDIF false="false" -->
+		<!-- IF GameTypeName="dm" -->
+				<td class="{cssclass}" align="center"><font class="{AlliesTeamClass}"><img src="{BASEPATH}images/main/dm-winner-small.png" height="16" alt="Winner"></font></td>
+				<td colspan="3" class="{cssclass}" align="left" nowrap><font class="WinnerTeam"><B>{LN_LROUNDS_WINNER}: </B></font>
+			<!-- IF WinnerPlayerID="-1" -->
+					<B>Unknown</B></font>
+			<!-- ENDIF WinnerPlayerID="-1" -->
+			<!-- IF WinnerPlayerID!="-1" -->
+					<A HREF="players-detail.php?id={WinnerPlayerID}{additional_url}"><B>{WinnerPlayerHtmlName}</B></font>
+			<!-- ENDIF WinnerPlayerID!="-1" -->
+			&nbsp;</td>
+		<!-- ENDIF GameTypeName="dm" -->
+			</tr>
+			<!-- END myrounds -->
+
+		<!-- END allrounds -->
+		</table>
+
+
+	</td>
+	<td width="10" valign="top" nowrap>&nbsp;</td>
+</tr>
+</table>
+<!-- ENDIF roundsenabled="true" -->
+
+<!-- INCLUDE include_footer.html -->

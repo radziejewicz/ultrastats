@@ -1,0 +1,281 @@
+/* Generell Tag Classes */
+BODY
+{
+    FONT-FAMILY: ARIAL;
+    FONT-SIZE: 8pt;
+    cursor:hand;
+	background-image: url("images/bg.gif");
+	COLOR: #000000; 
+
+	scrollbar-face-color: #475059;
+	scrollbar-highlight-color: #b8c2cc;
+	scrollbar-shadow-color: #b8c2cc; 
+	scrollbar-3dlight-color: #000000; 
+	scrollbar-arrow-color: #f2f5ff; 
+	scrollbar-track-color: #262d34; 
+	scrollbar-darkshadow-color: #000000;
+}
+
+TD { font-family: Arial, Helvetica, sans-serif; font-size: 8pt; color: #999999 }
+
+/* Link Classes */
+.playerlink { color:#ffffff;  cursor:hand; }
+.playerlink:hover { color:#348899; text-decoration: none; cursor:hand; }
+
+/* Default Link Classes */
+a:link,a:active,a:visited,a.postlink
+{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	background-color: transparent;
+	color:#ffffff;
+	text-decoration:none;
+}
+a:hover
+{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	color:#348899;
+}
+
+img
+{
+	border: 0px;
+}
+
+/* Title Classes */
+.title 
+{
+	FONT: bold 11px Verdana, Arial, Helvetica, sans-serif; 
+    BACKGROUND-COLOR: #999999;
+	COLOR: #000000;
+	border: 1px solid;
+	border-color: #c0c0c0;
+	height: 20px;
+	text-align:center;
+	vertical-align:middle;
+}
+A.title, A.title:active, A.title:visited 
+{
+	FONT: bold 11px Verdana, Arial, Helvetica, sans-serif;
+	COLOR: #ffffff;
+	TEXT-DECORATION: none;
+}
+A.title:hover 
+{
+	FONT: bold 11px Verdana, Arial, Helvetica, sans-serif;
+	COLOR: #348899; 
+	TEXT-DECORATION: none;
+}
+
+/* Default Font Classes */
+font
+{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+}
+
+/* Table / Border Classes (komplett rum)*/
+.table_with_border
+{ 
+	BACKGROUND-COLOR: #c0c0c0;
+	border:1px solid;
+	border-color: #c0c0c0 
+}
+
+.table_with_border_second
+{ 
+	BACKGROUND-COLOR: #999999;
+	border:1px solid;
+	border-color: #c0c0c0; 
+}
+
+.with_border
+{
+	text-indent:3px;
+	background-image: url("images/bg_content.gif");
+	border:0px #050A0F solid;
+}
+
+.with_border_alternate
+{
+	text-indent:3px;
+	background-image: url("images/bg_content.gif");
+	border:px #c0c0c0 ridge;
+}
+
+.mainheader
+{ 
+	border:0px solid;
+	background-image: url("images/bg_content.gif");
+	border-color: #006699 #07233F #07233F #006699; 
+}
+
+.mainfooter
+{ 
+	height: 20px;
+	background-image: url("images/bg_content.gif");
+	border-top: #050A0F 0px solid;
+	border-bottom: #050A0F 0px solid;
+}
+
+.imageborder
+{
+	border:1px solid;
+	border-color: #050A0F #353A3F #353A3F #050A0F; 
+}
+
+/* Cells for listening */
+.line0
+{
+	font-size: 8pt;
+	color: #000000;
+	background-color: #aaaaaa;
+}
+.line0:hover 
+{ 
+	background-color:#999999; 
+}
+
+.line1
+{
+	font-size: 8pt;
+	color: #000000;
+	background-color: #aaaaaa;
+}
+.line1:hover 
+{ 
+	background-color:#999999; 
+}
+
+.line2
+{
+	font-size: 8pt;
+	color: #000000;
+	background-color: #999999;
+}
+.line2:hover 
+{ 
+	background-color:#aaaaaa; 
+}
+
+.line_alt0
+{
+	font-size: 8pt;
+	color: #000000;
+	background-color: #999999;
+	background-image: url('images/bg_content.gif');
+}
+.line_alt0:hover 
+{ 
+	background-color:#aaaaaa; 
+	background-image: url('images/bg_content.gif'); 
+}
+
+.line_alt1
+{
+	font-size: 8pt;
+	color: #000000;
+	background-color: #999999;	
+	background-image: url('images/bg_content.gif'); 
+}
+.line_alt1:hover 
+{ 
+	background-color:#aaaaaa; 
+	background-image: url('images/bg_content.gif'); 
+}
+
+
+/* Cell Columns */
+.cellmenu1
+{
+	height: 15px;
+	border:1px solid;
+	border-color: #c0c0c0; 
+
+	text-indent:5px;
+	font: 10px Verdana, Arial, Helvetica, sans-serif;
+	color: #000000;
+	background-color: #aaaaaa;
+}
+.cellmenu1:hover 
+{ 
+	color: #000000;
+	text-decoration: none;
+}
+A.cellmenu1_link
+{
+	color: #ffffff;
+	text-decoration: underline;
+}
+A.cellmenu1_link:hover
+{
+	color: #348899;
+	text-decoration: none;
+}
+
+.cellmenu2
+{
+	height: 16px;
+	border:1px;
+	border-color: #c0c0c0; 
+
+	text-indent:5px;
+	font: 10px Verdana, Arial, Helvetica, sans-serif;
+	color: #000000;
+	background-color: #aaaaaa;
+}
+.cellmenu2:hover 
+{ 
+	color: #348899;
+	text-decoration: none;
+}
+
+/* Usefull Text Classes */
+.WinnerTeam
+{
+	color: #339933;
+	text-decoration: none;
+}
+.LoserTeam
+{
+	color: #ff0000;
+	text-decoration: none;
+}
+.DrawTeam
+{
+	color: #0000ff;
+	text-decoration: none;
+}
+.ErrorMsg 
+{
+	FONT: bold 12px Verdana, Arial, Helvetica, sans-serif; 
+	COLOR: #FF2222;
+	border-top: 1px solid;
+	border-bottom: 1px solid;
+	border-color: #58363E;
+}
+
+
+/* Player Elements */
+.playerlegend
+{
+	padding:2px;
+	background-color: #aaaaaa; 
+	color: #FFFFFF; 
+}
+
+.playertext
+{
+	filter: glow(Color=#000000,Strength=1); 
+}
+
+/* Form elements */
+select, input, textarea
+{
+	background-color: #aaaaaa; 
+	color:#FFFFFF; 
+	font:bold 10px Verdana,Arial,Helvetica,sans-serif;
+	border: 1px solid;
+	border-color: #233B51 #124A7C #124A7C #233B51; 
+}

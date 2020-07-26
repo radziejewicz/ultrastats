@@ -1,0 +1,37 @@
+-- New Database Structure Updates
+ALTER TABLE `stats_rounds` CHANGE `AxisRoundWins` `AxisRoundWins` INT( 11 ) DEFAULT '0' NOT NULL;
+ALTER TABLE `stats_rounds` CHANGE `AlliesRoundWins` `AlliesRoundWins` INT( 11 ) DEFAULT '0' NOT NULL;
+
+-- New Insert stuff
+-- ID's are auto generated
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('EN', 'medal_pro_knifekills', 'Player with the most knife kills' );
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('EN', 'medal_pro_claymorec4', 'Player with the most claymore and c4 kills' );
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('EN', 'MOD_RIFLE_BULLET', 'Killed by a Rifle Bullet.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('EN', 'MOD_HEAD_SHOT', 'Most likely the head has been blown off. ');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('EN', 'MOD_GRENADE_SPLASH', 'Kill by a grenade splash.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('EN', 'MOD_SUICIDE', 'Player killed himself, most often by accident. ');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('EN', 'MOD_MELEE', 'Either stabbed (into the back), or killed by knife. Both is very humiliating. ');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('EN', 'MOD_PISTOL_BULLET', 'Killed by a pistol bullet.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('EN', 'MOD_EXPLOSIVE', 'This represents a SD Explosion. Player was to close to the bomb ;).');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('EN', 'MOD_UNKNOWN', 'Unknown Damagetype');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('EN', 'MOD_GRENADE', 'Directly killed by a grenade.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('EN', 'MOD_PROJECTILE_SPLASH', 'Killed by a projectile Splash.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('EN', 'MOD_IMPACT', 'Impact by what? I don''t know ...');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('EN', 'MOD_PROJECTILE', 'Killed directly by a projectile. ');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'medal_anti_nademagnet', 'Spieler der die Granaten am meisten anzieht.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'medal_anti_no1target', 'Staatsfeind. spieler mit den meisten Toden.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'medal_anti_suicide', 'Spieler mit den meisten Selbstmorden.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'medal_anti_teamkiller', 'Spieler mit den meisten Team abschüssen.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'medal_anti_whiner', 'Spieler der am meisten rumheult.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'medal_pro_claymorec4', 'Spieler mit den meisten Claymore und C4 abschüsse.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'medal_pro_explosivekiller', 'Spieler mit den meisten explosiven abschüssen.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'medal_pro_headshot', 'Spiler mit den meisten Headshot abschüssen.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'medal_pro_killer', 'Spieler mit den meisten abschüssen.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'medal_pro_knifekills', 'Spieler mit den meisten Messer abschüssen.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'medal_pro_pistol', 'Spieler mit den meisten Pistolen abschüssen.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'medal_pro_slappyhappy', 'Spieler mit den meisten Schlag abschüssen.');
+INSERT INTO `stats_language_strings` (`LANG`, `STRINGID`, `TEXT`) VALUES('DE', 'medal_pro_sniper', 'Spieler mit den meisten Scharfschützen abschüssen.');
+
+-- Updated data records stuff
+UPDATE `stats_language_strings` SET `TEXT` = 'Player who seems to attract most nades ' WHERE `stats_language_strings`.`LANG` = 'EN' AND `stats_language_strings`.`STRINGID` = 'medal_anti_nademagnet' LIMIT 1;
+UPDATE `stats_damagetypes` SET `DisplayName` = 'Knife kill' WHERE `stats_damagetypes`.`ID` =5 LIMIT 1; -- Cod4 only%$&1337&%&;

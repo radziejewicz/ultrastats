@@ -1,0 +1,154 @@
+<!-- INCLUDE admin/admin_slim_header.html --> 
+
+<script language="javascript">
+	var myParent = null;
+</script>
+
+<!-- IF ISERROR="true" -->
+<center>
+<br>
+<h3><font color="red">{ERROR_MSG}</font></h3>
+</center>
+<!-- ENDIF ISERROR="true" -->
+
+<!-- IF ISSAVED="true" -->
+<script language="javascript">
+	function CloseWindow()
+	{
+		opener.window.location.reload();
+		this.window.close();
+	}
+
+	// Create Timer
+	window.setTimeout("CloseWindow();",5000)
+</script>
+
+<center>
+<br>
+{LN_FTPBUILD_SAVEDCLOE}
+<br><br>
+<input type="button" OnClick="CloseWindow();" value="Close Window">
+<h3></h3>
+</center>
+<!-- ENDIF ISSAVED="true" -->
+
+<!-- IF ISSAVED!="true" -->
+	<!-- IF ISERROR!="true" -->
+	<script language="javascript">
+		// Move to center
+		var myleft = (screen.width - 500) / 2;		// window.innerWidth
+		var mytop = (screen.height - 500) / 2;		// window.innerHeight
+		window.moveTo(myleft, mytop);
+		window.focus();
+
+		function updateftpurl(myform)
+		{
+			var szPassword = ""; 
+			if ( myform.elements.password.value.length > 0 )
+				szPassword = ":" + myform.elements.password.value;
+			else
+				szPassword = "";
+
+			var szFtpUrl = 		'ftp://'
+							+	myform.elements.username.value
+							+	szPassword
+							+	'@'
+							+	myform.elements.serverip.value
+							+	':'
+							+	myform.elements.serverport.value
+							+	myform.elements.pathtogamelog.value
+							+	myform.elements.gamelogfilename.value;
+
+			document.all.preview.innerHTML  = 	szFtpUrl;
+		}
+	</script>
+
+	<table cellpadding="0" cellspacing="0" border="0" align="center" class="with_border">
+		<tr>
+			<td colspan="10" align="center" valign="top" class="title"><strong>{LN_ADMINCENTER_FTPBUILDER}</strong></td>
+		</tr>
+		<tr>
+			<td colspan="10" align="left" class="line2" style="padding:5px;">{LN_ADMINCENTER_FTPBUILDER_DES}<br></td>
+		</tr>
+		<tr>
+			<td align="center">
+
+			<form action="" method="post" name="ftpcheck">
+				<table border="0" cellpadding="1" cellspacing="1" bgcolor="#DDDDDD" width="100%">
+				<tr>
+					<td align="left" class="cellmenu1" width="200" nowrap><b>{LN_FTPBUILD_SERVERIP}</b></td>
+					<td align="center" class="line0" width="100%"><input type="text" name="serverip" size="50" maxlength="255" value="{SERVERIP}" onkeyup="updateftpurl(document.forms.ftpcheck)"></td>
+				</tr>
+				<tr>
+					<td align="left" class="cellmenu2" nowrap><b>{LN_FTPBUILD_SERVERPORT}</b></td>
+					<td align="center" class="line1"><input type="text" name="serverport" size="50" maxlength="7" value="{SERVERPORT}" onkeyup="updateftpurl(document.forms.ftpcheck)"></td>
+				</tr>
+				<tr>
+					<td align="left" class="cellmenu1" nowrap><b>{LN_FTPBUILD_USERNAME}</b></td>
+					<td align="center" class="line0"><input type="text" name="username" size="50" maxlength="255" value="{USERNAME}" onkeyup="updateftpurl(document.forms.ftpcheck)"></td>
+				</tr>
+				<tr>
+					<td align="left" class="cellmenu2" nowrap><b>{LN_FTPBUILD_PASSWORD}</b></td>
+					<td align="center" class="line1"><input type="text" name="password" size="50" maxlength="255" value="{PASSWORD}" onkeyup="updateftpurl(document.forms.ftpcheck)"></td>
+				</tr>
+				<tr>
+					<td align="left" class="cellmenu1" nowrap><b>{LN_FTPBUILD_PATHTOGAMELOG}</b></td>
+					<td align="center" class="line0"><input type="text" name="pathtogamelog" size="50" maxlength="128" value="{PATHTOGAMELOG}" onkeyup="updateftpurl(document.forms.ftpcheck)"></td>
+				</tr>
+				<tr>
+					<td align="left" class="cellmenu2" nowrap><b>{LN_FTPBUILD_GAMELOGFILENAME}</b></td>
+					<td align="center" class="line1"><input type="text" name="gamelogfilename" size="50" maxlength="128" value="{GAMELOGFILENAME}" onkeyup="updateftpurl(document.forms.ftpcheck)"></td>
+				</tr>
+				<tr>
+					<td align="left" class="cellmenu2" nowrap><b>{LN_FTPPASSIVEENABLED}</b></td>
+					<td align="left" class="line1">&nbsp;&nbsp;&nbsp;<input type="checkbox" name="ftppassiveenabled" value="yes" {FTPPASSIVEENABLED_CHECKED}>&nbsp;Click to enable</td>
+				</tr>
+				<tr>
+					<td align="center" colspan="2" class="line1">
+						<br>
+						<input type="submit" name="verify" value="{LN_FTPBUILD_VERIFY_FTPURL}">
+						<input type="submit" name="save" value="{LN_FTPBUILD_SAVE_FTPURL}">
+						<input type="hidden" name="id" value="{SERVERID}">
+						<br><br>
+					</td>
+				</tr>
+				<tr>
+					<td align="center" colspan="2" class="cellmenu1">
+						<B>{LN_FTPBUILD_PREVIEW}</B>
+					</td>
+				</tr>
+				<tr>
+					<td align="center" colspan="2" class="line0" style="padding:7px;">
+						<span id="preview" name="preview" class="with_border" style="padding:2px;"></span>
+					</td>
+				</tr>
+	<!-- IF ISVERIFY="true" -->
+				<tr>
+					<td align="center" colspan="2" class="cellmenu1">
+						<B>{LN_FTPBUILD_VERIFY}</B>
+					</td>
+				</tr>
+				<tr>
+					<td align="left" colspan="2" class="line0" style="padding:5px;">
+					<span id="verify" name="verify">{verifyresults}</span>
+					</td>
+				</tr>
+	<!-- ENDIF ISVERIFY="true" -->
+
+				</table>
+			</form>
+
+			</td>
+		</tr>
+	</table>
+
+	<script language="javascript">
+		// trigger once
+		updateftpurl(document.forms.ftpcheck);
+	</script>
+	<!-- ENDIF ISERROR!="true" -->
+<!-- ENDIF ISSAVED!="true" -->
+
+
+
+<!-- INCLUDE admin/admin_slim_footer.html -->
