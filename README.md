@@ -30,4 +30,4 @@ how to update (german):
 3. Fertig
 
 
-Copyright <<(deltaray) shooter-szene.de>>
+Copyright by Andre Lorbach | 2006, 2007, 2008 | shooter-szene.de
